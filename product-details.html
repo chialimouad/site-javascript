@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل المنتج - Sheeka</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -94,6 +94,37 @@
             color: white;
             border-color: #C8797D;
         }
+
+        /* Print-specific styles */
+        @media print {
+            body > *:not(#order-confirmation-modal) {
+                display: none; /* Hide everything except the modal content */
+            }
+            #order-confirmation-modal {
+                position: static !important; /* Override fixed positioning */
+                display: block !important; /* Ensure it's visible */
+                background: none !important; /* No background for printing */
+                box-shadow: none !important; /* No shadow */
+                width: auto !important; /* Let content dictate width */
+                max-width: none !important;
+                height: auto !important; /* Let content dictate height */
+                overflow: visible !important; /* Ensure all content is visible */
+                margin: 0 !important;
+                padding: 0 !important;
+                transform: none !important;
+            }
+            #order-confirmation-modal > div { /* Target the inner content div */
+                width: 100% !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                padding: 16px !important; /* Maintain some padding */
+                margin: 0 !important;
+            }
+            #order-confirmation-modal button {
+                display: none; /* Hide buttons in print */
+            }
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -105,7 +136,8 @@
         </nav>
     </header>
 
-    <main class="pt-24 pb-16"> <div id="product-detail-container" class="container mx-auto px-6">
+    <main class="pt-24 pb-16">
+        <div id="product-detail-container" class="container mx-auto px-6">
             <div id="loading-spinner" class="text-center py-20">
                 <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#C8797D] mx-auto mb-4"></div>
                 <p class="text-xl text-gray-700">جاري تحميل تفاصيل المنتج...</p>
@@ -116,7 +148,7 @@
                     <div class="lg:col-span-1">
                         <img id="main-product-image" src="https://placehold.co/800x800/E6B89C/4A4A4A?text=جاري+التحميل..." alt="Main Product Image" class="main-image rounded-xl shadow-lg mb-6">
                         <div id="thumbnail-gallery" class="flex flex-wrap gap-4 justify-center">
-                            </div>
+                        </div>
                     </div>
 
                     <div class="lg:col-span-1 bg-white p-8 rounded-xl shadow-lg">
@@ -128,14 +160,14 @@
                             <div>
                                 <label class="block text-lg font-medium text-gray-800 mb-2 text-right">اللون</label>
                                 <div id="color-options" class="flex flex-wrap gap-4 justify-end">
-                                    </div>
+                                </div>
                                 <input type="hidden" id="selected-color-input" name="color" required>
                             </div>
 
                             <div>
                                 <label class="block text-lg font-medium text-gray-800 mb-2 text-right">الحجم</label>
                                 <div id="size-options" class="flex flex-wrap gap-4 justify-end">
-                                    </div>
+                                </div>
                                 <input type="hidden" id="selected-size-input" name="size" required>
                             </div>
 
@@ -219,9 +251,9 @@
             </div>
 
             <div id="message-box" class="fixed bottom-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg shadow-xl hidden z-50 text-right">
-                </div>
+            </div>
             <div id="error-message-box" class="fixed bottom-8 right-8 bg-red-500 text-white px-6 py-3 rounded-lg shadow-xl hidden z-50 text-right">
-                </div>
+            </div>
         </div>
     </main>
 
@@ -230,6 +262,40 @@
             <p class="text-gray-400">© 2025 Sheeka. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
+
+    <!-- Order Confirmation Modal -->
+    <div id="order-confirmation-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full text-center">
+            <h2 class="text-3xl font-bold text-primary mb-6">✅ تم استلام طلبك!</h2>
+            <p class="text-lg text-gray-700 mb-6">شكرًا لطلبك من <span id="modal-site-name">Sheeka</span>. لقد تم استلام طلبك بنجاح وسنقوم بمعالجته قريبًا.</p>
+            
+            <div class="text-right mb-6">
+                <h3 class="text-xl font-semibold text-general mb-2">تفاصيل الطلب:</h3>
+                <p><strong>رقم الطلب:</strong> <span id="modal-order-id" dir="ltr"></span></p>
+                <p><strong>المنتج:</strong> <span id="modal-product-name"></span></p>
+                <p><strong>الكمية:</strong> <span id="modal-quantity"></span></p>
+                <p><strong>اللون:</strong> <span id="modal-color"></span></p>
+                <p><strong>الحجم:</strong> <span id="modal-size"></span></p>
+                <p><strong>الاسم الكامل:</strong> <span id="modal-full-name"></span></p>
+                <p><strong>رقم الهاتف:</strong> <span id="modal-phone-number" dir="ltr"></span></p>
+                <p><strong>الولاية:</strong> <span id="modal-wilaya"></span></p>
+                <p><strong>البلدية:</strong> <span id="modal-commune"></span></p>
+                <p><strong>سعر المنتج:</strong> <span id="modal-product-total-price" dir="ltr"></span> DA</p>
+                <p><strong>سعر التوصيل:</strong> <span id="modal-delivery-price" dir="ltr"></span> DA</p>
+                <p class="text-2xl font-bold mt-4"><strong>المجموع الكلي:</strong> <span id="modal-total-order-price" dir="ltr"></span> DA</p>
+            </div>
+
+            <div class="flex justify-center gap-4 mt-6">
+                <button id="print-receipt-btn" class="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition duration-300">
+                    طباعة الإيصال <i class="fas fa-print mr-2"></i>
+                </button>
+                <button id="continue-shopping-btn" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-secondary transition duration-300">
+                    متابعة التسوق
+                </button>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -276,6 +342,25 @@
             const summaryDeliveryPrice = document.getElementById('summary-delivery-price');
             const summaryTotalPrice = document.getElementById('summary-total-price');
             const suggestionsList = document.getElementById('suggestions-list');
+
+            // Order Confirmation Modal Elements
+            const orderConfirmationModal = document.getElementById('order-confirmation-modal');
+            const modalOrderId = document.getElementById('modal-order-id');
+            const modalProductName = document.getElementById('modal-product-name');
+            const modalQuantity = document.getElementById('modal-quantity');
+            const modalColor = document.getElementById('modal-color');
+            const modalSize = document.getElementById('modal-size');
+            const modalFullName = document.getElementById('modal-full-name');
+            const modalPhoneNumber = document.getElementById('modal-phone-number');
+            const modalWilaya = document.getElementById('modal-wilaya');
+            const modalCommune = document.getElementById('modal-commune');
+            const modalProductTotalPrice = document.getElementById('modal-product-total-price');
+            const modalDeliveryPrice = document.getElementById('modal-delivery-price');
+            const modalTotalOrderPrice = document.getElementById('modal-total-order-price');
+            const continueShoppingBtn = document.getElementById('continue-shopping-btn');
+            const modalSiteName = document.getElementById('modal-site-name');
+            const printReceiptBtn = document.getElementById('print-receipt-btn'); // New: Print button
+
 
             // --- ALL 58 ALGERIAN WILAYAS (French Names) ---
             // This list is now primarily for populating communes, wilaya names from backend config
@@ -919,7 +1004,7 @@
                 return `${BASE_URL}${relativePath}`;
             }
 
-            // Function to display a message to the user
+            // Function to display a message to the user (snack-bar style)
             function showMessage(type, message) {
                 const box = type === 'success' ? messageBox : errorMessageBox;
                 box.textContent = message;
@@ -928,6 +1013,29 @@
                     box.classList.add('hidden');
                 }, 3000); // Hide after 3 seconds
             }
+
+            // Function to play a simple success sound using Web Audio API
+            function playSuccessSound() {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+
+                    oscillator.type = 'sine'; // Sine wave for a clean tone
+                    oscillator.frequency.setValueAtTime(500, audioContext.currentTime); // A slightly higher pitch for success
+                    gainNode.gain.setValueAtTime(0.5, audioContext.currentTime); // Volume
+
+                    oscillator.start();
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5); // Fade out
+                    oscillator.stop(audioContext.currentTime + 0.5); // Stop after 0.5 seconds
+                } catch (e) {
+                    console.warn("Web Audio API not supported or failed to play sound:", e);
+                }
+            }
+
 
             // --- Product Details Fetching and Display ---
             async function fetchProductDetails(id) {
@@ -1194,7 +1302,6 @@
                     }
                 }
 
-
                 const orderData = {
                     fullName: fullNameInput.value.trim(),
                     phoneNumber: phoneNumberInput.value.trim(),
@@ -1226,29 +1333,66 @@
                         const result = await response.json();
                         console.log('Order placed successfully:', result);
                         showMessage('success', 'تم تقديم الطلب بنجاح!');
-                        orderForm.reset(); // Clear the form
-                        // Reset selections and quantity
+                        playSuccessSound(); // Play success sound
+
+                        // Populate and show the order confirmation modal
+                        modalOrderId.textContent = result.order._id;
+                        modalProductName.textContent = currentProduct.name;
+                        modalQuantity.textContent = currentQuantity;
+                        modalColor.textContent = selectedColorInput.value;
+                        modalSize.textContent = selectedSizeInput.value;
+                        modalFullName.textContent = fullNameInput.value.trim();
+                        modalPhoneNumber.textContent = phoneNumberInput.value.trim();
+                        modalWilaya.textContent = wilayasMap.get(parseInt(selectedWilayaId));
+                        modalCommune.textContent = communesMap.has(parseInt(selectedCommuneId)) ? communesMap.get(parseInt(selectedCommuneId)).name : communeSelect.options[communeSelect.selectedIndex].text;
+                        modalProductTotalPrice.textContent = (parseFloat(currentProduct.price || 0) * currentQuantity).toFixed(2);
+                        modalDeliveryPrice.textContent = currentDeliveryFee.toFixed(2);
+                        modalTotalOrderPrice.textContent = (parseFloat(currentProduct.price || 0) * currentQuantity + currentDeliveryFee).toFixed(2);
+                        orderConfirmationModal.classList.remove('hidden'); // Show the modal
+
+                        // Reset form fields after successful submission and modal display
+                        orderForm.reset(); 
                         selectedColorInput.value = '';
                         selectedSizeInput.value = '';
                         document.querySelectorAll('.color-option, .size-option').forEach(opt => opt.classList.remove('selected'));
                         currentQuantity = 1;
                         quantityInput.value = currentQuantity;
-                        currentDeliveryFee = 0; // Reset delivery fee
+                        currentDeliveryFee = 0;
                         updateOrderSummary();
                         selectedWilayaId = null;
                         selectedCommuneId = null;
                         wilayaSelect.value = '';
-                        communeSelect.innerHTML = '<option value="" disabled selected>اختر بلدية</option>'; // Clear communes
-                        communeContainer.classList.add('hidden'); // Hide commune dropdown
+                        communeSelect.innerHTML = '<option value="" disabled selected>اختر بلدية</option>';
+                        communeContainer.classList.add('hidden');
                     } else {
-                        const errorText = await response.text();
-                        throw new Error(`فشل: ${errorText}`);
+                        const errorData = await response.json(); // Parse error response JSON
+                        const errorMessage = errorData.message || errorData.msg || `فشل: ${response.statusText}`; // Try to get message from backend
+                        throw new Error(errorMessage); // Throw a more descriptive error
                     }
                 } catch (error) {
                     console.error('Error placing order:', error);
                     showMessage('error', `حدث خطأ ما: ${error.message}`);
                 }
             });
+
+            // Event listener for the "Print Receipt" button
+            printReceiptBtn.addEventListener('click', () => {
+                // Add a class to the body to trigger print-specific CSS
+                document.body.classList.add('print-mode');
+                window.print(); // Trigger the print dialog
+            });
+
+            // Event listener for after print to remove print-specific styles
+            window.onafterprint = (event) => {
+                document.body.classList.remove('print-mode');
+            };
+
+            // Event listener for the "Continue Shopping" button in the modal
+            continueShoppingBtn.addEventListener('click', () => {
+                orderConfirmationModal.classList.add('hidden'); // Hide the modal
+                window.location.href = 'index.html'; // Redirect to the main page
+            });
+
 
             // --- Fetch All Products for Suggestions ---
             async function fetchAllProductsForSuggestions() {
