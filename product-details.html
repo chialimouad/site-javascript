@@ -174,7 +174,7 @@
 <body class="overflow-x-hidden">
     <header class="bg-white shadow-sm py-4 fixed w-full z-50">
         <nav class="container mx-auto px-6 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-extrabold text-[#C8797D] rounded-lg p-2 hover:text-[#A85F64] transition duration-300"></a>
+            <a href="index.html" class="text-3xl font-extrabold text-[#C8797D] rounded-lg p-2 hover:text-[#A85F64] transition duration-300">Sheeka</a>
             <a href="index.html" class="text-gray-700 hover:text-[#C8797D] font-medium transition duration-300 rounded-md p-2 flex items-center gap-2">
                 العودة للرئيسية <i class="fas fa-arrow-left"></i> </a>
         </nav>
@@ -1118,29 +1118,39 @@
                     allDeliveryFeesFromConfig = siteConfig.deliveryFees || [];
 
                     // --- Initialize Facebook Pixel ---
-                    if (siteConfig.facebookPixelId && typeof fbq === 'function') {
-                        fbq('init', siteConfig.facebookPixelId);
-                        fbq('track', 'PageView');
-                        // Update noscript tag dynamically
-                        fbPixelNoscriptImg.innerHTML = `<img height="1" width="1" style="display:none"
-                        src="https://www.facebook.com/tr?id=${siteConfig.facebookPixelId}&ev=PageView&noscript=1"
-                        />`;
+                    if (siteConfig.facebookPixelId) {
+                        console.log("Initializing Facebook Pixel with ID:", siteConfig.facebookPixelId);
+                        if (typeof fbq === 'function') {
+                            fbq('init', siteConfig.facebookPixelId);
+                            fbq('track', 'PageView');
+                            // Update noscript tag dynamically
+                            fbPixelNoscriptImg.innerHTML = `<img height="1" width="1" style="display:none"
+                            src="https://www.facebook.com/tr?id=${siteConfig.facebookPixelId}&ev=PageView&noscript=1"
+                            />`;
+                        } else {
+                            console.error("Facebook Pixel (fbq) not loaded. Ensure script is correctly embedded and not blocked.");
+                        }
                     } else {
-                        console.warn("Facebook Pixel ID not found in site config or fbq not loaded.");
+                        console.warn("Facebook Pixel ID not found in site config.");
                     }
+
 
                     // --- Initialize TikTok Pixel ---
-                    if (siteConfig.tiktokPixelId && typeof ttq === 'object') {
-                        ttq.load(siteConfig.tiktokPixelId);
-                        ttq.page();
-                        // Update noscript tag dynamically
-                        ttPixelNoscriptImg.innerHTML = `<img height="1" width="1" style="display:none"
-                        src="https://analytics.tiktok.com/i18n/pixel/events.js?id=${siteConfig.tiktokPixelId}"
-                        />`; // TikTok's noscript is slightly different, often a direct script load or image. This is a common pattern.
+                    if (siteConfig.tiktokPixelId) {
+                        console.log("Initializing TikTok Pixel with ID:", siteConfig.tiktokPixelId);
+                        if (typeof ttq === 'object' && ttq.load && ttq.page) {
+                            ttq.load(siteConfig.tiktokPixelId);
+                            ttq.page();
+                            // Update noscript tag dynamically
+                            ttPixelNoscriptImg.innerHTML = `<img height="1" width="1" style="display:none"
+                            src="https://analytics.tiktok.com/i18n/pixel/events.js?id=${siteConfig.tiktokPixelId}"
+                            />`; // TikTok's noscript is slightly different, often a direct script load or image. This is a common pattern.
+                        } else {
+                            console.error("TikTok Pixel (ttq) not loaded. Ensure script is correctly embedded and not blocked.");
+                        }
                     } else {
-                        console.warn("TikTok Pixel ID not found in site config or ttq not loaded.");
+                        console.warn("TikTok Pixel ID not found in site config.");
                     }
-
 
                 } catch (error) {
                     console.error("Error fetching site configuration:", error);
@@ -1469,6 +1479,7 @@
                                 })),
                                 content_type: 'product' // Or 'product_group' if multiple items are possible
                             });
+                            console.log("Facebook Pixel Purchase event tracked.");
                         } else {
                             console.warn("Facebook Pixel (fbq) not loaded, Purchase event not tracked.");
                         }
@@ -1485,6 +1496,7 @@
                                 currency: 'DZD',
                                 value: parseFloat(orderData.totalOrderPrice)
                             });
+                            console.log("TikTok Pixel CompletePayment event tracked.");
                         } else {
                             console.warn("TikTok Pixel (ttq) not loaded, CompletePayment event not tracked.");
                         }
