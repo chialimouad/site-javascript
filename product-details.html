@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفاصيل المنتج - </title>
+    <title id="page-title">جاري التحميل... - </title> <!-- Dynamic title -->
+    <meta name="description" id="meta-description" content="تصفح أفضل المنتجات في ."> <!-- Dynamic description -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -120,17 +121,49 @@
                 border-radius: 0 !important;
                 padding: 16px !important; /* Maintain some padding */
                 margin: 0 !important;
+                padding: 0 !important;
             }
             #order-confirmation-modal button {
                 display: none; /* Hide buttons in print */
             }
         }
     </style>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        // Define _fbq and fbq if they don't exist
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        // Replace 'YOUR_PIXEL_ID' with your actual Facebook Pixel ID.
+        // For standard implementations, this ID is static and embedded directly.
+        // The browser's caching mechanisms handle the efficient loading of the fbevents.js script.
+        // If your pixel ID were dynamic (e.g., fetched from a backend), you could store it in
+        // localStorage after the first fetch and retrieve it on subsequent page loads for faster
+        // initialization. For this example, we'll assume a static ID as is common.
+        const PIXEL_ID = '541325501729106'; // <<< IMPORTANT: REPLACE THIS WITH YOUR ACTUAL FACEBOOK PIXEL ID
+
+        // Initialize the Facebook Pixel with your ID
+        fbq('init', PIXEL_ID);
+        // Track a PageView event for every page load
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+
 </head>
 <body class="overflow-x-hidden">
     <header class="bg-white shadow-sm py-4 fixed w-full z-50">
         <nav class="container mx-auto px-6 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-extrabold text-[#C8797D] rounded-lg p-2 hover:text-[#A85F64] transition duration-300">Sheeka</a>
+            <a href="index.html" class="text-3xl font-extrabold text-[#C8797D] rounded-lg p-2 hover:text-[#A85F64] transition duration-300"></a>
             <a href="index.html" class="text-gray-700 hover:text-[#C8797D] font-medium transition duration-300 rounded-md p-2 flex items-center gap-2">
                 العودة للرئيسية <i class="fas fa-arrow-left"></i> </a>
         </nav>
@@ -183,7 +216,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <div class="pt-6 border-t border-gray-200">
                                 <h2 class="text-xl font-bold text-[#4A4A4A] mb-4 text-right">معلومات الزبون</h2>
                                 <div>
@@ -211,6 +244,12 @@
                                 <select id="commune" name="commune" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 bg-white text-right" required>
                                     <option value="" disabled selected>اختر بلدية</option>
                                     </select>
+                            </div>
+
+                            <!-- New Stopdesk Field -->
+                            <div>
+                                <label for="stopdesk" class="block text-lg font-medium text-gray-800 mb-2 text-right">مكتب التوقف (اختياري)</label>
+                                <input type="text" id="stopdesk" name="stopdesk" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 text-right" placeholder="اسم مكتب التوقف (اختياري)">
                             </div>
 
                             <div class="bg-gray-50 p-6 rounded-xl shadow-inner mt-8 border border-gray-200">
@@ -259,16 +298,16 @@
 
     <footer class="bg-[#4A4A4A] text-white py-10 mt-16">
         <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400">© 2025 Sheeka. جميع الحقوق محفوظة.</p>
+            <p class="text-gray-400">© 2025 . جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <!-- Order Confirmation Modal -->
     <div id="order-confirmation-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
         <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full text-center">
-            <h2 class="text-3xl font-bold text-primary mb-6">✅ تم استلام طلبك!</h2>
-            <p class="text-lg text-gray-700 mb-6">شكرًا لطلبك من <span id="modal-site-name">Sheeka</span>. لقد تم استلام طلبك بنجاح وسنقوم بمعالجته قريبًا.</p>
-            
+            <h2 class="text-3xl font-bold text-[#C8797D] mb-6">✅ تم استلام طلبك!</h2>
+            <p class="text-lg text-gray-700 mb-6">شكرًا لطلبك من <span id="modal-site-name"></span>. لقد تم استلام طلبك بنجاح وسنقوم بمعالجته قريبًا.</p>
+
             <div class="text-right mb-6">
                 <h3 class="text-xl font-semibold text-general mb-2">تفاصيل الطلب:</h3>
                 <p><strong>رقم الطلب:</strong> <span id="modal-order-id" dir="ltr"></span></p>
@@ -280,6 +319,7 @@
                 <p><strong>رقم الهاتف:</strong> <span id="modal-phone-number" dir="ltr"></span></p>
                 <p><strong>الولاية:</strong> <span id="modal-wilaya"></span></p>
                 <p><strong>البلدية:</strong> <span id="modal-commune"></span></p>
+                <p><strong>نقطة التوقف:</strong> <span id="modal-stopdesk"></span></p> <!-- New: Stopdesk in modal -->
                 <p><strong>سعر المنتج:</strong> <span id="modal-product-total-price" dir="ltr"></span> DA</p>
                 <p><strong>سعر التوصيل:</strong> <span id="modal-delivery-price" dir="ltr"></span> DA</p>
                 <p class="text-2xl font-bold mt-4"><strong>المجموع الكلي:</strong> <span id="modal-total-order-price" dir="ltr"></span> DA</p>
@@ -289,7 +329,7 @@
                 <button id="print-receipt-btn" class="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition duration-300">
                     طباعة الإيصال <i class="fas fa-print mr-2"></i>
                 </button>
-                <button id="continue-shopping-btn" class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-secondary transition duration-300">
+                <button id="continue-shopping-btn" class="bg-[#C8797D] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A85F64] transition duration-300">
                     متابعة التسوق
                 </button>
             </div>
@@ -311,6 +351,7 @@
             const communesMap = new Map(); // Map<commune_id, { id, wilaya_id, name, express_home (simulated) }>
 
             let allDeliveryFeesFromConfig = []; // To store fetched delivery fees from site config
+            let siteConfig = null; // To store fetched site configuration
 
             // DOM Elements
             const loadingSpinner = document.getElementById('loading-spinner');
@@ -331,12 +372,13 @@
             const quantityInput = document.getElementById('quantity');
             const increaseQtyBtn = document.getElementById('increase-qty');
             const decreaseQtyBtn = document.getElementById('decrease-qty');
-            
+
             const fullNameInput = document.getElementById('full-name');
             const phoneNumberInput = document.getElementById('phone-number');
             const wilayaSelect = document.getElementById('wilaya');
             const communeSelect = document.getElementById('commune');
             const communeContainer = document.getElementById('commune-container');
+            const stopdeskInput = document.getElementById('stopdesk'); // New: Stopdesk input
 
             const summaryProductPrice = document.getElementById('summary-product-price');
             const summaryDeliveryPrice = document.getElementById('summary-delivery-price');
@@ -354,6 +396,7 @@
             const modalPhoneNumber = document.getElementById('modal-phone-number');
             const modalWilaya = document.getElementById('modal-wilaya');
             const modalCommune = document.getElementById('modal-commune');
+            const modalStopdesk = document.getElementById('modal-stopdesk'); // New: Stopdesk modal display
             const modalProductTotalPrice = document.getElementById('modal-product-total-price');
             const modalDeliveryPrice = document.getElementById('modal-delivery-price');
             const modalTotalOrderPrice = document.getElementById('modal-total-order-price');
@@ -361,6 +404,9 @@
             const modalSiteName = document.getElementById('modal-site-name');
             const printReceiptBtn = document.getElementById('print-receipt-btn'); // New: Print button
 
+            // New DOM elements for dynamic meta/title
+            const pageTitleElem = document.getElementById('page-title');
+            const metaDescriptionElem = document.getElementById('meta-description');
 
             // --- ALL 58 ALGERIAN WILAYAS (French Names) ---
             // This list is now primarily for populating communes, wilaya names from backend config
@@ -382,7 +428,7 @@
                 { "id": 43, "name": "Mila" }, { "id": 44, "name": "Aïn Defla" }, { "id": 45, "name": "Naâma" },
                 { "id": 46, "name": "Aïn Témouchent" }, { "id": 47, "name": "Ghardaïa" }, { "id": 48, "name": "Relizane" },
                 { "id": 49, "name": "Timimoun" }, { "id": 50, "name": "Bordj Badji Mokhtar" }, { "id": 51, "name": "Ouled Djellal" },
-                { "id": 52, "name": "Béni Abbès" }, { "id": 53, "name": "Timimoun (Nouvelle)" }, 
+                { "id": 52, "name": "Béni Abbès" }, { "id": 53, "name": "Timimoun (Nouvelle)" },
                 { "id": 54, "name": "Touggourt" }, { "id": 55, "name": "Djanet" }, { "id": 56, "name": "El M'Ghair" },
                 { "id": 57, "name": "El Meniaa" }, { "id": 58, "name": "In Salah" }
             ];
@@ -471,7 +517,7 @@
                     { "id": 622, "name": "Souk El Tenine" }, { "id": 623, "name": "Tala Hamza" }, { "id": 624, "name": "Tamridjt" },
                     { "id": 625, "name": "Taskriout" }, { "id": 626, "name": "Toudja" }, { "id": 627, "name": "Tifra" },
                     { "id": 628, "name": "Aït R'zine" }, { "id": 629, "name": "Aït Smaïl" }, { "id": 630, "name": "Akfadou" },
-                    { "id": 631, "name": "Assif Ouane" }, { "id": 632, "name": "Beni Ksila" }, { "id": 633, "name": "Bouandas" },
+                    { "id": 631, "name": "Assi Youcef" }, { "id": 632, "name": "Beni Ksila" }, { "id": 633, "name": "Bouandas" },
                     { "id": 634, "name": "Bouria" }, { "id": 635, "name": "Djenane" }, { "id": 636, "name": "Fenasn" },
                     { "id": 637, "name": "Hammam Guergour" }, { "id": 638, "name": "Ighram" }, { "id": 639, "name": "M'cisna" },
                     { "id": 640, "name": "Melbou" }, { "id": 641, "name": "Ouzellaguen" }, { "id": 642, "name": "Sidi Boudjellil" },
@@ -672,7 +718,7 @@
                     { "id": 2113, "name": "Ain Cherchar" }, { "id": 2114, "name": "Beni Oulbane" }, { "id": 2115, "name": "Ouldja Boulballout" },
                     { "id": 2116, "name": "Djendel" }, { "id": 2117, "name": "El Marsa" }, { "id": 2118, "name": "Oum Toub" },
                     { "id": 2119, "name": "Ramdane Djamel" }, { "id": 2120, "name": "Ain Kechra" }, { "id": 2121, "name": "Khenguet Layoun" },
-                    { "id": 2122, "name": "Bouhaddid" }, { "id": 2123, "name": "Chouhada" }, { "id": 2124, "name": "El Ghoumri" },
+                    { "id": 2122, "name": "Bouhaddid" }, { "id": 223, "name": "Chouhada" }, { "id": 2124, "name": "El Ghoumri" },
                     { "id": 2125, "name": "Had Souk" }, { "id": 2126, "name": "Ain Zouit" }, { "id": 2127, "name": "Kanoua" },
                     { "id": 2128, "name": "M'daourouch" }
                 ],
@@ -1036,6 +1082,39 @@
                 }
             }
 
+            // --- Site Configuration Fetching and Display ---
+            async function fetchSiteConfig() {
+                try {
+                    const response = await fetch(`${BASE_URL}/api/site-config`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    siteConfig = await response.json();
+
+                    // Update dynamic content in <head>
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}${siteConfig.siteName || 'Sheeka'}`;
+                    if (metaDescriptionElem) {
+                        metaDescriptionElem.content = siteConfig.metaDescription || 'متجر Sheeka الإلكتروني يوفر أجود المنتجات بأسعار تنافسية.';
+                    }
+
+                    // Update site name in modal
+                    modalSiteName.textContent = siteConfig.siteName || 'Sheeka';
+
+                    // Store fetched delivery fees
+                    allDeliveryFeesFromConfig = siteConfig.deliveryFees || [];
+
+                } catch (error) {
+                    console.error("Error fetching site configuration:", error);
+                    // Fallback to default values if config fetch fails
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}Sheeka`;
+                    if (metaDescriptionElem) {
+                        metaDescriptionElem.content = 'متجر Sheeka الإلكتروني يوفر أجود المنتجات بأسعار تنافسية.';
+                    }
+                    modalSiteName.textContent = 'Sheeka';
+                    showMessage('error', 'فشل تحميل إعدادات الموقع. قد لا تكون بعض المعلومات دقيقة.');
+                }
+            }
+
 
             // --- Product Details Fetching and Display ---
             async function fetchProductDetails(id) {
@@ -1050,7 +1129,7 @@
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     currentProduct = await response.json();
-                    
+
                     // Hide loading spinner and show content
                     loadingSpinner.classList.add('hidden');
                     productContent.classList.remove('hidden');
@@ -1059,6 +1138,9 @@
                     productPriceElem.textContent = `DA ${(currentProduct.price !== undefined && currentProduct.price !== null) ? parseFloat(currentProduct.price).toFixed(2) : '0.00'}`;
                     productDescriptionElem.textContent = currentProduct.description || 'لا يوجد وصف متاح.';
                     updateOrderSummary(); // Initial summary calculation
+
+                    // Update page title with product name
+                    pageTitleElem.textContent = `${currentProduct.name} - ${siteConfig ? siteConfig.siteName : ''}`;
 
                     // Populate images
                     if (currentProduct.images && currentProduct.images.length > 0) {
@@ -1154,22 +1236,22 @@
             // --- Wilaya and Commune Logic (Now dynamically fetched from SiteConfig) ---
             async function loadWilayasAndCommunesData() {
                 try {
-                    const response = await fetch(`${BASE_URL}/api/site-config`);
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    const config = await response.json();
-                    allDeliveryFeesFromConfig = config.deliveryFees || []; // Store fetched fees
-                    
+                    // Site config should already be loaded by now, but check just in case.
+                    if (!siteConfig) {
+                        await fetchSiteConfig(); // Fetch if not already loaded
+                    }
+
                     wilayaSelect.innerHTML = '<option value="" disabled selected>اختر ولاية</option>';
-                    wilayasMap.clear(); 
-                    
+                    wilayasMap.clear();
+
                     // Filter out duplicate wilaya IDs and sort by name
                     const uniqueWilayas = Array.from(new Map(allDeliveryFeesFromConfig.map(item => [item.wilayaId, item])).values());
                     uniqueWilayas.sort((a, b) => a.wilayaName.localeCompare(b.wilayaName)).forEach(fee => {
                         const option = document.createElement('option');
-                        option.value = fee.wilayaId; 
-                        option.textContent = fee.wilayaName; 
+                        option.value = fee.wilayaId;
+                        option.textContent = fee.wilayaName;
                         wilayaSelect.appendChild(option);
-                        wilayasMap.set(fee.wilayaId, fee.wilayaName); 
+                        wilayasMap.set(fee.wilayaId, fee.wilayaName);
                     });
 
                     // Fallback to static data if no fees are configured in the backend
@@ -1177,10 +1259,10 @@
                         console.warn("No delivery fees found in site config. Falling back to static wilaya data.");
                         allAlgerianWilayasStatic.sort((a, b) => a.name.localeCompare(b.name)).forEach(wilaya => {
                             const option = document.createElement('option');
-                            option.value = wilaya.id; 
-                            option.textContent = wilaya.name; 
+                            option.value = wilaya.id;
+                            option.textContent = wilaya.name;
                             wilayaSelect.appendChild(option);
-                            wilayasMap.set(wilaya.id, wilaya.name); 
+                            wilayasMap.set(wilaya.id, wilaya.name);
                         });
                     }
 
@@ -1188,15 +1270,15 @@
                     console.error("Error loading wilaya data from site config:", error);
                     // Fallback to hardcoded wilayas if backend fetch fails
                     wilayaSelect.innerHTML = '<option value="" disabled selected>اختر ولاية</option>';
-                    wilayasMap.clear(); 
+                    wilayasMap.clear();
                     allAlgerianWilayasStatic.sort((a, b) => a.name.localeCompare(b.name)).forEach(wilaya => {
                         const option = document.createElement('option');
-                        option.value = wilaya.id; 
-                        option.textContent = wilaya.name; 
+                        option.value = wilaya.id;
+                        option.textContent = wilaya.name;
                         wilayaSelect.appendChild(option);
-                        wilayasMap.set(wilaya.id, wilaya.name); 
+                        wilayasMap.set(wilaya.id, wilaya.name);
                     });
-                     // Provide a warning to the user if the backend is inaccessible
+                    // Provide a warning to the user if the backend is inaccessible
                     showMessage('error', 'فشل تحميل بيانات الولاية. قد لا تكون رسوم التوصيل دقيقة.');
                 }
             }
@@ -1213,13 +1295,13 @@
                 updateOrderSummary();
 
                 if (selectedWilayaId && simplifiedCommunesByWilaya[selectedWilayaId]) {
-                    communesMap.clear(); 
+                    communesMap.clear();
                     simplifiedCommunesByWilaya[selectedWilayaId].sort((a, b) => a.name.localeCompare(b.name)).forEach(commune => {
                         const option = document.createElement('option');
-                        option.value = commune.id; 
+                        option.value = commune.id;
                         option.textContent = commune.name;
                         communeSelect.appendChild(option);
-                        communesMap.set(commune.id, commune); 
+                        communesMap.set(commune.id, commune);
                     });
                 } else {
                     // If no specific communes are defined for a wilaya, provide a generic option
@@ -1229,7 +1311,7 @@
                     communeSelect.appendChild(option);
                 }
                 // Trigger fee calculation after communes are populated (even if dummy)
-                fetchDeliveryFees(); 
+                fetchDeliveryFees();
             });
 
             communeSelect.addEventListener('change', () => {
@@ -1291,7 +1373,7 @@
                     showMessage('error', 'الرجاء تحديد كمية صالحة (يجب أن تكون 1 أو أكثر).');
                     return;
                 }
-                
+
                 // Ensure delivery fee is calculated before submission (using hardcoded values)
                 if (currentDeliveryFee === 0) {
                     fetchDeliveryFees(); // This will use the fetched fee or fallback
@@ -1307,6 +1389,7 @@
                     phoneNumber: phoneNumberInput.value.trim(),
                     wilaya: wilayasMap.get(parseInt(selectedWilayaId)), // Get name from map using ID
                     commune: communesMap.has(parseInt(selectedCommuneId)) ? communesMap.get(parseInt(selectedCommuneId)).name : communeSelect.options[communeSelect.selectedIndex].text, // Get name from map or default
+                    stopdesk: stopdeskInput.value.trim(), // New: Include stopdesk in order data
                     deliveryFee: currentDeliveryFee, // Include the calculated delivery fee
                     products: [
                         {
@@ -1335,6 +1418,24 @@
                         showMessage('success', 'تم تقديم الطلب بنجاح!');
                         playSuccessSound(); // Play success sound
 
+                        // --- Facebook Pixel: Track Purchase event ---
+                        // Ensure fbq is available before calling it
+                        if (typeof fbq === 'function') {
+                            fbq('track', 'Purchase', {
+                                value: parseFloat(orderData.totalOrderPrice),
+                                currency: 'DZD', // Assuming Algerian Dinar based on DA in price display
+                                contents: orderData.products.map(p => ({
+                                    id: p.productId,
+                                    quantity: p.quantity,
+                                    item_price: p.priceAtOrder
+                                })),
+                                content_type: 'product' // Or 'product_group' if multiple items are possible
+                            });
+                        } else {
+                            console.warn("Facebook Pixel (fbq) not loaded, Purchase event not tracked.");
+                        }
+                        // --- End Facebook Pixel Tracking ---
+
                         // Populate and show the order confirmation modal
                         modalOrderId.textContent = result.order._id;
                         modalProductName.textContent = currentProduct.name;
@@ -1345,13 +1446,14 @@
                         modalPhoneNumber.textContent = phoneNumberInput.value.trim();
                         modalWilaya.textContent = wilayasMap.get(parseInt(selectedWilayaId));
                         modalCommune.textContent = communesMap.has(parseInt(selectedCommuneId)) ? communesMap.get(parseInt(selectedCommuneId)).name : communeSelect.options[communeSelect.selectedIndex].text;
+                        modalStopdesk.textContent = stopdeskInput.value.trim() || 'لا يوجد'; // New: Display stopdesk
                         modalProductTotalPrice.textContent = (parseFloat(currentProduct.price || 0) * currentQuantity).toFixed(2);
                         modalDeliveryPrice.textContent = currentDeliveryFee.toFixed(2);
                         modalTotalOrderPrice.textContent = (parseFloat(currentProduct.price || 0) * currentQuantity + currentDeliveryFee).toFixed(2);
                         orderConfirmationModal.classList.remove('hidden'); // Show the modal
 
                         // Reset form fields after successful submission and modal display
-                        orderForm.reset(); 
+                        orderForm.reset();
                         selectedColorInput.value = '';
                         selectedSizeInput.value = '';
                         document.querySelectorAll('.color-option, .size-option').forEach(opt => opt.classList.remove('selected'));
@@ -1403,7 +1505,7 @@
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     let allProducts = await response.json();
-                    
+
                     // Filter out the current product from suggestions
                     if (currentProduct && currentProduct._id) {
                         allProducts = allProducts.filter(p => p._id !== currentProduct._id);
@@ -1417,8 +1519,8 @@
                     }
 
                     allProducts.forEach(product => {
-                        const imageUrl = product.images && product.images.length > 0 
-                            ? product.images[0] 
+                        const imageUrl = product.images && product.images.length > 0
+                            ? product.images[0]
                             : 'https://placehold.co/600x400/EEEEEE/333333?text=No+Image';
 
                         const productCard = document.createElement('div');
