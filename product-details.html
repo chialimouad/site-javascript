@@ -128,48 +128,6 @@
             }
         }
     </style>
-
-    <!-- Facebook Pixel Code (Dynamic) -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-    </script>
-    <noscript id="fb-pixel-noscript-img"></noscript>
-    <!-- End Facebook Pixel Code -->
-
-    <!-- TikTok Pixel Code (Dynamic) -->
-    <script>
-        !function (w, d, t) {
-            w.TiktokAnalyticsObject = t;
-            var ttq = w[t] = w[t] || [];
-            ttq.methods = ["page", "track", "identify", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "cookie", "trackPageview", "trackEvent"];
-            ttq.setAndDefer = function (t, e) {
-                t[e] = function () {
-                    t.push([e].concat(Array.prototype.slice.call(arguments)))
-                }
-            };
-            for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
-            ttq.instance = function (t) {
-                for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) ttq.setAndDefer(e, ttq.methods[n]);
-                return e
-            }, ttq._i = {};
-            ttq.load = function (e, n) {
-                var i = ttq._i[e] = [];
-                ttq.setAndDefer(i, "init"), ttq.init(e, n), ttq._i[e] = i
-            };
-            // Note: TikTok pixel load and page() call will be handled by JavaScript below
-            // once the pixel ID is fetched from the backend.
-        }(window, document, 'ttq');
-    </script>
-    <noscript id="tt-pixel-noscript-img"></noscript>
-    <!-- End TikTok Pixel Code -->
-
 </head>
 <body class="overflow-x-hidden">
     <header class="bg-white shadow-sm py-4 fixed w-full z-50">
@@ -418,9 +376,6 @@
             // New DOM elements for dynamic meta/title
             const pageTitleElem = document.getElementById('page-title');
             const metaDescriptionElem = document.getElementById('meta-description');
-            const fbPixelNoscriptImg = document.getElementById('fb-pixel-noscript-img');
-            const ttPixelNoscriptImg = document.getElementById('tt-pixel-noscript-img');
-
 
             // --- ALL 58 ALGERIAN WILAYAS (French Names) ---
             // This list is now primarily for populating communes, wilaya names from backend config
@@ -1096,7 +1051,7 @@
                 }
             }
 
-            // --- Site Configuration Fetching and Display ---
+            // --- Site Configuration Fetching and Pixel Initialization ---
             async function fetchSiteConfig() {
                 try {
                     const response = await fetch(`${BASE_URL}/api/site-config`);
@@ -1117,49 +1072,42 @@
                     // Store fetched delivery fees
                     allDeliveryFeesFromConfig = siteConfig.deliveryFees || [];
 
-                    // --- Initialize Facebook Pixel ---
+                    // --- Initialize Meta (Facebook) Pixel ---
                     if (siteConfig.facebookPixelId) {
-                        console.log("Initializing Facebook Pixel with ID:", siteConfig.facebookPixelId);
-                        if (typeof fbq === 'function') {
-                            fbq('init', siteConfig.facebookPixelId);
-                            fbq('track', 'PageView');
-                            // Update noscript tag dynamically
-                            fbPixelNoscriptImg.innerHTML = `<img height="1" width="1" style="display:none"
-                            src="https://www.facebook.com/tr?id=${siteConfig.facebookPixelId}&ev=PageView&noscript=1"
-                            />`;
-                        } else {
-                            console.error("Facebook Pixel (fbq) not loaded. Ensure script is correctly embedded and not blocked.");
-                        }
+                        console.log("Initializing Meta (Facebook) Pixel with ID:", siteConfig.facebookPixelId);
+                        // Standard Meta Pixel Code (adapted for dynamic ID)
+                        !function(f,b,e,v,n,t,s)
+                        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                        n.queue=[];t=b.createElement(e);t.async=!0;
+                        t.src=v;s=b.getElementsByTagName(e)[0];
+                        s.parentNode.insertBefore(t,s)}(window, document,'script',
+                        'https://connect.facebook.net/en_US/fbevents.js');
+                        fbq('init', siteConfig.facebookPixelId); // Use dynamic ID
+                        fbq('track', 'PageView');
+
+                        // Create and append noscript tag dynamically
+                        const noscript = document.createElement('noscript');
+                        noscript.innerHTML = `<img height="1" width="1" style="display:none"
+                        src="https://www.facebook.com/tr?id=${siteConfig.facebookPixelId}&ev=PageView&noscript=1"
+                        />`;
+                        document.head.appendChild(noscript);
+
                     } else {
                         console.warn("Facebook Pixel ID not found in site config.");
                     }
 
-
-                    // --- Initialize TikTok Pixel ---
-                    if (siteConfig.tiktokPixelId) {
-                        console.log("Initializing TikTok Pixel with ID:", siteConfig.tiktokPixelId);
-                        if (typeof ttq === 'object' && ttq.load && ttq.page) {
-                            ttq.load(siteConfig.tiktokPixelId);
-                            ttq.page();
-                            // Update noscript tag dynamically
-                            ttPixelNoscriptImg.innerHTML = `<img height="1" width="1" style="display:none"
-                            src="https://analytics.tiktok.com/i18n/pixel/events.js?id=${siteConfig.tiktokPixelId}"
-                            />`; // TikTok's noscript is slightly different, often a direct script load or image. This is a common pattern.
-                        } else {
-                            console.error("TikTok Pixel (ttq) not loaded. Ensure script is correctly embedded and not blocked.");
-                        }
-                    } else {
-                        console.warn("TikTok Pixel ID not found in site config.");
-                    }
+                    // TikTok Pixel code is removed as per user request.
 
                 } catch (error) {
                     console.error("Error fetching site configuration:", error);
                     // Fallback to default values if config fetch fails
-                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}Sheeka`;
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}`;
                     if (metaDescriptionElem) {
-                        metaDescriptionElem.content = 'متجر Sheeka الإلكتروني يوفر أجود المنتجات بأسعار تنافسية.';
+                        metaDescriptionElem.content = 'متجر  الإلكتروني يوفر أجود المنتجات بأسعار تنافسية.';
                     }
-                    modalSiteName.textContent = 'Sheeka';
+                    modalSiteName.textContent = '';
                     showMessage('error', 'فشل تحميل إعدادات الموقع. قد لا تكون بعض المعلومات دقيقة.');
                 }
             }
