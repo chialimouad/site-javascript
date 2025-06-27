@@ -151,7 +151,7 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content-container">
         <!-- Hero Section -->
         <section id="hero" class="relative text-white h-screen flex items-center justify-center text-center overflow-hidden pt-16">
             <!-- Background elements -->
@@ -214,7 +214,7 @@
         </section>
 
         <!-- Call to Action / Newsletter Section -->
-        <section class="py-16 bg-gradient-to-r from-secondary to-primary text-white text-center section-fade-in">
+        <section id="newsletter" class="py-16 bg-gradient-to-r from-secondary to-primary text-white text-center section-fade-in">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold mb-6">Stay Updated with <span id="newsletter-site-name"></span>!</h2>
                 <p class="text-xl mb-8 opacity-90">
@@ -304,8 +304,6 @@
             // DOM elements
             const pageTitle = document.getElementById('page-title');
             const siteNameHeader = document.getElementById('site-name-header');
-            const heroSiteName = document.getElementById('hero-site-name');
-            const heroSlogan = document.getElementById('hero-slogan');
             const aboutUsTextElem = document.getElementById('about-us-text');
             const aboutUsImageElem = document.getElementById('about-us-image'); 
             const newsletterSiteName = document.getElementById('newsletter-site-name');
@@ -322,6 +320,7 @@
             const heroVideoBackground = document.getElementById('hero-video-background');
             const heroVideoSource = document.getElementById('hero-video-source');
             const heroDynamicContent = document.getElementById('hero-dynamic-content');
+            const mainContentContainer = document.getElementById('main-content-container'); // Added for reordering sections
 
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -342,7 +341,7 @@
             const designConfigurations = [
                 {   // Design 0: Original Sheeka Pink (Default layout)
                     name: 'Default Sheeka Pink',
-                    layoutType: 'default',
+                    layoutType: 'default', 
                     primaryColor: '#C8797D',
                     secondaryColor: '#A85F64',
                     tertiaryColor: '#FDF5E6',
@@ -355,12 +354,14 @@
                     sectionBgPrimary: '#FDF5E6',
                     sectionBgSecondary: '#F5F0F0',
                     heroDefaultImage: 'https://placehold.co/1920x1080/c7c7c7/ffffff?text=SHEEKA+COLLECTION+DEFAULT',
-                    productSectionTitle: 'Featured Products', // Default title
-                    categorySectionTitle: 'Shop by Category'   // Default title
+                    productSectionTitle: 'Featured Products', 
+                    categorySectionTitle: 'Shop by Category',
+                    // Default section order
+                    sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact']
                 },
-                {   // Design 1: Ocean Breeze (Banner layout with custom product/category titles, and now always shows products)
+                {   // Design 1: Ocean Breeze (Banner layout with custom product/category titles)
                     name: 'Ocean Breeze',
-                    layoutType: 'banner',
+                    layoutType: 'banner', 
                     primaryColor: '#4A90E2', // Sky Blue
                     secondaryColor: '#2E86AB', // Deep Blue
                     tertiaryColor: '#E0F2F7', // Light Cyan
@@ -373,13 +374,15 @@
                     sectionBgPrimary: '#E0F2F7',
                     sectionBgSecondary: '#D1EEF5',
                     heroDefaultImage: 'https://placehold.co/1920x1080/A2CCB6/2E86AB?text=OCEAN+BREEZE+COLLECTION',
-                    defaultBannerHeadline: 'Experience Serenity in Every Stitch.',
-                    productSectionTitle: 'Our Curated Picks', // Custom title for Design 1 products
-                    categorySectionTitle: 'Explore Unique Themes' // Custom title for Design 1 categories
+                    defaultBannerHeadline: 'Experience Serenity in Every Stitch.', 
+                    productSectionTitle: 'Our Curated Picks', 
+                    categorySectionTitle: 'Explore Unique Themes',
+                    // Reordered sections: Categories first, then products
+                    sectionOrder: ['hero', 'categories', 'products', 'newsletter', 'about', 'contact']
                 },
-                {   // Design 2: Forest Earth (Video background layout with custom titles)
+                {   // Design 2: Forest Earth (Now a default layout, no video)
                     name: 'Forest Earth',
-                    layoutType: 'video',
+                    layoutType: 'default', // Changed from 'video' to 'default'
                     primaryColor: '#6A994E', // Forest Green
                     secondaryColor: '#386641', // Dark Green
                     tertiaryColor: '#F2EFE8', // Off-white/Beige
@@ -391,10 +394,12 @@
                     heroGradientTo: '#386641',
                     sectionBgPrimary: '#F2EFE8',
                     sectionBgSecondary: '#E8E4DB',
-                    heroDefaultImage: 'https://placehold.co/1920x1080/8B4513/FFFFFF?text=FOREST+EARTH+COLLECTION',
-                    defaultHeroVideoUrl: 'https://www.w3schools.com/tags/movie.mp4',
-                    productSectionTitle: 'Handpicked for Nature Lovers', // Custom title for Design 2 products
-                    categorySectionTitle: 'Collections from the Wild'   // Custom title for Design 2 categories
+                    heroDefaultImage: 'https://placehold.co/1920x1080/8B4513/FFFFFF?text=FOREST+EARTH+COLLECTION', // This image will now be used
+                    // Removed defaultHeroVideoUrl
+                    productSectionTitle: 'Handpicked for Nature Lovers', 
+                    categorySectionTitle: 'Collections from the Wild',
+                    // Different order: About Us after hero, then products & categories
+                    sectionOrder: ['hero', 'about', 'products', 'categories', 'contact', 'newsletter']
                 },
                 {   // Design 3: Modern Monochrome (Retains default layout, but can have custom titles)
                     name: 'Modern Monochrome',
@@ -412,7 +417,9 @@
                     sectionBgSecondary: '#E9ECEF',
                     heroDefaultImage: 'https://placehold.co/1920x1080/495057/FFFFFF?text=MONOCHROME+ELEGANCE',
                     productSectionTitle: 'Sleek & Stylish Products',
-                    categorySectionTitle: 'Minimalist Collections'
+                    categorySectionTitle: 'Minimalist Collections',
+                    // Order emphasizing contact and newsletter earlier
+                    sectionOrder: ['hero', 'newsletter', 'products', 'categories', 'about', 'contact']
                 },
                 {   // Design 4: Royal Purple & Gold (Retains default layout)
                     name: 'Royal Purple & Gold',
@@ -430,7 +437,9 @@
                     sectionBgSecondary: '#F8E7D1',
                     heroDefaultImage: 'https://placehold.co/1920x1080/5C2D91/FFD700?text=ROYAL+COLLECTION',
                     productSectionTitle: 'Regal Selections',
-                    categorySectionTitle: 'Opulent Collections'
+                    categorySectionTitle: 'Opulent Collections',
+                    // Another custom order
+                    sectionOrder: ['hero', 'about', 'newsletter', 'products', 'categories', 'contact']
                 },
                 {   // Design 5: Warm Sunset (Retains default layout)
                     name: 'Warm Sunset',
@@ -448,7 +457,9 @@
                     sectionBgSecondary: '#F5DEB3',
                     heroDefaultImage: 'https://placehold.co/1920x1080/E74C3C/F4D03F?text=SUNSET+VIBES',
                     productSectionTitle: 'Warmth & Style Products',
-                    categorySectionTitle: 'Golden Hour Collections'
+                    categorySectionTitle: 'Golden Hour Collections',
+                    // Standard order for this design
+                    sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact']
                 }
             ];
 
@@ -501,37 +512,47 @@
                 root.style.setProperty('--section-bg-secondary', chosenDesign.sectionBgSecondary);
 
                 // Reset hero background elements
-                heroBackground.style.backgroundImage = '';
-                heroVideoBackground.classList.add('hidden');
+                heroBackground.style.backgroundImage = 'none'; // Clear any image background
+                heroVideoBackground.classList.add('hidden'); // Hide video
                 heroVideoBackground.pause(); // Pause any playing video
+                heroBackground.style.opacity = '1'; // Ensure opacity is reset for image if it's used
 
                 // Apply dynamic hero content based on layoutType
                 heroDynamicContent.innerHTML = ''; // Clear previous content
 
-                if (chosenDesign.layoutType === 'default' || chosenDesign.layoutType === 'banner') {
-                    const heroTextContent = chosenDesign.layoutType === 'banner'
-                        ? `<h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in">${siteConfig.bannerHeadline || chosenDesign.defaultBannerHeadline}</h1>
-                           <p class="text-lg md:text-xl mb-10 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s;">Explore our curated collections designed just for you.</p>
-                           <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" style="animation-delay: 1s;">View Collections</a>`
-                        : `<h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in">
-                               <span id="hero-site-name"></span>: <span class="block text-[#E6B89C]" id="hero-slogan"></span>
-                           </h1>
-                           <p class="text-lg md:text-xl mb-10 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s;">
-                               Discover the latest trends and timeless classics that define sophistication and comfort.
-                           </p>
-                           <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" style="animation-delay: 1s;">
-                               Shop Now
-                           </a>`;
-                    heroDynamicContent.innerHTML = heroTextContent;
-
+                if (chosenDesign.layoutType === 'default') {
+                    heroDynamicContent.innerHTML = `
+                        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in">
+                            <span id="hero-site-name"></span>: <span class="block text-[#E6B89C]" id="hero-slogan"></span>
+                        </h1>
+                        <p class="text-lg md:text-xl mb-10 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s;">
+                            Discover the latest trends and timeless classics that define sophistication and comfort.
+                        </p>
+                        <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" style="animation-delay: 1s;">
+                            Shop Now
+                        </a>
+                    `;
+                    // Manage hero image carousel for default layout
                     if (promoImagesArray.length === 0) {
                         heroBackground.style.backgroundImage = `url('${chosenDesign.heroDefaultImage}')`;
-                        heroBackground.style.opacity = '1';
                     } else {
-                        changeHeroImage();
+                        changeHeroImage(); // Start carousel
                     }
-
-                } else if (chosenDesign.layoutType === 'video') {
+                    heroBackground.classList.remove('hidden'); // Show image background
+                } else if (chosenDesign.layoutType === 'banner') {
+                    heroDynamicContent.innerHTML = `
+                        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in">${siteConfig.bannerHeadline || chosenDesign.defaultBannerHeadline}</h1>
+                        <p class="text-lg md:text-xl mb-10 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s;">Explore our curated collections designed just for you.</p>
+                        <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" style="animation-delay: 1s;">View Collections</a>
+                    `;
+                    // Manage hero image carousel for banner layout
+                    if (promoImagesArray.length === 0) {
+                        heroBackground.style.backgroundImage = `url('${chosenDesign.heroDefaultImage}')`;
+                    } else {
+                        changeHeroImage(); // Start carousel
+                    }
+                    heroBackground.classList.remove('hidden'); // Show image background
+                } else if (chosenDesign.layoutType === 'video') { // This block is now effectively for Design 2 if changed back, or other future video designs
                     const videoUrl = buildAbsoluteUrl(siteConfig.heroVideoUrl || chosenDesign.defaultHeroVideoUrl, 'No Video URL');
                     if (videoUrl) {
                         heroVideoSource.src = videoUrl;
@@ -539,12 +560,12 @@
                         heroVideoBackground.play();
                         heroVideoBackground.classList.remove('hidden');
                         heroVideoBackground.style.opacity = '1';
-                        heroBackground.style.backgroundImage = 'none';
-                        
+                        heroBackground.classList.add('hidden'); // Hide image background
                     } else {
                         console.warn("No valid video URL found for video layout. Falling back to default image.");
                         heroBackground.style.backgroundImage = `url('${chosenDesign.heroDefaultImage}')`;
-                        heroBackground.style.opacity = '1';
+                        heroBackground.classList.remove('hidden'); // Show image background
+                        heroVideoBackground.classList.add('hidden'); // Ensure video is hidden
                     }
 
                     heroDynamicContent.innerHTML = `
@@ -570,12 +591,35 @@
 
                 if (pageTitle) pageTitle.textContent = `${siteConfig.siteName} - ${siteConfig.slogan}`;
                 if (siteNameHeader) siteNameHeader.textContent = siteConfig.siteName;
+                // Re-populate hero specific dynamic text if elements exist (relevant for 'default' layout after innerHTML clears it)
                 if (currentHeroSiteName) currentHeroSiteName.textContent = siteConfig.siteName;
                 if (currentHeroSlogan) currentHeroSlogan.textContent = siteConfig.slogan;
+                
                 if (newsletterSiteName) newsletterSiteName.textContent = siteConfig.siteName;
                 if (footerSiteName) footerSiteName.textContent = siteConfig.siteName;
-                if (footerSlogan) footerSlogan.textContent = siteConfig.slogan; // Corrected ID usage
+                if (footerSlogan) footerSlogan.textContent = siteConfig.slogan; 
                 if (copyrightSiteName) copyrightSiteName.textContent = siteConfig.siteName;
+
+                // Reorder sections based on sectionOrder array
+                const sectionsToReorder = {};
+                chosenDesign.sectionOrder.forEach(sectionId => {
+                    const sectionElement = document.getElementById(sectionId);
+                    if (sectionElement) {
+                        sectionsToReorder[sectionId] = sectionElement;
+                    } else {
+                        console.warn(`Section with ID '${sectionId}' not found in HTML.`);
+                    }
+                });
+
+                // Clear current content in main and append in new order
+                mainContentContainer.innerHTML = ''; // Clear all existing sections
+
+                chosenDesign.sectionOrder.forEach(sectionId => {
+                    const sectionElement = sectionsToReorder[sectionId];
+                    if (sectionElement) {
+                        mainContentContainer.appendChild(sectionElement);
+                    }
+                });
             }
 
             // Function to fetch and apply site configuration
@@ -627,7 +671,15 @@
                     // Fallback to default design and content on error
                     applyDesign(0, { siteName: 'Sheeka', slogan: 'Elevate Your Style', aboutUsText: `At <strong class="text-primary">Sheeka</strong>, we believe that fashion is a powerful form of self-expression. Our brand is dedicated to providing high-quality, stylish, and comfortable clothing that empowers you to express your unique personality.
 
-From conceptualization to creation, every piece is crafted with meticulous attention to detail and a passion for design. We're committed to sustainable practices and ethical production, ensuring that your style choices make a positive impact. Join the Sheeka family and redefine your wardrobe.`, aboutUsImageUrl: 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us' });
+From conceptualization to creation, every piece is crafted with meticulous attention to detail and a passion for design. We're committed to sustainable practices and ethical production, ensuring that your style choices make a positive impact. Join the Sheeka family and redefine your wardrobe.`, aboutUsImageUrl: 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us',
+                    bannerHeadline: 'Welcome to our Collection', // Fallback for banner
+                    heroVideoUrl: 'https://www.w3schools.com/tags/movie.mp4', // Fallback for video
+                    socialMediaLinks: [ // Fallback social links
+                        { url: '#', iconClass: 'fab fa-facebook' },
+                        { url: '#', iconClass: 'fab fa-instagram' },
+                        { url: '#', iconClass: 'fab fa-twitter' }
+                    ]
+                 });
                     console.warn("Using default site configuration due to fetch error.");
                 }
             }
@@ -725,7 +777,20 @@ From conceptualization to creation, every piece is crafted with meticulous atten
             function changeHeroImage() {
                 if (promoImagesArray.length > 0) {
                     // Only apply image background if not a video layout
-                    const currentDesignIndex = parseInt(document.getElementById('page-title').textContent.split(' - ')[0].replace('Design ', '') || '0');
+                    // Note: pageTitle.textContent will contain "Design X - Site Name - Slogan"
+                    // We need to reliably get the design index. Using a more robust way.
+                    let currentDesignIndex = 0;
+                    try {
+                        const titleParts = pageTitle.textContent.split(' - ');
+                        const designPart = titleParts[0]; // e.g., "Design 0"
+                        if (designPart.startsWith('Design ')) {
+                            currentDesignIndex = parseInt(designPart.replace('Design ', ''));
+                        }
+                    } catch (e) {
+                        console.warn("Could not parse design index from page title, defaulting to 0.", e);
+                        currentDesignIndex = 0;
+                    }
+
                     const currentDesign = designConfigurations[currentDesignIndex];
                     
                     if (currentDesign && currentDesign.layoutType !== 'video') {
@@ -758,7 +823,18 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                         }
 
                         // Display the first image immediately, only if current design is not video
-                        const currentDesignIndex = parseInt(document.getElementById('page-title').textContent.split(' - ')[0].replace('Design ', '') || '0');
+                        let currentDesignIndex = 0;
+                        try {
+                            const titleParts = pageTitle.textContent.split(' - ');
+                            const designPart = titleParts[0]; 
+                            if (designPart.startsWith('Design ')) {
+                                currentDesignIndex = parseInt(designPart.replace('Design ', ''));
+                            }
+                        } catch (e) {
+                            console.warn("Could not parse design index from page title, defaulting to 0 for carousel init.", e);
+                            currentDesignIndex = 0;
+                        }
+
                         const currentDesign = designConfigurations[currentDesignIndex];
 
                         if (currentDesign && currentDesign.layoutType !== 'video') {
@@ -791,6 +867,17 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                     }
 
                     try {
+                        // IMPORTANT: The 'Route not found' error indicates a BACKEND configuration issue.
+                        // This frontend code is correct for SENDING the email.
+                        //
+                        // To fix this, ensure your backend server (e.g., your Express app):
+                        // 1. Is RUNNING and publicly accessible at the BASE_URL.
+                        // 2. Has the 'cors' middleware configured to allow requests from this frontend's origin.
+                        // 3. CORRECTLY uses your emailRoutes.js file in its main server.js/app.js:
+                        //    e.g., `const emailRoutes = require('./routes/emailRoutes');`
+                        //    and `app.use('/api', emailRoutes);`
+                        // 4. The `sendEmail` function in your email controller (`../controllers/email.js`)
+                        //    is fully implemented and working (e.g., with nodemailer).
                         const response = await fetch(`${BASE_URL}/api/emails`, {
                             method: 'POST',
                             headers: {
@@ -809,10 +896,12 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                             showMessage('success', result.message || 'Your message has been sent successfully!');
                             contactForm.reset(); // Clear the form
                         } else {
+                            // If backend responds with a non-2xx status (e.g., 404, 500)
                             showMessage('error', `Failed to send message: ${result.message || 'Unknown error'}`);
                             console.error('Backend error response:', result);
                         }
                     } catch (error) {
+                        // This catch block handles network errors (e.g., server down, CORS preflight failed)
                         console.error('Network error during contact message submission:', error);
                         showMessage('error', `An error occurred while sending your message: ${error.message}`);
                     }
@@ -829,9 +918,15 @@ From conceptualization to creation, every piece is crafted with meticulous atten
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    // Get the target section ID from the href
+                    const targetId = this.getAttribute('href').substring(1); 
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
 
