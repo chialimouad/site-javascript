@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title"></title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font: Inter -->
+    <!-- Tailwind CSS CDN - using defer to not block rendering -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Google Font: Inter - preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Font Awesome for icons - using defer to not block rendering -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" defer>
     <style>
         :root {
             /* These will be set dynamically by JavaScript */
@@ -204,7 +206,8 @@
         <section id="about" class="py-16 section-fade-in">
             <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/2">
-                    <img id="about-us-image" src="https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Sheeka" alt="About Us" class="rounded-xl shadow-xl w-full h-auto object-cover transform transition duration-500 hover:scale-105">
+                    <!-- Added loading="lazy" for performance -->
+                    <img id="about-us-image" src="https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Sheeka" alt="About Us" class="rounded-xl shadow-xl w-full h-auto object-cover transform transition duration-500 hover:scale-105" loading="lazy">
                 </div>
                 <div class="lg:w-1/2 text-center lg:text-left">
                     <h2 class="text-4xl font-bold mb-6 text-general">About Us</h2>
@@ -273,6 +276,8 @@
                         <li><a href="index.html#categories" class="footer-text hover:footer-link transition duration-300">Categories</a></li>
                         <li><a href="index.html#about" class="footer-text hover:footer-link transition duration-300">About Us</a></li>
                         <li><a href="index.html#contact" class="footer-text hover:footer-link transition duration-300">Contact</a></li>
+                        <!-- Added link to the policy page -->
+                        <li><a href="privacy-policy.html" class="footer-text hover:footer-link transition duration-300">Politique de Commandes</a></li>
                     </ul>
                 </div>
                 <div>
@@ -296,7 +301,25 @@
         <!-- Error message here -->
     </div>
 
+    <!-- Cookie Consent Bar -->
+    <div id="cookie-consent-bar" class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex flex-col sm:flex-row items-center justify-between transform translate-y-full transition-transform duration-500 ease-out z-50">
+        <p class="text-sm text-center sm:text-left mb-3 sm:mb-0">
+            We use cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our <a href="privacy-policy.html" class="underline hover:text-blue-300">privacy policy</a>.
+        </p>
+        <div class="flex space-x-3">
+            <button id="accept-cookies" class="bg-primary hover:bg-secondary text-white px-5 py-2 rounded-full text-sm font-semibold transition duration-300">
+                Accept
+            </button>
+            <button id="decline-cookies" class="bg-gray-600 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition duration-300">
+                Decline
+            </button>
+        </div>
+    </div>
+
     <script>
+        // Store the active design configuration globally for easy access
+        let currentActiveDesign = null;
+
         document.addEventListener('DOMContentLoaded', () => {
             // Base URL for your backend API
             const BASE_URL = 'https://sheeka.onrender.com';
@@ -332,6 +355,11 @@
             const successMessageBox = document.getElementById('success-message-box');
             const errorMessageBox = document.getElementById('error-message-box');
 
+            // Cookie Consent elements
+            const cookieConsentBar = document.getElementById('cookie-consent-bar');
+            const acceptCookiesButton = document.getElementById('accept-cookies');
+            const declineCookiesButton = document.getElementById('decline-cookies');
+
             // Variables for hero image carousel
             let promoImagesArray = [];
             let currentPromoImageIndex = 0;
@@ -339,7 +367,7 @@
 
             // Define multiple design configurations
             const designConfigurations = [
-                {   // Design 0: Original Sheeka Pink (Default layout)
+                { 
                     name: 'Default Sheeka Pink',
                     layoutType: 'default', 
                     primaryColor: '#C8797D',
@@ -359,7 +387,7 @@
                     // Default section order
                     sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact']
                 },
-                {   // Design 1: Ocean Breeze (Banner layout with custom product/category titles)
+                { 
                     name: 'Ocean Breeze',
                     layoutType: 'banner', 
                     primaryColor: '#4A90E2', // Sky Blue
@@ -380,7 +408,7 @@
                     // Reordered sections: Categories first, then products
                     sectionOrder: ['hero', 'categories', 'products', 'newsletter', 'about', 'contact']
                 },
-                {   // Design 2: Forest Earth (Now a default layout, no video)
+                { 
                     name: 'Forest Earth',
                     layoutType: 'default', // Changed from 'video' to 'default'
                     primaryColor: '#6A994E', // Forest Green
@@ -401,7 +429,7 @@
                     // Different order: About Us after hero, then products & categories
                     sectionOrder: ['hero', 'about', 'products', 'categories', 'contact', 'newsletter']
                 },
-                {   // Design 3: Modern Monochrome (Retains default layout, but can have custom titles)
+                { 
                     name: 'Modern Monochrome',
                     layoutType: 'default',
                     primaryColor: '#FF6B6B', // Coral Red Accent
@@ -421,7 +449,7 @@
                     // Order emphasizing contact and newsletter earlier
                     sectionOrder: ['hero', 'newsletter', 'products', 'categories', 'about', 'contact']
                 },
-                {   // Design 4: Royal Purple & Gold (Retains default layout)
+                { 
                     name: 'Royal Purple & Gold',
                     layoutType: 'default',
                     primaryColor: '#8A2BE2', // Blue Violet (Purple)
@@ -441,7 +469,7 @@
                     // Another custom order
                     sectionOrder: ['hero', 'about', 'newsletter', 'products', 'categories', 'contact']
                 },
-                {   // Design 5: Warm Sunset (Retains default layout)
+                { 
                     name: 'Warm Sunset',
                     layoutType: 'default',
                     primaryColor: '#FF7F50', // Coral
@@ -467,10 +495,9 @@
             function buildAbsoluteUrl(url, fallbackText = 'No Image') {
                 if (!url) {
                     if (fallbackText.includes('Image')) {
-                         return `https://placehold.co/600x400/EEEEEE/333333?text=${encodeURIComponent(fallbackText)}`;
+                        return `https://placehold.co/600x400/EEEEEE/333333?text=${encodeURIComponent(fallbackText)}`;
                     } else if (fallbackText.includes('Video')) {
-                         // A generic video placeholder might be tricky, so return empty or a default known video
-                         return ''; // Or a default video URL if you have one
+                        return ''; // Or a default video URL if you have one
                     }
                 }
                 if (url && url.startsWith('http')) return url; // Already absolute
@@ -497,6 +524,8 @@
                     applyDesign(0, siteConfig); // Fallback to default design
                     return;
                 }
+
+                currentActiveDesign = chosenDesign; // Store the active design globally
 
                 // Apply colors
                 root.style.setProperty('--primary-color', chosenDesign.primaryColor);
@@ -679,7 +708,7 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                         { url: '#', iconClass: 'fab fa-instagram' },
                         { url: '#', iconClass: 'fab fa-twitter' }
                     ]
-                 });
+                    });
                     console.warn("Using default site configuration due to fetch error.");
                 }
             }
@@ -710,7 +739,7 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                         productCard.className = 'bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105';
                         productCard.innerHTML = `
                             <a href="product-details.html?id=${product._id}" class="block">
-                                <img src="${buildAbsoluteUrl(imageUrl, 'Image Error')}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=Image+Error';">
+                                <img src="${buildAbsoluteUrl(imageUrl, 'Image Error')}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=Image+Error';" loading="lazy">
                                 <div class="p-6">
                                     <h3 class="text-xl font-semibold mb-2 text-general">${product.name}</h3>
                                     <p class="text-gray-600 mb-4">${product.description?.substring(0, 100) ?? ''}${product.description?.length > 100 ? '...' : ''}</p>
@@ -759,7 +788,7 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                         // Updated href to point to collection-details.html with ID
                         categoryCard.innerHTML = `
                             <a href="collection-details.html?id=${collection._id}" class="block">
-                                <img src="${thumbnailUrl}" alt="${collectionName}" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/600x400/DDA0DD/FFFFFF?text=Image+Error';">
+                                <img src="${thumbnailUrl}" alt="${collectionName}" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/600x400/DDA0DD/FFFFFF?text=Image+Error';" loading="lazy">
                                 <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <span class="text-white text-2xl font-bold">${collectionName}</span>
                                 </div>
@@ -775,30 +804,11 @@ From conceptualization to creation, every piece is crafted with meticulous atten
 
             // Function to change the hero image for carousel
             function changeHeroImage() {
-                if (promoImagesArray.length > 0) {
-                    // Only apply image background if not a video layout
-                    // Note: pageTitle.textContent will contain "Design X - Site Name - Slogan"
-                    // We need to reliably get the design index. Using a more robust way.
-                    let currentDesignIndex = 0;
-                    try {
-                        const titleParts = pageTitle.textContent.split(' - ');
-                        const designPart = titleParts[0]; // e.g., "Design 0"
-                        if (designPart.startsWith('Design ')) {
-                            currentDesignIndex = parseInt(designPart.replace('Design ', ''));
-                        }
-                    } catch (e) {
-                        console.warn("Could not parse design index from page title, defaulting to 0.", e);
-                        currentDesignIndex = 0;
-                    }
-
-                    const currentDesign = designConfigurations[currentDesignIndex];
-                    
-                    if (currentDesign && currentDesign.layoutType !== 'video') {
-                        const imageUrl = buildAbsoluteUrl(promoImagesArray[currentPromoImageIndex], 'No Image');
-                        heroBackground.style.backgroundImage = `url('${imageUrl}')`;
-                        heroBackground.style.opacity = '1';
-                        currentPromoImageIndex = (currentPromoImageIndex + 1) % promoImagesArray.length;
-                    }
+                if (promoImagesArray.length > 0 && currentActiveDesign && currentActiveDesign.layoutType !== 'video') {
+                    const imageUrl = buildAbsoluteUrl(promoImagesArray[currentPromoImageIndex], 'No Image');
+                    heroBackground.style.backgroundImage = `url('${imageUrl}')`;
+                    heroBackground.style.opacity = '1';
+                    currentPromoImageIndex = (currentPromoImageIndex + 1) % promoImagesArray.length;
                 }
             }
 
@@ -823,21 +833,7 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                         }
 
                         // Display the first image immediately, only if current design is not video
-                        let currentDesignIndex = 0;
-                        try {
-                            const titleParts = pageTitle.textContent.split(' - ');
-                            const designPart = titleParts[0]; 
-                            if (designPart.startsWith('Design ')) {
-                                currentDesignIndex = parseInt(designPart.replace('Design ', ''));
-                            }
-                        } catch (e) {
-                            console.warn("Could not parse design index from page title, defaulting to 0 for carousel init.", e);
-                            currentDesignIndex = 0;
-                        }
-
-                        const currentDesign = designConfigurations[currentDesignIndex];
-
-                        if (currentDesign && currentDesign.layoutType !== 'video') {
+                        if (currentActiveDesign && currentActiveDesign.layoutType !== 'video') {
                            changeHeroImage(); // Set the first image
                             if (promoImagesArray.length > 1) {
                                 heroImageInterval = setInterval(changeHeroImage, 5000); // Start carousel if more than one image
@@ -908,11 +904,73 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                 });
             }
 
-            // Initial data fetching calls
+            // --- Cookie Consent Logic ---
+            function setCookie(name, value, days) {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
+            }
+
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+
+            function showCookieConsent() {
+                // Only show if the user hasn't accepted cookies previously
+                if (!getCookie('cookies_accepted')) {
+                    cookieConsentBar.classList.remove('translate-y-full');
+                    cookieConsentBar.classList.add('translate-y-0');
+                }
+            }
+
+            function hideCookieConsent() {
+                cookieConsentBar.classList.remove('translate-y-0');
+                cookieConsentBar.classList.add('translate-y-full');
+                // Use a timeout to hide after transition
+                setTimeout(() => {
+                    cookieConsentBar.classList.add('hidden');
+                }, 500); // Match CSS transition duration
+            }
+
+            // Event listeners for cookie consent buttons
+            if (acceptCookiesButton) {
+                acceptCookiesButton.addEventListener('click', () => {
+                    setCookie('cookies_accepted', 'true', 365); // Consent for 1 year
+                    hideCookieConsent();
+                    showMessage('success', 'Cookies accepted. Thank you!');
+                });
+            }
+
+            if (declineCookiesButton) {
+                declineCookiesButton.addEventListener('click', () => {
+                    // For simplicity, we just hide it. If more strict decline behavior is needed (e.g., disabling analytics),
+                    // additional logic would go here.
+                    hideCookieConsent();
+                    showMessage('info', 'Cookies declined. Some features might be limited.');
+                });
+            }
+
+
+            // Initial data fetching calls - these will run as soon as DOM is ready
             fetchSiteConfig(); 
-            fetchProducts(); // Explicitly call fetchProducts for all designs
-            fetchCollections(); // Explicitly call fetchCollections for all designs
+            fetchProducts(); 
+            fetchCollections(); 
             fetchHeroImagesForCarousel();
+            
+            // Show cookie consent bar after all other content is loaded
+            showCookieConsent();
+
 
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -934,7 +992,7 @@ From conceptualization to creation, every piece is crafted with meticulous atten
             function openMobileMenu() {
                 mobileMenu.classList.remove('translate-x-full');
                 mobileMenu.classList.add('translate-x-0');
-                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.remove('hidden'); // Ensure it's visible for transition
                 mobileMenuOverlay.classList.remove('hidden');
             }
 
