@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title"></title>
+    <!-- Meta description for SEO, will be dynamically updated by JS -->
+    <meta name="description" id="meta-description" content="Découvrez les dernières tendances et les classiques intemporels chez Sheeka Store.">
+    
     <!-- Tailwind CSS CDN - using defer to not block rendering -->
     <script src="https://cdn.tailwindcss.com" defer></script>
     <!-- Google Font: Inter - preconnect for faster loading -->
@@ -53,7 +56,7 @@
         }
         /* Added for smooth background image transitions */
         #hero-background {
-            transition: background-image 1s ease-in-out, opacity 1s ease-in-out;
+            transition: background-image 1s ease-in-out; /* Removed opacity transition as it's now opaque */
         }
 
         /* Dynamic colors applied using CSS variables */
@@ -71,10 +74,7 @@
         .footer-text { color: var(--footer-text-color); }
         .footer-link:hover { color: var(--footer-link-color); }
 
-        /* Dynamic gradient for hero section */
-        #hero {
-            background-image: linear-gradient(to right, var(--hero-gradient-from), var(--hero-gradient-to));
-        }
+        /* No direct gradient on #hero anymore, it's on the overlay div */
         /* Dynamic section backgrounds */
         #products, #about {
             background-color: var(--section-bg-primary);
@@ -82,7 +82,6 @@
         #categories, #contact {
             background-color: var(--section-bg-secondary);
         }
-
 
         @keyframes slideInLeft {
             from {
@@ -129,8 +128,8 @@
                 <a href="index.html#about" class="text-general hover:text-primary font-medium transition duration-300 rounded-md p-2">About Us</a>
                 <a href="index.html#contact" class="text-general hover:text-primary font-medium transition duration-300 rounded-md p-2">Contact</a>
             </div>
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-general hover:text-primary focus:outline-none">
+            <!-- Mobile Menu Button - Added aria-label for accessibility -->
+            <button id="mobile-menu-button" class="md:hidden text-general hover:text-primary focus:outline-none" aria-label="Open mobile menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
         </nav>
@@ -139,7 +138,8 @@
         <!-- Mobile Menu Sidebar -->
         <div id="mobile-menu" class="hidden md:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
             <div class="p-6">
-                <button id="close-mobile-menu" class="absolute top-4 right-4 text-general hover:text-primary focus:outline-none">
+                <!-- Close Mobile Menu Button - Added aria-label for accessibility -->
+                <button id="close-mobile-menu" class="absolute top-4 right-4 text-general hover:text-primary focus:outline-none" aria-label="Close mobile menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
                 <nav class="flex flex-col space-y-4 mt-8">
@@ -156,16 +156,19 @@
     <main id="main-content-container">
         <!-- Hero Section -->
         <section id="hero" class="relative text-white h-screen flex items-center justify-center text-center overflow-hidden pt-16">
-            <!-- Background elements -->
-            <div id="hero-background" class="absolute inset-0 z-0 opacity-10" style="background-size: cover; background-position: center;"></div>
-            <!-- New: Video background element, hidden by default -->
-            <video id="hero-video-background" class="absolute inset-0 w-full h-full object-cover hidden z-0 opacity-10" loop muted autoplay playsinline>
-                <source id="hero-video-source" src="" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-
+            <!-- Background media container - now fully opaque, transition handled by JS for image/video swap -->
+            <div id="hero-media-container" class="absolute inset-0 z-0">
+                <div id="hero-background" class="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out"></div>
+                <video id="hero-video-background" class="absolute inset-0 w-full h-full object-cover hidden" loop muted autoplay playsinline>
+                    <source id="hero-video-source" src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <!-- Gradient Overlay - now a separate div with controlled opacity -->
+            <div class="absolute inset-0 z-10" style="background-image: linear-gradient(to right, var(--hero-gradient-from), var(--hero-gradient-to)); opacity: 0.8;"></div>
+            
             <!-- Dynamic Content Container -->
-            <div id="hero-dynamic-content" class="relative z-10 p-8 max-w-4xl mx-auto">
+            <div id="hero-dynamic-content" class="relative z-20 p-8 max-w-4xl mx-auto">
                 <!-- Content will be injected here by JavaScript based on design -->
                 <!-- Default content (Design 0) -->
                 <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in">
@@ -206,8 +209,8 @@
         <section id="about" class="py-16 section-fade-in">
             <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/2">
-                    <!-- Added loading="lazy" for performance -->
-                    <img id="about-us-image" src="https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Sheeka" alt="About Us" class="rounded-xl shadow-xl w-full h-auto object-cover transform transition duration-500 hover:scale-105" loading="lazy">
+                    <!-- Added loading="lazy" for performance and explicit width/height for CLS -->
+                    <img id="about-us-image" src="https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Sheeka" alt="About Us Sheeka Store" class="rounded-xl shadow-xl w-full h-auto object-cover transform transition duration-500 hover:scale-105" loading="lazy" width="800" height="600">
                 </div>
                 <div class="lg:w-1/2 text-center lg:text-left">
                     <h2 class="text-4xl font-bold mb-6 text-general">About Us</h2>
@@ -326,6 +329,7 @@
 
             // DOM elements
             const pageTitle = document.getElementById('page-title');
+            const metaDescription = document.getElementById('meta-description'); // Get meta description element
             const siteNameHeader = document.getElementById('site-name-header');
             const aboutUsTextElem = document.getElementById('about-us-text');
             const aboutUsImageElem = document.getElementById('about-us-image'); 
@@ -339,6 +343,7 @@
             const categoriesSectionTitle = document.getElementById('categories-section-title');
             const productsSectionTitle = document.getElementById('products-section-title');
             const categoryListContainer = document.getElementById('category-list');
+            const heroMediaContainer = document.getElementById('hero-media-container'); // New container for background media
             const heroBackground = document.getElementById('hero-background');
             const heroVideoBackground = document.getElementById('hero-video-background');
             const heroVideoSource = document.getElementById('hero-video-source');
@@ -385,7 +390,8 @@
                     productSectionTitle: 'Featured Products', 
                     categorySectionTitle: 'Shop by Category',
                     // Default section order
-                    sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact']
+                    sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact'],
+                    defaultMetaDescription: 'Découvrez les dernières tendances et les classiques intemporels chez Sheeka Store. Élégance et confort garantis.'
                 },
                 { 
                     name: 'Ocean Breeze',
@@ -406,7 +412,8 @@
                     productSectionTitle: 'Our Curated Picks', 
                     categorySectionTitle: 'Explore Unique Themes',
                     // Reordered sections: Categories first, then products
-                    sectionOrder: ['hero', 'categories', 'products', 'newsletter', 'about', 'contact']
+                    sectionOrder: ['hero', 'categories', 'products', 'newsletter', 'about', 'contact'],
+                    defaultMetaDescription: 'Explorez la collection Ocean Breeze de Sheeka Store. Des vêtements qui allient sérénité et style pour une expérience unique.'
                 },
                 { 
                     name: 'Forest Earth',
@@ -427,7 +434,8 @@
                     productSectionTitle: 'Handpicked for Nature Lovers', 
                     categorySectionTitle: 'Collections from the Wild',
                     // Different order: About Us after hero, then products & categories
-                    sectionOrder: ['hero', 'about', 'products', 'categories', 'contact', 'newsletter']
+                    sectionOrder: ['hero', 'about', 'products', 'categories', 'contact', 'newsletter'],
+                    defaultMetaDescription: 'Découvrez la collection Forest Earth de Sheeka Store. Des pièces inspirées par la nature pour un style authentique et confortable.'
                 },
                 { 
                     name: 'Modern Monochrome',
@@ -447,7 +455,8 @@
                     productSectionTitle: 'Sleek & Stylish Products',
                     categorySectionTitle: 'Minimalist Collections',
                     // Order emphasizing contact and newsletter earlier
-                    sectionOrder: ['hero', 'newsletter', 'products', 'categories', 'about', 'contact']
+                    sectionOrder: ['hero', 'newsletter', 'products', 'categories', 'about', 'contact'],
+                    defaultMetaDescription: 'Explorez le style épuré et moderne de la collection Monochrome de Sheeka Store. L\'élégance dans la simplicité.'
                 },
                 { 
                     name: 'Royal Purple & Gold',
@@ -467,7 +476,8 @@
                     productSectionTitle: 'Regal Selections',
                     categorySectionTitle: 'Opulent Collections',
                     // Another custom order
-                    sectionOrder: ['hero', 'about', 'newsletter', 'products', 'categories', 'contact']
+                    sectionOrder: ['hero', 'about', 'newsletter', 'products', 'categories', 'contact'],
+                    defaultMetaDescription: 'Plongez dans le luxe avec la collection Royal Purple & Gold de Sheeka Store. Des pièces opulentes pour un style majestueux.'
                 },
                 { 
                     name: 'Warm Sunset',
@@ -487,7 +497,8 @@
                     productSectionTitle: 'Warmth & Style Products',
                     categorySectionTitle: 'Golden Hour Collections',
                     // Standard order for this design
-                    sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact']
+                    sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact'],
+                    defaultMetaDescription: 'Adoptez la chaleur du coucher de soleil avec la collection Warm Sunset de Sheeka Store. Des vêtements confortables et élégants.'
                 }
             ];
 
@@ -544,8 +555,7 @@
                 heroBackground.style.backgroundImage = 'none'; // Clear any image background
                 heroVideoBackground.classList.add('hidden'); // Hide video
                 heroVideoBackground.pause(); // Pause any playing video
-                heroBackground.style.opacity = '1'; // Ensure opacity is reset for image if it's used
-
+                
                 // Apply dynamic hero content based on layoutType
                 heroDynamicContent.innerHTML = ''; // Clear previous content
 
@@ -568,6 +578,7 @@
                         changeHeroImage(); // Start carousel
                     }
                     heroBackground.classList.remove('hidden'); // Show image background
+                    heroMediaContainer.classList.remove('hidden'); // Ensure media container is visible
                 } else if (chosenDesign.layoutType === 'banner') {
                     heroDynamicContent.innerHTML = `
                         <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in">${siteConfig.bannerHeadline || chosenDesign.defaultBannerHeadline}</h1>
@@ -581,6 +592,7 @@
                         changeHeroImage(); // Start carousel
                     }
                     heroBackground.classList.remove('hidden'); // Show image background
+                    heroMediaContainer.classList.remove('hidden'); // Ensure media container is visible
                 } else if (chosenDesign.layoutType === 'video') { // This block is now effectively for Design 2 if changed back, or other future video designs
                     const videoUrl = buildAbsoluteUrl(siteConfig.heroVideoUrl || chosenDesign.defaultHeroVideoUrl, 'No Video URL');
                     if (videoUrl) {
@@ -588,12 +600,13 @@
                         heroVideoBackground.load();
                         heroVideoBackground.play();
                         heroVideoBackground.classList.remove('hidden');
-                        heroVideoBackground.style.opacity = '1';
+                        heroMediaContainer.classList.remove('hidden'); // Ensure media container is visible
                         heroBackground.classList.add('hidden'); // Hide image background
                     } else {
                         console.warn("No valid video URL found for video layout. Falling back to default image.");
                         heroBackground.style.backgroundImage = `url('${chosenDesign.heroDefaultImage}')`;
                         heroBackground.classList.remove('hidden'); // Show image background
+                        heroMediaContainer.classList.remove('hidden'); // Ensure media container is visible
                         heroVideoBackground.classList.add('hidden'); // Ensure video is hidden
                     }
 
@@ -619,6 +632,9 @@
                 const currentHeroSlogan = document.getElementById('hero-slogan');
 
                 if (pageTitle) pageTitle.textContent = `${siteConfig.siteName} - ${siteConfig.slogan}`;
+                // Set meta description dynamically
+                if (metaDescription) metaDescription.content = siteConfig.metaDescription || chosenDesign.defaultMetaDescription;
+
                 if (siteNameHeader) siteNameHeader.textContent = siteConfig.siteName;
                 // Re-populate hero specific dynamic text if elements exist (relevant for 'default' layout after innerHTML clears it)
                 if (currentHeroSiteName) currentHeroSiteName.textContent = siteConfig.siteName;
@@ -677,7 +693,7 @@
                     // Apply About Us Image (safe as it's not in hero-dynamic-content)
                     if (aboutUsImageElem) {
                         aboutUsImageElem.src = buildAbsoluteUrl(config.aboutUsImageUrl || 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us');
-                        aboutUsImageElem.alt = `About Us - ${config.siteName}`;
+                        aboutUsImageElem.alt = `About Us - ${config.siteName}`; // More descriptive alt text
                     }
 
                     // Apply social media links
@@ -688,6 +704,7 @@
                                 const a = document.createElement('a');
                                 a.href = link.url;
                                 a.target = '_blank';
+                                a.rel = 'noopener noreferrer'; // Security for external links
                                 a.className = 'text-footer-text hover:text-white transition duration-300';
                                 a.innerHTML = `<i class="${link.iconClass} w-6 h-6"></i>`;
                                 socialMediaLinksContainer.appendChild(a);
@@ -698,17 +715,23 @@
                 } catch (error) {
                     console.error("Error fetching site configuration:", error);
                     // Fallback to default design and content on error
-                    applyDesign(0, { siteName: 'Sheeka', slogan: 'Elevate Your Style', aboutUsText: `At <strong class="text-primary">Sheeka</strong>, we believe that fashion is a powerful form of self-expression. Our brand is dedicated to providing high-quality, stylish, and comfortable clothing that empowers you to express your unique personality.
+                    const defaultSiteConfig = { 
+                        siteName: 'Sheeka', 
+                        slogan: 'Elevate Your Style', 
+                        aboutUsText: `At <strong class="text-primary">Sheeka</strong>, we believe that fashion is a powerful form of self-expression. Our brand is dedicated to providing high-quality, stylish, and comfortable clothing that empowers you to express your unique personality.
 
-From conceptualization to creation, every piece is crafted with meticulous attention to detail and a passion for design. We're committed to sustainable practices and ethical production, ensuring that your style choices make a positive impact. Join the Sheeka family and redefine your wardrobe.`, aboutUsImageUrl: 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us',
-                    bannerHeadline: 'Welcome to our Collection', // Fallback for banner
-                    heroVideoUrl: 'https://www.w3schools.com/tags/movie.mp4', // Fallback for video
-                    socialMediaLinks: [ // Fallback social links
-                        { url: '#', iconClass: 'fab fa-facebook' },
-                        { url: '#', iconClass: 'fab fa-instagram' },
-                        { url: '#', iconClass: 'fab fa-twitter' }
-                    ]
-                    });
+From conceptualization to creation, every piece is crafted with meticulous attention to detail and a passion for design. We're committed to sustainable practices and ethical production, ensuring that your style choices make a positive impact. Join the Sheeka family and redefine your wardrobe.`, 
+                        aboutUsImageUrl: 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us',
+                        bannerHeadline: 'Welcome to our Collection', // Fallback for banner
+                        heroVideoUrl: 'https://www.w3schools.com/tags/movie.mp4', // Fallback for video
+                        socialMediaLinks: [ // Fallback social links
+                            { url: '#', iconClass: 'fab fa-facebook', platform: 'Facebook' },
+                            { url: '#', iconClass: 'fab fa-instagram', platform: 'Instagram' },
+                            { url: '#', iconClass: 'fab fa-twitter', platform: 'Twitter' }
+                        ],
+                        metaDescription: 'Découvrez les dernières tendances et les classiques intemporels chez Sheeka Store. Élégance et confort garantis.'
+                    };
+                    applyDesign(0, defaultSiteConfig);
                     console.warn("Using default site configuration due to fetch error.");
                 }
             }
@@ -739,7 +762,8 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                         productCard.className = 'bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105';
                         productCard.innerHTML = `
                             <a href="product-details.html?id=${product._id}" class="block">
-                                <img src="${buildAbsoluteUrl(imageUrl, 'Image Error')}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=Image+Error';" loading="lazy">
+                                <!-- Added explicit width/height and more descriptive alt text -->
+                                <img src="${buildAbsoluteUrl(imageUrl, 'Image Error')}" alt="Image du produit ${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=Image+Error';" loading="lazy" width="600" height="400">
                                 <div class="p-6">
                                     <h3 class="text-xl font-semibold mb-2 text-general">${product.name}</h3>
                                     <p class="text-gray-600 mb-4">${product.description?.substring(0, 100) ?? ''}${product.description?.length > 100 ? '...' : ''}</p>
@@ -788,7 +812,8 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                         // Updated href to point to collection-details.html with ID
                         categoryCard.innerHTML = `
                             <a href="collection-details.html?id=${collection._id}" class="block">
-                                <img src="${thumbnailUrl}" alt="${collectionName}" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/600x400/DDA0DD/FFFFFF?text=Image+Error';" loading="lazy">
+                                <!-- Added explicit width/height and more descriptive alt text -->
+                                <img src="${thumbnailUrl}" alt="Image de la collection ${collectionName}" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/600x400/DDA0DD/FFFFFF?text=Image+Error';" loading="lazy" width="400" height="300">
                                 <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <span class="text-white text-2xl font-bold">${collectionName}</span>
                                 </div>
@@ -807,7 +832,6 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                 if (promoImagesArray.length > 0 && currentActiveDesign && currentActiveDesign.layoutType !== 'video') {
                     const imageUrl = buildAbsoluteUrl(promoImagesArray[currentPromoImageIndex], 'No Image');
                     heroBackground.style.backgroundImage = `url('${imageUrl}')`;
-                    heroBackground.style.opacity = '1';
                     currentPromoImageIndex = (currentPromoImageIndex + 1) % promoImagesArray.length;
                 }
             }
