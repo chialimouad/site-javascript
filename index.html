@@ -7,11 +7,30 @@
     <!-- Meta description for SEO, will be dynamically updated by JS -->
     <meta name="description" id="meta-description" content="Découvrez les dernières tendances et les classiques intemporels chez Sheeka Store.">
     
-    <!-- Tailwind CSS CDN - using defer to not block rendering -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
-    <!-- Google Font: Inter - preconnect for faster loading -->
+    <!-- Security Headers (Best Practices) -->
+    <!-- X-Frame-Options: DENY to prevent clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- Cross-Origin-Opener-Policy: same-origin for isolation -->
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+    <!-- Content-Security-Policy: Basic policy to prevent XSS. Adjust as needed for your specific resources. -->
+    <!-- This is a *very basic* example. A robust CSP requires careful planning. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://placehold.co https://sheeka.onrender.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co https://res.cloudinary.com; media-src 'self' https://www.w3schools.com;">
+    
+    <!-- Preconnect for faster loading of critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://placehold.co">
+    <link rel="preconnect" href="https://sheeka.onrender.com">
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Tailwind CSS CDN - using defer to not block rendering -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Google Font: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons - using defer to not block rendering -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" defer>
@@ -210,7 +229,7 @@
             <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/2">
                     <!-- Added loading="lazy" for performance and explicit width/height for CLS -->
-                    <img id="about-us-image" src="https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Sheeka" alt="About Us Sheeka Store" class="rounded-xl shadow-xl w-full h-auto object-cover transform transition duration-500 hover:scale-105" loading="lazy" width="800" height="600">
+                    <img id="about-us-image" src="https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Sheeka" alt="À propos de Sheeka Store" class="rounded-xl shadow-xl w-full h-auto object-cover transform transition duration-500 hover:scale-105" loading="lazy" width="800" height="600">
                 </div>
                 <div class="lg:w-1/2 text-center lg:text-left">
                     <h2 class="text-4xl font-bold mb-6 text-general">About Us</h2>
@@ -227,7 +246,7 @@
                     Sign up for our newsletter to get exclusive offers, new arrivals, and style tips directly to your inbox.
                 </p>
                 <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                    <input type="email" placeholder="Your email address" class="flex-grow p-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition duration-300 shadow-md" required>
+                    <input type="email" placeholder="Your email address" class="flex-grow p-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition duration-300 shadow-md" required aria-label="Your email address for newsletter">
                     <button type="submit" class="bg-white text-primary px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition duration-300 shadow-lg transform hover:scale-105">
                         Subscribe
                     </button>
@@ -567,7 +586,7 @@
                         <p class="text-lg md:text-xl mb-10 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s;">
                             Discover the latest trends and timeless classics that define sophistication and comfort.
                         </p>
-                        <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" style="animation-delay: 1s;">
+                        <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" aria-label="Shop Now">
                             Shop Now
                         </a>
                     `;
@@ -583,7 +602,9 @@
                     heroDynamicContent.innerHTML = `
                         <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate-fade-in">${siteConfig.bannerHeadline || chosenDesign.defaultBannerHeadline}</h1>
                         <p class="text-lg md:text-xl mb-10 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s;">Explore our curated collections designed just for you.</p>
-                        <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" style="animation-delay: 1s;">View Collections</a>
+                        <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" aria-label="View Collections">
+                            View Collections
+                        </a>
                     `;
                     // Manage hero image carousel for banner layout
                     if (promoImagesArray.length === 0) {
@@ -617,7 +638,7 @@
                         <p class="text-lg md:text-xl mb-10 opacity-0 animate-slide-in-right" style="animation-delay: 0.5s;">
                             Experience our latest arrivals in stunning detail.
                         </p>
-                        <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" style="animation-delay: 1s;">
+                        <a href="#products" class="inline-block bg-white text-primary hover:bg-gray-100 px-10 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 opacity-0 animate-slide-in-left" aria-label="Discover More">
                             Discover More
                         </a>
                     `;
@@ -693,7 +714,7 @@
                     // Apply About Us Image (safe as it's not in hero-dynamic-content)
                     if (aboutUsImageElem) {
                         aboutUsImageElem.src = buildAbsoluteUrl(config.aboutUsImageUrl || 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us');
-                        aboutUsImageElem.alt = `About Us - ${config.siteName}`; // More descriptive alt text
+                        aboutUsImageElem.alt = `À propos de Sheeka Store - ${config.siteName}`; // More descriptive alt text
                     }
 
                     // Apply social media links
@@ -706,6 +727,8 @@
                                 a.target = '_blank';
                                 a.rel = 'noopener noreferrer'; // Security for external links
                                 a.className = 'text-footer-text hover:text-white transition duration-300';
+                                // Use platform for accessible name for social media links
+                                a.setAttribute('aria-label', `Visit us on ${link.platform}`);
                                 a.innerHTML = `<i class="${link.iconClass} w-6 h-6"></i>`;
                                 socialMediaLinksContainer.appendChild(a);
                             });
@@ -887,17 +910,6 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                     }
 
                     try {
-                        // IMPORTANT: The 'Route not found' error indicates a BACKEND configuration issue.
-                        // This frontend code is correct for SENDING the email.
-                        //
-                        // To fix this, ensure your backend server (e.g., your Express app):
-                        // 1. Is RUNNING and publicly accessible at the BASE_URL.
-                        // 2. Has the 'cors' middleware configured to allow requests from this frontend's origin.
-                        // 3. CORRECTLY uses your emailRoutes.js file in its main server.js/app.js:
-                        //    e.g., `const emailRoutes = require('./routes/emailRoutes');`
-                        //    and `app.use('/api', emailRoutes);`
-                        // 4. The `sendEmail` function in your email controller (`../controllers/email.js`)
-                        //    is fully implemented and working (e.g., with nodemailer).
                         const response = await fetch(`${BASE_URL}/api/emails`, {
                             method: 'POST',
                             headers: {
