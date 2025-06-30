@@ -13,7 +13,8 @@
     <!-- Cross-Origin-Opener-Policy: same-origin for isolation -->
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
     <!-- Content-Security-Policy: Basic policy to prevent XSS. Adjust as needed for your specific resources. -->
-    <!-- This is a *very basic* example. A robust CSP requires careful planning. -->
+    <!-- NOTE: 'unsafe-inline' is used for style-src and script-src because the CSS and JavaScript are embedded directly in this HTML file.
+         For a more robust CSP in a production environment with external files, 'unsafe-inline' should be avoided. -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://placehold.co https://sheeka.onrender.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co https://res.cloudinary.com; media-src 'self' https://www.w3schools.com;">
     
     <!-- Preconnect for faster loading of critical resources -->
@@ -133,6 +134,39 @@
             }
         }
     </style>
+    <!-- Schema.org Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Sheeka Store",
+      "url": "https://sheeka.onrender.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://sheeka.onrender.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Sheeka Store",
+      "url": "https://sheeka.onrender.com",
+      "logo": "https://placehold.co/150x50/C8797D/FFFFFF?text=SheekaLogo",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+213-555-1234",
+        "contactType": "Customer Service"
+      },
+      "sameAs": [
+        "https://www.facebook.com/sheekastore",
+        "https://www.instagram.com/sheekastore",
+        "https://www.twitter.com/sheekastore"
+      ]
+    }
+    </script>
 </head>
 <body class="overflow-x-hidden">
     <!-- Header -->
@@ -459,14 +493,14 @@
                 { 
                     name: 'Modern Monochrome',
                     layoutType: 'default',
-                    primaryColor: '#FF6B6B', // Coral Red Accent
-                    secondaryColor: '#343A40', // Dark Grey
+                    primaryColor: '#495057', // Dark Grey (adjusted for contrast)
+                    secondaryColor: '#212529', // Even Darker Grey (adjusted for contrast)
                     tertiaryColor: '#F8F9FA', // Light Grey
                     generalTextColor: '#212529', // Blackish-Grey
                     footerBgColor: '#212529',
                     footerTextColor: '#CED4DA',
-                    footerLinkColor: '#FF6B6B',
-                    heroGradientFrom: '#343A40',
+                    footerLinkColor: '#FF6B6B', // Accent color for links
+                    heroGradientFrom: '#495057',
                     heroGradientTo: '#212529',
                     sectionBgPrimary: '#F8F9FA',
                     sectionBgSecondary: '#E9ECEF',
@@ -501,15 +535,15 @@
                 { 
                     name: 'Warm Sunset',
                     layoutType: 'default',
-                    primaryColor: '#FF7F50', // Coral
-                    secondaryColor: '#FF4500', // Orange Red
+                    primaryColor: '#E67E22', // Carrot Orange (adjusted for contrast)
+                    secondaryColor: '#D35400', // Pumpkin Orange (adjusted for contrast)
                     tertiaryColor: '#FFF8DC', // Cornsilk (Very light yellow)
                     generalTextColor: '#8B4513', // Saddle Brown
-                    footerBgColor: '#FF4500',
-                    footerTextColor: '#FFDEAD', // Navajo White
-                    footerLinkColor: '#FFA07A', // Light Salmon
-                    heroGradientFrom: '#FF7F50',
-                    heroGradientTo: '#FF4500',
+                    footerBgColor: '#D35400', // Adjusted to match darker secondary
+                    footerTextColor: '#FAD7A0', // Lighter, warm tone
+                    footerLinkColor: '#F5B041', // Gold/Yellow accent
+                    heroGradientFrom: '#E67E22',
+                    heroGradientTo: '#D35400',
                     sectionBgPrimary: '#FFF8DC',
                     sectionBgSecondary: '#F5DEB3',
                     heroDefaultImage: 'https://placehold.co/1920x1080/E74C3C/F4D03F?text=SUNSET+VIBES',
@@ -696,7 +730,7 @@
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const config = await response.json();
-                    console.log("Fetched Site Config:", config);
+                    // console.log("Fetched Site Config:", config); // Removed console.log
 
                     // Determine the design index, fallback to 0 if invalid
                     const designIndex = (config.currentDataIndex !== undefined && config.currentDataIndex >= 0 && config.currentDataIndex < designConfigurations.length)
@@ -862,13 +896,13 @@ From conceptualization to creation, every piece is crafted with meticulous atten
             // Function to fetch and set hero images for carousel
             async function fetchHeroImagesForCarousel() {
                 try {
-                    console.log("Attempting to fetch promo images for carousel from:", `${BASE_URL}/products/promo`);
+                    // console.log("Attempting to fetch promo images for carousel from:", `${BASE_URL}/products/promo`); // Removed console.log
                     const response = await fetch(`${BASE_URL}/products/promo`);
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const fetchedImages = await response.json();
-                    console.log("Fetched promo images (raw data) for carousel:", fetchedImages);
+                    // console.log("Fetched promo images (raw data) for carousel:", fetchedImages); // Removed console.log
 
                     if (fetchedImages.length > 0) {
                         promoImagesArray = fetchedImages; // Store fetched images
