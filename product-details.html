@@ -1089,30 +1089,11 @@
             'https://connect.facebook.net/en_US/fbevents.js');
             // End of Meta (Facebook) Pixel Base Code
 
-            // --- New function: Fetch and Initialize Facebook Pixel ---
-            async function fetchAndInitializeFacebookPixel(pixelId) {
-                if (pixelId) { // Only init if a valid ID is present
-                    console.log("Initializing Meta (Facebook) Pixel with ID:", pixelId);
-                    fbq('init', pixelId); // Use dynamic ID
-                    fbq('track', 'PageView'); // Track PageView after initialization
-                    // Create and append noscript tag dynamically
-                    const noscript = document.createElement('noscript');
-                    noscript.innerHTML = `<img height="1" width="1" style="display:none"
-                    src="https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1"
-                    />`;
-                    document.head.appendChild(noscript);
-                    facebookPixelDisplayElem.textContent = pixelId; // Display pixel ID on page
-                } else {
-                    console.warn("Facebook Pixel not initialized as no valid ID was provided.");
-                    facebookPixelDisplayElem.textContent = 'N/A (No ID)'; // Indicate no ID
-                }
-            }
-
 
             // --- Site Configuration Fetching and Pixel Initialization ---
             async function fetchSiteConfig() {
                 try {
-                    const response = await fetch(`${BASE_URL}/api/site-config`);
+                    const response = await fetch(`${BASE_URL}/site/site-config`);
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
@@ -1130,8 +1111,25 @@
                     // Store fetched delivery fees
                     allDeliveryFeesFromConfig = siteConfig.deliveryFees || [];
 
-                    // Call the new function to handle Facebook Pixel initialization
-                    fetchAndInitializeFacebookPixel(siteConfig.facebookPixelId);
+                    // --- Initialize Meta (Facebook) Pixel with fetched ID ---
+                    let pixelIdToUse = siteConfig.facebookPixelId;
+                    console.log("Fetched siteConfig.facebookPixelId:", pixelIdToUse); // Debugging: Log the fetched pixel ID
+
+                    if (pixelIdToUse) { // Only init if a valid ID is present
+                        console.log("Initializing Meta (Facebook) Pixel with ID:", pixelIdToUse);
+                        fbq('init', pixelIdToUse); // Use dynamic ID
+                        fbq('track', 'PageView'); // Track PageView after initialization
+                        // Create and append noscript tag dynamically
+                        const noscript = document.createElement('noscript');
+                        noscript.innerHTML = `<img height="1" width="1" style="display:none"
+                        src="https://www.facebook.com/tr?id=${pixelIdToUse}&ev=PageView&noscript=1"
+                        />`;
+                        document.head.appendChild(noscript);
+                        facebookPixelDisplayElem.textContent = pixelIdToUse; // Display pixel ID on page
+                    } else {
+                        console.warn("Facebook Pixel not initialized as no valid ID was provided by the backend.");
+                        facebookPixelDisplayElem.textContent = 'N/A (No ID from backend)'; // Indicate no ID
+                    }
 
                     // TikTok Pixel code is removed as per user request.
 
@@ -1663,7 +1661,7 @@
             const productId = urlParams.get('id');
 
             try {
-                await fetchSiteConfig(); // First, fetch site configuration which now calls fetchAndInitializeFacebookPixel
+                await fetchSiteConfig(); // First, fetch site configuration
                 await loadWilayasAndCommunesData(); // Then, load wilaya/commune data using site config
                 await fetchProductDetails(productId); // Finally, fetch product details
                 await fetchAllProductsForSuggestions(); // Fetch suggestions after main product is loaded
