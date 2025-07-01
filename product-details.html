@@ -274,6 +274,7 @@
     <footer class="bg-[#4A4A4A] text-white py-10 mt-16">
         <div class="container mx-auto px-6 text-center">
             <p class="text-gray-400">© 2025 شيقة. جميع الحقوق محفوظة.</p>
+            <p class="text-gray-400 text-sm mt-2">Facebook Pixel ID: <span id="facebook-pixel-display">N/A</span></p>
         </div>
     </footer>
 
@@ -383,6 +384,7 @@
             // New DOM elements for dynamic meta/title
             const pageTitleElem = document.getElementById('page-title');
             const metaDescriptionElem = document.getElementById('meta-description');
+            const facebookPixelDisplayElem = document.getElementById('facebook-pixel-display'); // New: Element to display pixel ID
 
             // --- ALL 58 ALGERIAN WILAYAS (English Names) ---
             // This list is now primarily for populating communes, wilaya names from backend config
@@ -1109,8 +1111,10 @@
                         src="https://www.facebook.com/tr?id=${pixelIdToUse}&ev=PageView&noscript=1"
                         />`;
                         document.head.appendChild(noscript);
+                        facebookPixelDisplayElem.textContent = pixelIdToUse; // Display pixel ID on page
                     } else {
                         console.warn("Facebook Pixel not initialized as no valid ID was provided by the backend.");
+                        facebookPixelDisplayElem.textContent = 'N/A (No ID from backend)'; // Indicate no ID
                     }
 
                     // TikTok Pixel code is removed as per user request.
@@ -1124,6 +1128,7 @@
                     }
                     modalSiteName.textContent = 'شيقة';
                     showMessage('error', 'فشل تحميل إعدادات الموقع. قد تكون بعض المعلومات غير دقيقة.');
+                    facebookPixelDisplayElem.textContent = 'N/A (Error fetching config)'; // Indicate error
                 }
             }
 
@@ -1485,22 +1490,7 @@
                         }
                         // --- End Facebook Pixel Tracking ---
 
-                        // --- TikTok Pixel: Track CompletePayment event ---
-                        if (typeof ttq === 'object' && ttq.track) {
-                            ttq.track('CompletePayment', {
-                                content_id: currentProduct._id,
-                                content_name: currentProduct.name,
-                                content_type: 'product',
-                                quantity: currentQuantity,
-                                price: parseFloat(currentProduct.price || 0),
-                                currency: 'DZD',
-                                value: parseFloat(orderData.totalOrderPrice)
-                            });
-                            console.log("TikTok Pixel CompletePayment event tracked.");
-                        } else {
-                            console.warn("TikTok Pixel (ttq) not loaded, CompletePayment event not tracked.");
-                        }
-                        // --- End TikTok Pixel Tracking ---
+                        // TikTok Pixel code is removed as per user request.
 
 
                         // Populate and show the order confirmation modal
