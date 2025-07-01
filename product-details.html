@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">جاري التحميل... - </title> <!-- Dynamic title -->
-    <meta name="description" id="meta-description" content="تصفح أفضل المنتجات في ."> <!-- Dynamic description -->
+    <title id="page-title">Loading... - Sheeka</title> <!-- Dynamic title -->
+    <meta name="description" id="meta-description" content="Browse the best products at Sheeka."> <!-- Dynamic description -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: 'Cairo', 'Inter', sans-serif;
+            font-family: 'Inter', 'Cairo', sans-serif;
             background-color: #FDF5E6; /* Creamy off-white */
             color: #4A4A4A; /* Dark charcoal */
         }
@@ -134,7 +134,8 @@
         <nav class="container mx-auto px-6 flex justify-between items-center">
             <a href="index.html" class="text-3xl font-extrabold text-[#C8797D] rounded-lg p-2 hover:text-[#A85F64] transition duration-300">Sheeka</a>
             <a href="index.html" class="text-gray-700 hover:text-[#C8797D] font-medium transition duration-300 rounded-md p-2 flex items-center gap-2">
-                العودة للرئيسية <i class="fas fa-arrow-left"></i> </a>
+                Back to Home <i class="fas fa-arrow-left"></i>
+            </a>
         </nav>
     </header>
 
@@ -142,164 +143,169 @@
         <div id="product-detail-container" class="container mx-auto px-6">
             <div id="loading-spinner" class="text-center py-20">
                 <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#C8797D] mx-auto mb-4"></div>
-                <p class="text-xl text-gray-700">جاري تحميل تفاصيل المنتج...</p>
+                <p class="text-xl text-gray-700">Loading product details...</p>
             </div>
 
             <div id="product-content" class="hidden">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     <div class="lg:col-span-1">
-                        <img id="main-product-image" src="https://placehold.co/800x800/E6B89C/4A4A4A?text=جاري+التحميل..." alt="Main Product Image" class="main-image rounded-xl shadow-lg mb-6">
+                        <img id="main-product-image" src="https://placehold.co/800x800/E6B89C/4A4A4A?text=Loading..." alt="Main Product Image" class="main-image rounded-xl shadow-lg mb-6">
                         <div id="thumbnail-gallery" class="flex flex-wrap gap-4 justify-center">
+                            <!-- Thumbnails will be injected here -->
                         </div>
                     </div>
 
                     <div class="lg:col-span-1 bg-white p-8 rounded-xl shadow-lg">
-                        <h1 id="product-name" class="text-4xl font-extrabold mb-4 text-[#4A4A4A] text-right"></h1>
-                        <p id="product-price" class="text-3xl font-bold text-[#C8797D] mb-6 text-right"></p>
-                        <p id="product-description" class="text-lg text-gray-700 leading-relaxed mb-8 text-right"></p>
+                        <h1 id="product-name" class="text-4xl font-extrabold mb-4 text-[#4A4A4A]"></h1>
+                        <p id="product-price" class="text-3xl font-bold text-[#C8797D] mb-6"></p>
+                        <p id="short-description" class="text-lg text-gray-700 leading-relaxed mb-8"></p>
 
                         <form id="order-form" class="space-y-6">
                             <div>
-                                <label class="block text-lg font-medium text-gray-800 mb-2 text-right">اللون</label>
-                                <div id="color-options" class="flex flex-wrap gap-4 justify-end">
+                                <label class="block text-lg font-medium text-gray-800 mb-2">Color</label>
+                                <div id="color-options" class="flex flex-wrap gap-4 justify-start">
+                                    <!-- Color options will be injected here -->
                                 </div>
                                 <input type="hidden" id="selected-color-input" name="color" required>
                             </div>
 
                             <div>
-                                <label class="block text-lg font-medium text-gray-800 mb-2 text-right">الحجم</label>
-                                <div id="size-options" class="flex flex-wrap gap-4 justify-end">
+                                <label class="block text-lg font-medium text-gray-800 mb-2">Size</label>
+                                <div id="size-options" class="flex flex-wrap gap-4 justify-start">
+                                    <!-- Size options will be injected here -->
                                 </div>
                                 <input type="hidden" id="selected-size-input" name="size" required>
                             </div>
 
                             <div>
-                                <label for="quantity" class="block text-lg font-medium text-gray-800 mb-2 text-right">الكمية</label>
-                                <div class="flex items-center justify-center space-x-4">
-                                    <button type="button" id="increase-qty" class="qty-button">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="w-20 text-center p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" required readonly>
+                                <label for="quantity" class="block text-lg font-medium text-gray-800 mb-2">Quantity</label>
+                                <div class="flex items-center space-x-4">
                                     <button type="button" id="decrease-qty" class="qty-button">
                                         <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="w-20 text-center p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" required readonly>
+                                    <button type="button" id="increase-qty" class="qty-button">
+                                        <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
 
                             <div class="pt-6 border-t border-gray-200">
-                                <h2 class="text-xl font-bold text-[#4A4A4A] mb-4 text-right">معلومات الزبون</h2>
+                                <h2 class="text-xl font-bold text-[#4A4A4A] mb-4">Customer Information</h2>
                                 <div>
-                                    <label for="full-name" class="block text-lg font-medium text-gray-800 mb-2 text-right">الاسم الكامل</label>
-                                    <input type="text" id="full-name" name="fullName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 text-right" placeholder="المرجو إدخال إسمك الكامل" required>
+                                    <label for="full-name" class="block text-lg font-medium text-gray-800 mb-2">Full Name</label>
+                                    <input type="text" id="full-name" name="fullName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="Please enter your full name" required>
                                 </div>
                                 <div>
-                                    <label for="phone-number" class="block text-lg font-medium text-gray-800 mb-2 text-right">رقم الهاتف</label>
+                                    <label for="phone-number" class="block text-lg font-medium text-gray-800 mb-2">Phone Number</label>
                                     <div class="flex">
-                                        <input type="text" id="phone-number" name="phoneNumber" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 text-right" placeholder="المرجو إدخال رقم هاتفك" required inputmode="tel">
-                                        <span class="p-3 border border-gray-300 rounded-lg bg-gray-100 ml-2">213+</span>
+                                        <span class="p-3 border border-gray-300 rounded-lg bg-gray-100 mr-2">+213</span>
+                                        <input type="text" id="phone-number" name="phoneNumber" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="Please enter your phone number" required inputmode="tel">
                                     </div>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="wilaya" class="block text-lg font-medium text-gray-800 mb-2 text-right">الولاية</label>
-                                <select id="wilaya" name="wilaya" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 bg-white text-right" required>
-                                    <option value="" disabled selected>اختر ولاية</option>
+                                <label for="wilaya" class="block text-lg font-medium text-gray-800 mb-2">State/Province</label>
+                                <select id="wilaya" name="wilaya" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 bg-white" required>
+                                    <option value="" disabled selected>Select a State/Province</option>
                                 </select>
                             </div>
 
                             <div id="commune-container" class="hidden">
-                                <label for="commune" class="block text-lg font-medium text-gray-800 mb-2 text-right">البلدية</label>
-                                <select id="commune" name="commune" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 bg-white text-right" required>
-                                    <option value="" disabled selected>اختر بلدية</option>
+                                <label for="commune" class="block text-lg font-medium text-gray-800 mb-2">Municipality</label>
+                                <select id="commune" name="commune" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 bg-white" required>
+                                    <option value="" disabled selected>Select a Municipality</option>
                                 </select>
                             </div>
 
                             <!-- New Stopdesk Field -->
                             <div>
-                                <label for="stopdesk" class="block text-lg font-medium text-gray-800 mb-2 text-right">مكتب التوقف (اختياري)</label>
-                                <input type="text" id="stopdesk" name="stopdesk" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 text-right" placeholder="اسم مكتب التوقف (اختياري)">
+                                <label for="stopdesk" class="block text-lg font-medium text-gray-800 mb-2">Stopdesk (Optional)</label>
+                                <input type="text" id="stopdesk" name="stopdesk" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="Stopdesk Name (Optional)">
                             </div>
 
                             <div class="bg-gray-50 p-6 rounded-xl shadow-inner mt-8 border border-gray-200">
-                                <h2 class="text-xl font-bold text-[#4A4A4A] mb-4 text-right">ملخص الطلب</h2>
+                                <h2 class="text-xl font-bold text-[#4A4A4A] mb-4">Order Summary</h2>
                                 <div class="flex justify-between items-center mb-2">
+                                    <span class="text-lg text-gray-700">Product Price</span>
                                     <span id="summary-product-price" class="text-lg font-semibold text-[#C8797D]"></span>
-                                    <span class="text-lg text-gray-700">سعر المنتج</span>
                                 </div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span id="summary-delivery-price" class="text-lg font-semibold text-[#C8797D]">جاري الحساب...</span>
-                                    <span class="text-lg text-gray-700">سعر التوصيل</span>
+                                    <span class="text-lg text-gray-700">Delivery Fee</span>
+                                    <span id="summary-delivery-price" class="text-lg font-semibold text-[#C8797D]">Calculating...</span>
                                 </div>
                                 <div class="border-t border-gray-300 my-4"></div>
                                 <div class="flex justify-between items-center">
+                                    <span class="text-2xl font-extrabold text-[#4A4A4A]">Total</span>
                                     <span id="summary-total-price" class="text-2xl font-extrabold text-[#4A4A4A]"></span>
-                                    <span class="text-2xl font-extrabold text-[#4A4A4A]">المجموع</span>
                                 </div>
                             </div>
 
-                            <button type="submit" class="w-full bg-[#C8797D] text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-[#A85F64] transition duration-300 shadow-lg transform hover:scale-105 mt-6">
-                                اطلب الآن <i class="fas fa-shopping-cart mr-2"></i>
+                            <button type="submit" class="w-full bg-[#C8797D] text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-[#A85F64] transition duration-300 shadow-lg transform hover:scale-105 mt-6 flex items-center justify-center gap-2">
+                                Order Now <i class="fas fa-shopping-cart"></i>
                             </button>
                         </form>
                     </div>
                 </div>
 
                 <div class="mt-16 bg-white p-8 rounded-xl shadow-lg">
-                    <h2 class="text-3xl font-bold text-[#4A4A4A] mb-6 text-right">الوصف</h2>
-                    <p id="full-description" class="text-lg text-gray-700 leading-relaxed text-right"></p>
+                    <h2 class="text-3xl font-bold text-[#4A4A4A] mb-6">Description</h2>
+                    <div id="full-description" class="text-lg text-gray-700 leading-relaxed">
+                        <!-- Dynamic description content (text and images) will be injected here -->
+                    </div>
                 </div>
 
                 <div class="mt-16">
-                    <h2 class="text-3xl font-bold text-[#4A4A4A] mb-6 text-right">اقتراحاتنا لك</h2>
+                    <h2 class="text-3xl font-bold text-[#4A4A4A] mb-6">Our Suggestions for You</h2>
                     <div id="suggestions-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <p class="col-span-full text-center text-gray-500">جاري تحميل الاقتراحات...</p>
+                        <p class="col-span-full text-center text-gray-500">Loading suggestions...</p>
                     </div>
                 </div>
             </div>
 
-            <div id="message-box" class="fixed bottom-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg shadow-xl hidden z-50 text-right">
+            <div id="message-box" class="fixed bottom-8 right-8 bg-green-500 text-white px-6 py-3 rounded-lg shadow-xl hidden z-50">
             </div>
-            <div id="error-message-box" class="fixed bottom-8 right-8 bg-red-500 text-white px-6 py-3 rounded-lg shadow-xl hidden z-50 text-right">
+            <div id="error-message-box" class="fixed bottom-8 right-8 bg-red-500 text-white px-6 py-3 rounded-lg shadow-xl hidden z-50">
             </div>
         </div>
     </main>
 
     <footer class="bg-[#4A4A4A] text-white py-10 mt-16">
         <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400">© 2025 . جميع الحقوق محفوظة.</p>
+            <p class="text-gray-400">© 2025 Sheeka. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Order Confirmation Modal -->
     <div id="order-confirmation-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
         <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full text-center">
-            <h2 class="text-3xl font-bold text-[#C8797D] mb-6">✅ تم استلام طلبك!</h2>
-            <p class="text-lg text-gray-700 mb-6">شكرًا لطلبك من <span id="modal-site-name"></span>. لقد تم استلام طلبك بنجاح وسنقوم بمعالجته قريبًا.</p>
+            <h2 class="text-3xl font-bold text-[#C8797D] mb-6">✅ Order Received!</h2>
+            <p class="text-lg text-gray-700 mb-6">Thank you for your order from <span id="modal-site-name">Sheeka</span>. Your order has been successfully received and will be processed soon.</p>
 
-            <div class="text-right mb-6">
-                <h3 class="text-xl font-semibold text-general mb-2">تفاصيل الطلب:</h3>
-                <p><strong>رقم الطلب:</strong> <span id="modal-order-id" dir="ltr"></span></p>
-                <p><strong>المنتج:</strong> <span id="modal-product-name"></span></p>
-                <p><strong>الكمية:</strong> <span id="modal-quantity"></span></p>
-                <p><strong>اللون:</strong> <span id="modal-color"></span></p>
-                <p><strong>الحجم:</strong> <span id="modal-size"></span></p>
-                <p><strong>الاسم الكامل:</strong> <span id="modal-full-name"></span></p>
-                <p><strong>رقم الهاتف:</strong> <span id="modal-phone-number" dir="ltr"></span></p>
-                <p><strong>الولاية:</strong> <span id="modal-wilaya"></span></p>
-                <p><strong>البلدية:</strong> <span id="modal-commune"></span></p>
-                <p><strong>نقطة التوقف:</strong> <span id="modal-stopdesk"></span></p> <!-- New: Stopdesk in modal -->
-                <p><strong>سعر المنتج:</strong> <span id="modal-product-total-price" dir="ltr"></span> DA</p>
-                <p><strong>سعر التوصيل:</strong> <span id="modal-delivery-price" dir="ltr"></span> DA</p>
-                <p class="text-2xl font-bold mt-4"><strong>المجموع الكلي:</strong> <span id="modal-total-order-price" dir="ltr"></span> DA</p>
+            <div class="text-left mb-6">
+                <h3 class="text-xl font-semibold text-general mb-2">Order Details:</h3>
+                <p><strong>Order ID:</strong> <span id="modal-order-id" dir="ltr"></span></p>
+                <p><strong>Product:</strong> <span id="modal-product-name"></span></p>
+                <p><strong>Quantity:</strong> <span id="modal-quantity"></span></p>
+                <p><strong>Color:</strong> <span id="modal-color"></span></p>
+                <p><strong>Size:</strong> <span id="modal-size"></span></p>
+                <p><strong>Full Name:</strong> <span id="modal-full-name"></span></p>
+                <p><strong>Phone Number:</strong> <span id="modal-phone-number" dir="ltr"></span></p>
+                <p><strong>State/Province:</strong> <span id="modal-wilaya"></span></p>
+                <p><strong>Municipality:</strong> <span id="modal-commune"></span></p>
+                <p><strong>Stopdesk:</strong> <span id="modal-stopdesk"></span></p> <!-- New: Stopdesk in modal -->
+                <p><strong>Product Total Price:</strong> <span id="modal-product-total-price" dir="ltr"></span> DA</p>
+                <p><strong>Delivery Fee:</strong> <span id="modal-delivery-price" dir="ltr"></span> DA</p>
+                <p class="text-2xl font-bold mt-4"><strong>Total Order Price:</strong> <span id="modal-total-order-price" dir="ltr"></span> DA</p>
             </div>
 
             <div class="flex justify-center gap-4 mt-6">
                 <button id="print-receipt-btn" class="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition duration-300">
-                    طباعة الإيصال <i class="fas fa-print mr-2"></i>
+                    Print Receipt <i class="fas fa-print ml-2"></i>
                 </button>
                 <button id="continue-shopping-btn" class="bg-[#C8797D] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A85F64] transition duration-300">
-                    متابعة التسوق
+                    Continue Shopping
                 </button>
             </div>
         </div>
@@ -329,7 +335,8 @@
             const thumbnailGallery = document.getElementById('thumbnail-gallery');
             const productNameElem = document.getElementById('product-name');
             const productPriceElem = document.getElementById('product-price');
-            const productDescriptionElem = document.getElementById('full-description');
+            const shortDescriptionElem = document.getElementById('short-description'); // Renamed from productDescriptionElem
+            const fullDescriptionContainer = document.getElementById('full-description'); // Changed to container for dynamic content
             const orderForm = document.getElementById('order-form');
             const messageBox = document.getElementById('message-box');
             const errorMessageBox = document.getElementById('error-message-box');
@@ -377,38 +384,38 @@
             const pageTitleElem = document.getElementById('page-title');
             const metaDescriptionElem = document.getElementById('meta-description');
 
-            // --- ALL 58 ALGERIAN WILAYAS (French Names) ---
+            // --- ALL 58 ALGERIAN WILAYAS (English Names) ---
             // This list is now primarily for populating communes, wilaya names from backend config
             const allAlgerianWilayasStatic = [
                 { "id": 1, "name": "Adrar" }, { "id": 2, "name": "Chlef" }, { "id": 3, "name": "Laghouat" },
-                { "id": 4, "name": "Oum El Bouaghi" }, { "id": 5, "name": "Batna" }, { "id": 6, "name": "Béjaïa" },
-                { "id": 7, "name": "Biskra" }, { "id": 8, "name": "Béchar" }, { "id": 9, "name": "Blida" },
-                { "id": 10, "name": "Bouira" }, { "id": 11, "name": "Tamanrasset" }, { "id": 12, "name": "Tébessa" },
+                { "id": 4, "name": "Oum El Bouaghi" }, { "id": 5, "name": "Batna" }, { "id": 6, "name": "Bejaia" },
+                { "id": 7, "name": "Biskra" }, { "id": 8, "name": "Bechar" }, { "id": 9, "name": "Blida" },
+                { "id": 10, "name": "Bouira" }, { "id": 11, "name": "Tamanrasset" }, { "id": 12, "name": "Tebessa" },
                 { "id": 13, "name": "Tlemcen" }, { "id": 14, "name": "Tiaret" }, { "id": 15, "name": "Tizi Ouzou" },
-                { "id": 16, "name": "Alger" }, { "id": 17, "name": "Djelfa" }, { "id": 18, "name": "Jijel" },
-                { "id": 19, "name": "Sétif" }, { "id": 20, "name": "Saïda" }, { "id": 21, "name": "Skikda" },
-                { "id": 22, "name": "Sidi Bel Abbès" }, { "id": 23, "name": "Annaba" }, { "id": 24, "name": "Guelma" },
-                { "id": 25, "name": "Constantine" }, { "id": 26, "name": "Médéa" }, { "id": 27, "name": "Mostaganem" },
+                { "id": 16, "name": "Algiers" }, { "id": 17, "name": "Djelfa" }, { "id": 18, "name": "Jijel" },
+                { "id": 19, "name": "Setif" }, { "id": 20, "name": "Saida" }, { "id": 21, "name": "Skikda" },
+                { "id": 22, "name": "Sidi Bel Abbes" }, { "id": 23, "name": "Annaba" }, { "id": 24, "name": "Guelma" },
+                { "id": 25, "name": "Constantine" }, { "id": 26, "name": "Medea" }, { "id": 27, "name": "Mostaganem" },
                 { "id": 28, "name": "M'Sila" }, { "id": 29, "name": "Mascara" }, { "id": 30, "name": "Ouargla" },
                 { "id": 31, "name": "Oran" }, { "id": 32, "name": "El Bayadh" }, { "id": 33, "name": "Illizi" },
-                { "id": 34, "name": "Bordj Bou Arréridj" }, { "id": 35, "name": "Boumerdès" }, { "id": 36, "name": "El Tarf" },
+                { "id": 34, "name": "Bordj Bou Arreridj" }, { "id": 35, "name": "Boumerdes" }, { "id": 36, "name": "El Tarf" },
                 { "id": 37, "name": "Tindouf" }, { "id": 38, "name": "Tissemsilt" }, { "id": 39, "name": "El Oued" },
                 { "id": 40, "name": "Khenchela" }, { "id": 41, "name": "Souk Ahras" }, { "id": 42, "name": "Tipaza" },
-                { "id": 43, "name": "Mila" }, { "id": 44, "name": "Aïn Defla" }, { "id": 45, "name": "Naâma" },
-                { "id": 46, "name": "Aïn Témouchent" }, { "id": 47, "name": "Ghardaïa" }, { "id": 48, "name": "Relizane" },
+                { "id": 43, "name": "Mila" }, { "id": 44, "name": "Ain Defla" }, { "id": 45, "name": "Naama" },
+                { "id": 46, "name": "Ain Temouchent" }, { "id": 47, "name": "Ghardaia" }, { "id": 48, "name": "Relizane" },
                 { "id": 49, "name": "Timimoun" }, { "id": 50, "name": "Bordj Badji Mokhtar" }, { "id": 51, "name": "Ouled Djellal" },
-                { "id": 52, "name": "Béni Abbès" }, { "id": 53, "name": "Timimoun (Nouvelle)" },
+                { "id": 52, "name": "Beni Abbes" }, { "id": 53, "name": "Timimoun (New)" },
                 { "id": 54, "name": "Touggourt" }, { "id": 55, "name": "Djanet" }, { "id": 56, "name": "El M'Ghair" },
                 { "id": 57, "name": "El Meniaa" }, { "id": 58, "name": "In Salah" }
             ];
 
-            // All Algerian Communes by Wilaya (Comprehensive List)
+            // All Algerian Communes by Wilaya (Comprehensive List) - Translated
             const simplifiedCommunesByWilaya = {
                 "1": [ // Adrar
                     { "id": 101, "name": "Adrar" }, { "id": 102, "name": "Tamest" }, { "id": 103, "name": "Charouine" },
                     { "id": 104, "name": "Reggane" }, { "id": 105, "name": "Bordj Badji Mokhtar" }, { "id": 106, "name": "Tsamouret" },
                     { "id": 107, "name": "Timimoun" }, { "id": 108, "name": "Aoulef" }, { "id": 109, "name": "Akabli" },
-                    { "id": 110, "name": "Tinerkouk" }, { "id": 111, "name": "Ksour" }, { "id": 112, "name": "Ouled Saïd" },
+                    { "id": 110, "name": "Tinerkouk" }, { "id": 111, "name": "Ksour" }, { "id": 112, "name": "Ouled Said" },
                     { "id": 113, "name": "Zaouiet Kounta" }, { "id": 114, "name": "Sali" }, { "id": 115, "name": "Amizour" },
                     { "id": 116, "name": "Tamentit" }, { "id": 117, "name": "Fenoughil" }, { "id": 118, "name": "Tabelbala" },
                     { "id": 119, "name": "Dellys" }, { "id": 120, "name": "Beni Abbes" }, { "id": 121, "name": "Timiaouine" },
@@ -475,17 +482,17 @@
                     { "id": 558, "name": "Djellal" }, { "id": 559, "name": "El Batan" }, { "id": 560, "name": "Tassili" },
                     { "id": 561, "name": "Seggana" }
                 ],
-                "6": [ // Béjaïa
-                    { "id": 601, "name": "Béjaïa" }, { "id": 602, "name": "Akbou" }, { "id": 603, "name": "Amizour" },
-                    { "id": 604, "name": "Sidi Aïch" }, { "id": 605, "name": "Tichy" }, { "id": 606, "name": "Kherrata" },
+                "6": [ // Bejaia
+                    { "id": 601, "name": "Bejaia" }, { "id": 602, "name": "Akbou" }, { "id": 603, "name": "Amizour" },
+                    { "id": 604, "name": "Sidi Aich" }, { "id": 605, "name": "Tichy" }, { "id": 606, "name": "Kherrata" },
                     { "id": 607, "name": "El Kseur" }, { "id": 608, "name": "Feraoun" }, { "id": 609, "name": "Seddouk" },
                     { "id": 610, "name": "Aokas" }, { "id": 611, "name": "Barbacha" }, { "id": 612, "name": "Chemini" },
-                    { "id": 613, "name": "Draâ El Kaïd" }, { "id": 614, "name": "Adekar" }, { "id": 615, "name": "Beni Djellil" },
+                    { "id": 613, "name": "Draa El Kaid" }, { "id": 614, "name": "Adekar" }, { "id": 615, "name": "Beni Djellil" },
                     { "id": 616, "name": "Beni Mellikeche" }, { "id": 617, "name": "Bouhamza" }, { "id": 618, "name": "Boukhelifa" },
                     { "id": 619, "name": "Darguina" }, { "id": 620, "name": "El Flaye" }, { "id": 621, "name": "Kendira" },
                     { "id": 622, "name": "Souk El Tenine" }, { "id": 623, "name": "Tala Hamza" }, { "id": 624, "name": "Tamridjt" },
                     { "id": 625, "name": "Taskriout" }, { "id": 626, "name": "Toudja" }, { "id": 627, "name": "Tifra" },
-                    { "id": 628, "name": "Aït R'zine" }, { "id": 629, "name": "Aït Smaïl" }, { "id": 630, "name": "Akfadou" },
+                    { "id": 628, "name": "Ait R'zine" }, { "id": 629, "name": "Ait Smail" }, { "id": 630, "name": "Akfadou" },
                     { "id": 631, "name": "Assi Youcef" }, { "id": 632, "name": "Beni Ksila" }, { "id": 633, "name": "Bouandas" },
                     { "id": 634, "name": "Bouria" }, { "id": 635, "name": "Djenane" }, { "id": 636, "name": "Fenasn" },
                     { "id": 637, "name": "Hammam Guergour" }, { "id": 638, "name": "Ighram" }, { "id": 639, "name": "M'cisna" },
@@ -507,8 +514,8 @@
                     { "id": 725, "name": "Besbes" }, { "id": 726, "name": "Mechouneche" }, { "id": 727, "name": "Foughala" },
                     { "id": 728, "name": "Sidi Khlif" }, { "id": 729, "name": "El Hadjab" }, { "id": 730, "name": "Ech Chaiba" }
                 ],
-                "8": [ // Béchar
-                    { "id": 801, "name": "Béchar" }, { "id": 802, "name": "Beni Ounif" }, { "id": 803, "name": "Lahmar" },
+                "8": [ // Bechar
+                    { "id": 801, "name": "Bechar" }, { "id": 802, "name": "Beni Ounif" }, { "id": 803, "name": "Lahmar" },
                     { "id": 804, "name": "Mechraa Houari Boumediene" }, { "id": 805, "name": "Abadla" }, { "id": 806, "name": "Timoudi" },
                     { "id": 807, "name": "Tabalbala" }, { "id": 808, "name": "Igli" }, { "id": 809, "name": "Taghit" },
                     { "id": 810, "name": "El Ouata" }, { "id": 811, "name": "Kenadsa" }, { "id": 812, "name": "Mougheul" },
@@ -519,7 +526,7 @@
                 "9": [ // Blida
                     { "id": 901, "name": "Blida" }, { "id": 902, "name": "Boufarik" }, { "id": 903, "name": "Ouled Yaich" },
                     { "id": 904, "name": "Mouzaia" }, { "id": 905, "name": "Chiffa" }, { "id": 906, "name": "Chebli" },
-                    { "id": 907, "name": "Larbaâ" }, { "id": 908, "name": "Soumaa" }, { "id": 909, "name": "Meftah" },
+                    { "id": 907, "name": "Larbaa" }, { "id": 908, "name": "Soumaa" }, { "id": 909, "name": "Meftah" },
                     { "id": 910, "name": "Hammam Melouane" }, { "id": 911, "name": "Ben Khelil" }, { "id": 912, "name": "Jebbar" },
                     { "id": 913, "name": "Ain Romana" }, { "id": 914, "name": "Oued El Alleug" }, { "id": 915, "name": "Bouinane" },
                     { "id": 916, "name": "El Affroun" }, { "id": 917, "name": "Attatba" }, { "id": 918, "name": "Oued Djer" },
@@ -545,8 +552,8 @@
                     { "id": 1107, "name": "In Guezzam" }, { "id": 1108, "name": "Tin Zaouatine" }, { "id": 1109, "name": "In Amguel" },
                     { "id": 1110, "name": "Tessalit" }, { "id": 1111, "name": "Ain Salah" }
                 ],
-                "12": [ // Tébessa
-                    { "id": 1201, "name": "Tébessa" }, { "id": 1202, "name": "Bir El Ater" }, { "id": 1203, "name": "Cheria" },
+                "12": [ // Tebessa
+                    { "id": 1201, "name": "Tebessa" }, { "id": 1202, "name": "Bir El Ater" }, { "id": 1203, "name": "Cheria" },
                     { "id": 1204, "name": "El Kouif" }, { "id": 1205, "name": "Ouenza" }, { "id": 1206, "name": "El Ma Labiod" },
                     { "id": 1207, "name": "Ain Zergua" }, { "id": 1208, "name": "Bakaria" }, { "id": 1209, "name": "Boukhadra" },
                     { "id": 1210, "name": "Safsaf El Ouesra" }, { "id": 1211, "name": "Hammamet" }, { "id": 1212, "name": "Negrine" },
@@ -563,7 +570,7 @@
                     { "id": 1313, "name": "Bab El Assa" }, { "id": 1314, "name": "Beni Bahdel" }, { "id": 1315, "name": "Beni Boussaid" },
                     { "id": 1316, "name": "Beni Mester" }, { "id": 1317, "name": "Beni Ouarsous" }, { "id": 1318, "name": "Bouhlou" },
                     { "id": 1319, "name": "Dar Yaghmouracene" }, { "id": 1320, "name": "Djazair" }, { "id": 1321, "name": "El Aricha" },
-                    { "id": 1322, "name": "El Bouihi" }, { "id": 1323, "name": "Fellaoucene" }, { "id": 1324, "name": "Honaïne" },
+                    { "id": 1322, "name": "El Bouihi" }, { "id": 1323, "name": "Fellaoucene" }, { "id": 1324, "name": "Honaine" },
                     { "id": 1325, "name": "Msirda Fouaga" }, { "id": 1326, "name": "Oued Lakhdar" }, { "id": 1327, "name": "Ouled Mimoun" },
                     { "id": 1328, "name": "Sidi Djillali" }, { "id": 1329, "name": "Souani" }, { "id": 1330, "name": "Souk Tleta" },
                     { "id": 1331, "name": "Terny Beni Hdiel" }, { "id": 1332, "name": "Zenata" }, { "id": 1333, "name": "Djebala" },
@@ -588,37 +595,37 @@
                 ],
                 "15": [ // Tizi Ouzou
                     { "id": 1501, "name": "Tizi Ouzou" }, { "id": 1502, "name": "Ain El Hammam" }, { "id": 1503, "name": "Azazga" },
-                    { "id": 1504, "name": "Boghni" }, { "id": 1505, "name": "Draâ Ben Khedda" }, { "id": 1506, "name": "Freha" },
-                    { "id": 1507, "name": "Ouadhia" }, { "id": 1508, "name": "Larbaâ Nath Irathen" }, { "id": 1509, "name": "Tigzirt" },
+                    { "id": 1504, "name": "Boghni" }, { "id": 1505, "name": "Draa Ben Khedda" }, { "id": 1506, "name": "Freha" },
+                    { "id": 1507, "name": "Ouadhia" }, { "id": 1508, "name": "Larbaa Nath Irathen" }, { "id": 1509, "name": "Tigzirt" },
                     { "id": 1510, "name": "Mekla" }, { "id": 1511, "name": "Azazga" }, { "id": 1512, "name": "Aghribs" },
-                    { "id": 1513, "name": "Aït Chafâa" }, { "id": 1514, "name": "Aït Khellili" }, { "id": 1515, "name": "Aït Mahmoud" },
-                    { "id": 1516, "name": "Aït Ouamal" }, { "id": 1517, "name": "Aït Yahia" }, { "id": 1518, "name": "Aït Yahia Moussa" },
+                    { "id": 1513, "name": "Ait Chafaa" }, { "id": 1514, "name": "Ait Khellili" }, { "id": 1515, "name": "Ait Mahmoud" },
+                    { "id": 1516, "name": "Ait Ouamal" }, { "id": 1517, "name": "Ait Yahia" }, { "id": 1518, "name": "Ait Yahia Moussa" },
                     { "id": 1519, "name": "Assi Youcef" }, { "id": 1520, "name": "Beni Douala" }, { "id": 1521, "name": "Beni Yenni" },
                     { "id": 1522, "name": "Beni Zmenzer" }, { "id": 1523, "name": "Boghal" }, { "id": 1524, "name": "Boubhir" },
-                    { "id": 1525, "name": "Bouzeguene" }, { "id": 1526, "name": "Djebla" }, { "id": 1527, "name": "Draâ El Mizan" },
+                    { "id": 1525, "name": "Bouzeguene" }, { "id": 1526, "name": "Djebla" }, { "id": 1527, "name": "Draa El Mizan" },
                     { "id": 1528, "name": "Iferhounene" }, { "id": 1529, "name": "Iflissen" }, { "id": 1530, "name": "Illilten" },
-                    { "id": 1531, "name": "Imsouhal" }, { "id": 1532, "name": "Irdjen" }, { "id": 1533, "name": "Larbaâ Nath Irathen" },
+                    { "id": 1531, "name": "Imsouhal" }, { "id": 1532, "name": "Irdjen" }, { "id": 1533, "name": "Larbaa Nath Irathen" },
                     { "id": 1534, "name": "Makouda" }, { "id": 1535, "name": "Mizrana" }, { "id": 1536, "name": "Ouacif" },
                     { "id": 1537, "name": "Timizart" }, { "id": 1538, "name": "Tirmitine" }, { "id": 1539, "name": "Yatafen" },
                     { "id": 1540, "name": "Zekri" }, { "id": 1541, "name": "Boumahni" }, { "id": 1542, "name": "Azeffoun" },
                     { "id": 1543, "name": "Ait Aggouacha" }, { "id": 1544, "name": "Ain Zaouia" }, { "id": 1545, "name": "Fouka" },
                     { "id": 1546, "name": "Bouzeguene" }, { "id": 1547, "name": "Mechtras" }, { "id": 1548, "name": "Souk El Thenine" }
                 ],
-                "16": [ // Alger
-                    { "id": 1601, "name": "Alger Centre" }, { "id": 1602, "name": "Sidi M'Hamed" }, { "id": 1603, "name": "El Madania" },
+                "16": [ // Algiers
+                    { "id": 1601, "name": "Algiers Centre" }, { "id": 1602, "name": "Sidi M'Hamed" }, { "id": 1603, "name": "El Madania" },
                     { "id": 1604, "name": "Belouizdad" }, { "id": 1605, "name": "Bab El Oued" }, { "id": 1606, "name": "Bologhine Ibnou Ziri" },
-                    { "id": 1607, "name": "Casbah" }, { "id": 1608, "name": "Oued Koriche" }, { "id": 1609, "name": "Raïs Hamidou" },
-                    { "id": 1610, "name": "Bir Mourad Raïs" }, { "id": 1611, "name": "El Biar" }, { "id": 1612, "name": "Bouzareah" },
+                    { "id": 1607, "name": "Casbah" }, { "id": 1608, "name": "Oued Koriche" }, { "id": 1609, "name": "Rais Hamidou" },
+                    { "id": 1610, "name": "Bir Mourad Rais" }, { "id": 1611, "name": "El Biar" }, { "id": 1612, "name": "Bouzareah" },
                     { "id": 1613, "name": "Ben Aknoun" }, { "id": 1614, "name": "Hydra" }, { "id": 1615, "name": "Mohammadia" },
-                    { "id": 1616, "name": "Dar El Beïda" }, { "id": 1617, "name": "Bab Ezzouar" }, { "id": 1618, "name": "Bordj El Kiffan" },
+                    { "id": 1616, "name": "Dar El Beida" }, { "id": 1617, "name": "Bab Ezzouar" }, { "id": 1618, "name": "Bordj El Kiffan" },
                     { "id": 1619, "name": "El Harrach" }, { "id": 1620, "name": "Baraki" }, { "id": 1621, "name": "Oued Smar" },
                     { "id": 1622, "name": "Les Eucalyptus" }, { "id": 1623, "name": "Hussein Dey" }, { "id": 1624, "name": "Kouba" },
                     { "id": 1625, "name": "Bourouba" }, { "id": 1626, "name": "Tessala El Merdja" }, { "id": 1627, "name": "Birkhadem" },
-                    { "id": 1628, "name": "Saoula" }, { "id": 1629, "name": "Draria" }, { "id": 1630, "name": "Douéra" },
-                    { "id": 1631, "name": "Khraicia" }, { "id": 1632, "name": "Mahelma" }, { "id": 1633, "name": "Staouéli" },
-                    { "id": 1634, "name": "Zéralda" }, { "id": 1635, "name": "Souidania" }, { "id": 1636, "name": "Rahmania" },
-                    { "id": 1637, "name": "Aïn Benian" }, { "id": 1638, "name": "El Achour" }, { "id": 1639, "name": "Cheraga" },
-                    { "id": 1640, "name": "Ouled Fayet" }, { "id": 1641, "name": "Dely Ibrahim" }, { "id": 1642, "name": "Reghaïa" },
+                    { "id": 1628, "name": "Saoula" }, { "id": 1629, "name": "Draria" }, { "id": 1630, "name": "Douera" },
+                    { "id": 1631, "name": "Khraicia" }, { "id": 1632, "name": "Mahelma" }, { "id": 1633, "name": "Staoueli" },
+                    { "id": 1634, "name": "Zeralda" }, { "id": 1635, "name": "Souidania" }, { "id": 1636, "name": "Rahmania" },
+                    { "id": 1637, "name": "Ain Benian" }, { "id": 1638, "name": "El Achour" }, { "id": 1639, "name": "Cheraga" },
+                    { "id": 1640, "name": "Ouled Fayet" }, { "id": 1641, "name": "Dely Ibrahim" }, { "id": 1642, "name": "Reghaia" },
                     { "id": 1643, "name": "Rouiba" }, { "id": 1644, "name": "Ain Taya" }, { "id": 1645, "name": "Harraguia" },
                     { "id": 1646, "name": "Bordj El Bahri" }, { "id": 1647, "name": "Rouiba" }, { "id": 1648, "name": "Heuraoua" },
                     { "id": 1649, "name": "Ain Naadja" }, { "id": 1650, "name": "Ain Allah" }, { "id": 1651, "name": "Ain Taya" },
@@ -643,14 +650,14 @@
                     { "id": 1804, "name": "Chekfa" }, { "id": 1805, "name": "El Milia" }, { "id": 1806, "name": "Ziamine Mansouriah" },
                     { "id": 1807, "name": "El Aouana" }, { "id": 1808, "name": "Sidi Abdelaziz" }, { "id": 1809, "name": "Bouraoui Belhadef" },
                     { "id": 1810, "name": "Ouled Yahia Khedrouche" }, { "id": 1811, "name": "Texenna" }, { "id": 1812, "name": "Djemaa Beni Habibi" },
-                    { "id": 1813, "name": "Kaous" }, { "id": 1814, "name": "Kheïri Oued Adjoul" }, { "id": 1815, "name": "Bordj Tahar" },
+                    { "id": 1813, "name": "Kaous" }, { "id": 1814, "name": "Kheiri Oued Adjoul" }, { "id": 1815, "name": "Bordj Tahar" },
                     { "id": 1816, "name": "Sidi Maarouf" }, { "id": 1817, "name": "Ghebalou" }, { "id": 1818, "name": "Ouled Rabah" },
                     { "id": 1819, "name": "Settara" }, { "id": 1820, "name": "Erraguene" }, { "id": 1821, "name": "Chahna" },
                     { "id": 1822, "name": "Selma Benziada" }, { "id": 1823, "name": "Boussif Ouled Askeur" }, { "id": 1824, "name": "Ziama Mansouriah" },
                     { "id": 1825, "name": "Ouled Roumane" }, { "id": 1826, "name": "Bouraoui Belhadef" }, { "id": 1827, "name": "Djimla" }
                 ],
-                "19": [ // Sétif
-                    { "id": 1901, "name": "Sétif" }, { "id": 1902, "name": "El Eulma" }, { "id": 1903, "name": "Ain Oulmane" },
+                "19": [ // Setif
+                    { "id": 1901, "name": "Setif" }, { "id": 1902, "name": "El Eulma" }, { "id": 1903, "name": "Ain Oulmane" },
                     { "id": 1904, "name": "Bougaa" }, { "id": 1905, "name": "Beni Ourtilane" }, { "id": 1906, "name": "Beni Chebana" },
                     { "id": 1907, "name": "Beni Fouda" }, { "id": 1908, "name": "Bouandas" }, { "id": 1909, "name": "Bougaa" },
                     { "id": 1910, "name": "Bousselam" }, { "id": 1911, "name": "Boutaleb" }, { "id": 1912, "name": "Ain Abessa" },
@@ -671,8 +678,8 @@
                     { "id": 1955, "name": "Hammam Sokhna" }, { "id": 1956, "name": "Tala Ifassen" }, { "id": 1957, "name": "Ain Seffra" },
                     { "id": 1958, "name": "Bougaa" }
                 ],
-                "20": [ // Saïda
-                    { "id": 2001, "name": "Saïda" }, { "id": 2002, "name": "Ain El Hadjar" }, { "id": 2003, "name": "Sidi Boubekeur" },
+                "20": [ // Saida
+                    { "id": 2001, "name": "Saida" }, { "id": 2002, "name": "Ain El Hadjar" }, { "id": 2003, "name": "Sidi Boubekeur" },
                     { "id": 2004, "name": "Hassasna" }, { "id": 2005, "name": "Youb" }, { "id": 2006, "name": "Tirmitine" },
                     { "id": 2007, "name": "Ain Soltane" }, { "id": 2008, "name": "El Hassaneia" }, { "id": 2009, "name": "Ouled Brahim" },
                     { "id": 2010, "name": "Doui Thabet" }, { "id": 2011, "name": "Moulay Larbi" }, { "id": 2012, "name": "Sidi Ahmed" },
@@ -691,8 +698,8 @@
                     { "id": 2125, "name": "Had Souk" }, { "id": 2126, "name": "Ain Zouit" }, { "id": 2127, "name": "Kanoua" },
                     { "id": 2128, "name": "M'daourouch" }
                 ],
-                "22": [ // Sidi Bel Abbès
-                    { "id": 2201, "name": "Sidi Bel Abbès" }, { "id": 2202, "name": "Ain El Berd" }, { "id": 2203, "name": "Sfisef" },
+                "22": [ // Sidi Bel Abbes
+                    { "id": 2201, "name": "Sidi Bel Abbes" }, { "id": 2202, "name": "Ain El Berd" }, { "id": 2203, "name": "Sfisef" },
                     { "id": 2204, "name": "Tessala" }, { "id": 2205, "name": "Sidi Brahim" }, { "id": 2206, "name": "Ain Kada" },
                     { "id": 2207, "name": "Ain Thrid" }, { "id": 2208, "name": "Amarnas" }, { "id": 2209, "name": "Ben Badis" },
                     { "id": 2210, "name": "Benachiba Chelia" }, { "id": 2211, "name": "Dhaya" }, { "id": 2212, "name": "Hassi Dahou" },
@@ -708,19 +715,19 @@
                 ],
                 "23": [ // Annaba
                     { "id": 2301, "name": "Annaba" }, { "id": 2302, "name": "El Bouni" }, { "id": 2303, "name": "El Hadjar" },
-                    { "id": 2304, "name": "Sidi Amar" }, { "id": 2305, "name": "Berrahal" }, { "id": 2306, "name": "Chetaïbi" },
-                    { "id": 2307, "name": "Seraïdi" }, { "id": 2308, "name": "Oued El Aneb" }, { "id": 2309, "name": "Aïn Berda" },
-                    { "id": 2310, "name": "El Eulma" }, { "id": 2311, "name": "El Bouni" }, { "id": 2312, "name": "Seraïdi" }
+                    { "id": 2304, "name": "Sidi Amar" }, { "id": 2305, "name": "Berrahal" }, { "id": 2306, "name": "Chetaibi" },
+                    { "id": 2307, "name": "Seraidi" }, { "id": 2308, "name": "Oued El Aneb" }, { "id": 2309, "name": "Ain Berda" },
+                    { "id": 2310, "name": "El Eulma" }, { "id": 2311, "name": "El Bouni" }, { "id": 2312, "name": "Seraidi" }
                 ],
                 "24": [ // Guelma
                     { "id": 2401, "name": "Guelma" }, { "id": 2402, "name": "Heliopolis" }, { "id": 2403, "name": "Belkheir" },
                     { "id": 2404, "name": "Bouchegouf" }, { "id": 2405, "name": "Hammam Debagh" }, { "id": 2406, "name": "Ain Reggada" },
                     { "id": 2407, "name": "Beni Mezline" }, { "id": 2408, "name": "Dahouara" }, { "id": 2409, "name": "Djeballah Khemissi" },
-                    { "id": 2410, "name": "El Fedjoudj" }, { "id": 2411, "name": "Guelaat Bou Sbaa" }, { "id": 2412, "name": "Hammam N'Baïls" },
+                    { "id": 2410, "name": "El Fedjoudj" }, { "id": 2411, "name": "Guelaat Bou Sbaa" }, { "id": 2412, "name": "Hammam N'Bails" },
                     { "id": 2413, "name": "Khezaras" }, { "id": 2414, "name": "Oued Zenati" }, { "id": 2415, "name": "Ain Kercha" },
                     { "id": 2416, "name": "Bouati Mahmoud" }, { "id": 2417, "name": "Ain Ben Beida" }, { "id": 2418, "name": "Ain Larbi" },
                     { "id": 2419, "name": "El Haria" }, { "id": 2420, "name": "Ain Sandel" }, { "id": 2421, "name": "Beni Mezline" },
-                    { "id": 2422, "name": "Boumahra Ahmed" }, { "id": 2423, "name": "Oued Fragha" }, { "id": 2424, "name": "El Guelaât Bou Sbaa" },
+                    { "id": 2422, "name": "Boumahra Ahmed" }, { "id": 2423, "name": "Oued Fragha" }, { "id": 2424, "name": "El Guelaat Bou Sbaa" },
                     { "id": 2425, "name": "Ain Makhlouf" }, { "id": 2426, "name": "Tamlouka" }, { "id": 2427, "name": "Sellaoua Announa" },
                     { "id": 2428, "name": "Dahouara" }
                 ],
@@ -731,8 +738,8 @@
                     { "id": 2510, "name": "Messaoud Boudjriou" }, { "id": 2511, "name": "Ain Smara" }, { "id": 2512, "name": "Benouadah" },
                     { "id": 2513, "name": "Cheliya" }, { "id": 2514, "name": "Sidi Khelifa" }, { "id": 2515, "name": "Hamma Bouziane" }
                 ],
-                "26": [ // Médéa
-                    { "id": 2601, "name": "Médéa" }, { "id": 2602, "name": "Berrouaghia" }, { "id": 2603, "name": "Ksar Boukhari" },
+                "26": [ // Medea
+                    { "id": 2601, "name": "Medea" }, { "id": 2602, "name": "Berrouaghia" }, { "id": 2603, "name": "Ksar Boukhari" },
                     { "id": 2604, "name": "Tablat" }, { "id": 2605, "name": "Ain Boucif" }, { "id": 2606, "name": "Seghouane" },
                     { "id": 2607, "name": "Chahbounia" }, { "id": 2608, "name": "Ain Oum El Djellil" }, { "id": 2609, "name": "Si Mahdjoub" },
                     { "id": 2610, "name": "Ouled Bouachra" }, { "id": 2611, "name": "Chellalet El Adhaoura" }, { "id": 2612, "name": "Beni Slimane" },
@@ -742,15 +749,15 @@
                     { "id": 2622, "name": "Ouled Antar" }, { "id": 2623, "name": "Ouled Brahim" }, { "id": 2624, "name": "Tamesguida" },
                     { "id": 2625, "name": "Bouaichoun" }, { "id": 2626, "name": "Hannacha" }, { "id": 2627, "name": "Ain Zohra" },
                     { "id": 2628, "name": "Derrag" }, { "id": 2629, "name": "El Hamdania" }, { "id": 2630, "name": "Ouled Hellal" },
-                    { "id": 2631, "name": "Sidi Ziane" }, { "id": 2632, "name": "Tafraout" }, { "id": 2633, "name": "Aïn D'heb" },
-                    { "id": 2634, "name": "Aïn Ghomri" }, { "id": 2635, "name": "Ouled Daïed" }, { "id": 2636, "name": "Boghar" },
+                    { "id": 2631, "name": "Sidi Ziane" }, { "id": 2632, "name": "Tafraout" }, { "id": 2633, "name": "Ain D'heb" },
+                    { "id": 2634, "name": "Ain Ghomri" }, { "id": 2635, "name": "Ouled Daied" }, { "id": 2636, "name": "Boghar" },
                     { "id": 2637, "name": "Boughezoul" }, { "id": 2638, "name": "Ouzera" }, { "id": 2639, "name": "Saneg" },
                     { "id": 2640, "name": "Tlatet Eddouar" }, { "id": 2641, "name": "Ouled Mimoun" }, { "id": 2642, "name": "Seddaya" },
                     { "id": 2643, "name": "Souagui" }, { "id": 2644, "name": "Aziz" }
                 ],
                 "27": [ // Mostaganem
                     { "id": 2701, "name": "Mostaganem" }, { "id": 2702, "name": "Hassi Mameche" }, { "id": 2703, "name": "Ain Tedles" },
-                    { "id": 2704, "name": "Kheïr Eddine" }, { "id": 2705, "name": "Mazagran" }, { "id": 2706, "name": "Mansourah" },
+                    { "id": 2704, "name": "Kheir Eddine" }, { "id": 2705, "name": "Mazagran" }, { "id": 2706, "name": "Mansourah" },
                     { "id": 2707, "name": "Mesra" }, { "id": 2708, "name": "Achaacha" }, { "id": 2709, "name": "Ain Boudinar" },
                     { "id": 2710, "name": "Ain Nouissy" }, { "id": 2711, "name": "Bouguirat" }, { "id": 2712, "name": "Fornaka" },
                     { "id": 2713, "name": "Hadjadj" }, { "id": 2714, "name": "Khair Eddine" }, { "id": 2715, "name": "Nekmaria" },
@@ -765,7 +772,7 @@
                     { "id": 2804, "name": "Ain El Hadjel" }, { "id": 2805, "name": "Ain Khadra" }, { "id": 2806, "name": "Ain Fares" },
                     { "id": 2807, "name": "Ain Rich" }, { "id": 2808, "name": "Beni Ilmane" }, { "id": 2809, "name": "Ben Sroun" },
                     { "id": 2810, "name": "Berhoum" }, { "id": 2811, "name": "Bouhmama" }, { "id": 2812, "name": "Chellal" },
-                    { "id": 2813, "name": "Dehahna" }, { "id": 2814, "name": "Djebel Messaad" }, { "id": 2815, "name": "Hammam Dhalaâ" },
+                    { "id": 2813, "name": "Dehahna" }, { "id": 2814, "name": "Djebel Messaad" }, { "id": 2815, "name": "Hammam Dhalaa" },
                     { "id": 2816, "name": "Khoubana" }, { "id": 2817, "name": "M'Cif" }, { "id": 2818, "name": "Maadid" },
                     { "id": 2819, "name": "Ouled Addi Guebala" }, { "id": 2820, "name": "Ouanougha" }, { "id": 2821, "name": "Oued El Baraka" },
                     { "id": 2822, "name": "Oued El Kheir" }, { "id": 2823, "name": "Oultene" }, { "id": 2824, "name": "Sidi Aissa" },
@@ -790,7 +797,7 @@
                     { "id": 3001, "name": "Ouargla" }, { "id": 3002, "name": "Hassi Messaoud" }, { "id": 3003, "name": "Rouissat" },
                     { "id": 3004, "name": "N'Goussa" }, { "id": 3005, "name": "El Hadjira" }, { "id": 3006, "name": "Hassi Ben Abdellah" },
                     { "id": 3007, "name": "Ain Beida" }, { "id": 3008, "name": "Sidi Khouiled" }, { "id": 3009, "name": "Touggourt" },
-                    { "id": 3010, "name": "Témacine" }, { "id": 3011, "name": "Blidet Amour" }, { "id": 3012, "name": "El Borma" },
+                    { "id": 3010, "name": "Temacine" }, { "id": 3011, "name": "Blidet Amour" }, { "id": 3012, "name": "El Borma" },
                     { "id": 3013, "name": "Tegueddane" }, { "id": 3014, "name": "Hadjira" }, { "id": 3015, "name": "Zaouia El Abidia" },
                     { "id": 3016, "name": "Chott" }, { "id": 3017, "name": "Hassi Labiod" }, { "id": 3018, "name": "Reggane" },
                     { "id": 3019, "name": "M'Rara" }, { "id": 3020, "name": "El Allia" }
@@ -802,7 +809,7 @@
                     { "id": 3110, "name": "Ain Kerma" }, { "id": 3111, "name": "Ain El Kerma" }, { "id": 3112, "name": "Boufatis" },
                     { "id": 3113, "name": "El Braya" }, { "id": 3114, "name": "Hassi Ben Okba" }, { "id": 3115, "name": "Hassi Mefsoukh" },
                     { "id": 3116, "name": "Mers El Kebir" }, { "id": 3117, "name": "Ain El Bia" }, { "id": 3118, "name": "Tafraoui" },
-                    { "id": 3119, "name": "Sidi Chami" }, { "id": 3120, "name": "El Ançor" }, { "id": 3121, "name": "Ain El Kerma" },
+                    { "id": 3119, "name": "Sidi Chami" }, { "id": 3120, "name": "El Ancor" }, { "id": 3121, "name": "Ain El Kerma" },
                     { "id": 3122, "name": "Bou Sfer" }, { "id": 3123, "name": "Marsat El Hadjaj" }, { "id": 3124, "name": "Ain El Beida" },
                     { "id": 3125, "name": "Ain Fekan" }, { "id": 3126, "name": "Hassi Bounif" }, { "id": 3127, "name": "Kristel" },
                     { "id": 3128, "name": "Sidi Ben Yebka" }
@@ -818,10 +825,10 @@
                 ],
                 "33": [ // Illizi
                     { "id": 3301, "name": "Illizi" }, { "id": 3302, "name": "Djanet" }, { "id": 3303, "name": "Bordj Omar Driss" },
-                    { "id": 3304, "name": "Bordj El Haouas" }, { "id": 3305, "name": "Debdeb" }, { "id": 3306, "name": "In Aménas" }
+                    { "id": 3304, "name": "Bordj El Haouas" }, { "id": 3305, "name": "Debdeb" }, { "id": 3306, "name": "In Amenas" }
                 ],
-                "34": [ // Bordj Bou Arréridj
-                    { "id": 3401, "name": "Bordj Bou Arréridj" }, { "id": 3402, "name": "Ain Taghrout" }, { "id": 3403, "name": "Ras El Oued" },
+                "34": [ // Bordj Bou Arreridj
+                    { "id": 3401, "name": "Bordj Bou Arreridj" }, { "id": 3402, "name": "Ain Taghrout" }, { "id": 3403, "name": "Ras El Oued" },
                     { "id": 3404, "name": "Bordj Ghedir" }, { "id": 3405, "name": "Mansourah" }, { "id": 3406, "name": "El Achir" },
                     { "id": 3407, "name": "Ghassira" }, { "id": 3408, "name": "Hammam El Biban" }, { "id": 3409, "name": "Ain Legradj" },
                     { "id": 3410, "name": "Khelil" }, { "id": 3411, "name": "Medjana" }, { "id": 3412, "name": "Ouled Brahem" },
@@ -831,17 +838,17 @@
                     { "id": 3422, "name": "Sidi Embarek" }, { "id": 3423, "name": "Tassameurt" }, { "id": 3424, "name": "Tefreg" },
                     { "id": 3425, "name": "El Main" }, { "id": 3426, "name": "Ouled Sidi Brahim" }, { "id": 3427, "name": "Colla" }
                 ],
-                "35": [ // Boumerdès
-                    { "id": 3501, "name": "Boumerdès" }, { "id": 3502, "name": "Boudouaou" }, { "id": 3503, "name": "Dellys" },
+                "35": [ // Boumerdes
+                    { "id": 3501, "name": "Boumerdes" }, { "id": 3502, "name": "Boudouaou" }, { "id": 3503, "name": "Dellys" },
                     { "id": 3504, "name": "Khemis El Khechna" }, { "id": 3505, "name": "Thenia" }, { "id": 3506, "name": "Isser" },
-                    { "id": 3507, "name": "Bordj Menaïel" }, { "id": 3508, "name": "Naciria" }, { "id": 3509, "name": "Boudouaou El Bahri" },
+                    { "id": 3507, "name": "Bordj Menaiel" }, { "id": 3508, "name": "Naciria" }, { "id": 3509, "name": "Boudouaou El Bahri" },
                     { "id": 3510, "name": "Corso" }, { "id": 3511, "name": "Ouled Moussa" }, { "id": 3512, "name": "Tidjelabine" },
                     { "id": 3513, "name": "Baghlia" }, { "id": 3514, "name": "Si Mustapha" }, { "id": 3515, "name": "Timezrit" },
                     { "id": 3516, "name": "Chabet El Ameur" }, { "id": 3517, "name": "Taourga" }, { "id": 3518, "name": "Hammedi" },
                     { "id": 3519, "name": "Ain Taya" }, { "id": 3520, "name": "Sidi Daoud" }, { "id": 3521, "name": "Afir" },
                     { "id": 3522, "name": "Ben Choud" }, { "id": 3523, "name": "Kaddara" }, { "id": 3524, "name": "Larbatache" },
                     { "id": 3525, "name": "Ammal" }, { "id": 3526, "name": "Bouzegza" }, { "id": 3527, "name": "Zemmouri" },
-                    { "id": 3528, "name": "Thénia" }
+                    { "id": 3528, "name": "Thenia" }
                 ],
                 "36": [ // El Tarf
                     { "id": 3601, "name": "El Tarf" }, { "id": 3602, "name": "Ben M'Hidi" }, { "id": 3603, "name": "El Kala" },
@@ -876,9 +883,9 @@
                 ],
                 "40": [ // Khenchela
                     { "id": 4001, "name": "Khenchela" }, { "id": 4002, "name": "Ain Touila" }, { "id": 4003, "name": "Chechar" },
-                    { "id": 4004, "name": "Kaïs" }, { "id": 4005, "name": "Bouhmama" }, { "id": 4006, "name": "Ouled Rechache" },
+                    { "id": 4004, "name": "Kais" }, { "id": 4005, "name": "Bouhmama" }, { "id": 4006, "name": "Ouled Rechache" },
                     { "id": 4007, "name": "Tamza" }, { "id": 4008, "name": "Babare" }, { "id": 4009, "name": "El Mahmal" },
-                    { "id": 4010, "name": "Djellal" }, { "id": 4011, "name": "Ain Zoui" }, { "id": 4012, "name": "Baghaï" },
+                    { "id": 4010, "name": "Djellal" }, { "id": 4011, "name": "Ain Zoui" }, { "id": 4012, "name": "Baghait" },
                     { "id": 4013, "name": "El Hamma" }, { "id": 4014, "name": "Khirane" }, { "id": 4015, "name": "M'Toussa" },
                     { "id": 4016, "name": "Metoussa" }, { "id": 4017, "name": "Oued Djellal" }, { "id": 4018, "name": "Yabous" },
                     { "id": 4019, "name": "Taouzianat" }, { "id": 4020, "name": "Chelia" }, { "id": 4021, "name": "Fais" }
@@ -886,7 +893,7 @@
                 "41": [ // Souk Ahras
                     { "id": 4101, "name": "Souk Ahras" }, { "id": 4102, "name": "Sedrata" }, { "id": 4103, "name": "M'Daourouch" },
                     { "id": 4104, "name": "Taoura" }, { "id": 4105, "name": "Ain Zwit" }, { "id": 4106, "name": "Bir Bouhouche" },
-                    { "id": 4107, "name": "Dréa" }, { "id": 4108, "name": "Haddada" }, { "id": 4109, "name": "Khedara" },
+                    { "id": 4107, "name": "Drea" }, { "id": 4108, "name": "Haddada" }, { "id": 4109, "name": "Khedara" },
                     { "id": 4110, "name": "Mashrouha" }, { "id": 4111, "name": "Oued Keberit" }, { "id": 4112, "name": "Ouillen" },
                     { "id": 4113, "name": "Ragouba" }, { "id": 4114, "name": "Sidi Fredj" }, { "id": 4115, "name": "Zouabi" },
                     { "id": 4116, "name": "Ain Fakroun" }, { "id": 4117, "name": "Ain El Bey" }, { "id": 4118, "name": "Ouled Driss" },
@@ -894,7 +901,7 @@
                 ],
                 "42": [ // Tipaza
                     { "id": 4201, "name": "Tipaza" }, { "id": 4202, "name": "Cherchell" }, { "id": 4203, "name": "Hadjout" },
-                    { "id": 4204, "name": "Fouka" }, { "id": 4205, "name": "Bou Ismaïl" }, { "id": 4206, "name": "Kolea" },
+                    { "id": 4204, "name": "Fouka" }, { "id": 4205, "name": "Bou Ismail" }, { "id": 4206, "name": "Kolea" },
                     { "id": 4207, "name": "Ahmar El Ain" }, { "id": 4208, "name": "Bourkika" }, { "id": 4209, "name": "Chaiba" },
                     { "id": 4210, "name": "Damous" }, { "id": 4211, "name": "Douaouda" }, { "id": 4212, "name": "Larhat" },
                     { "id": 4213, "name": "Menaceur" }, { "id": 4214, "name": "Messelmoune" }, { "id": 4215, "name": "Nador" },
@@ -903,11 +910,11 @@
                     { "id": 4222, "name": "Merad" }, { "id": 4223, "name": "Khemisti" }, { "id": 4224, "name": "Ain Tagourait" }
                 ],
                 "43": [ // Mila
-                    { "id": 4301, "name": "Mila" }, { "id": 4302, "name": "Chelghoum Laïd" }, { "id": 4303, "name": "Terrai Bainem" },
+                    { "id": 4301, "name": "Mila" }, { "id": 4302, "name": "Chelghoum Laid" }, { "id": 4303, "name": "Terrai Bainem" },
                     { "id": 4304, "name": "Tadjenanet" }, { "id": 4305, "name": "Rouached" }, { "id": 4306, "name": "Grarem Gouga" },
                     { "id": 4307, "name": "Sidi Khelifa" }, { "id": 4308, "name": "Tassala Lematai" }, { "id": 4309, "name": "Ain Beida" },
                     { "id": 4310, "name": "Ain Mellouk" }, { "id": 4311, "name": "Bouhatem" }, { "id": 4312, "name": "Hamala" },
-                    { "id": 4313, "name": "Oued Athmenia" }, { "id": 4314, "name": "Ouled Khalfallah" }, { "id": 4315, "name": "Zeghaïa" },
+                    { "id": 4313, "name": "Oued Athmenia" }, { "id": 4314, "name": "Ouled Khalfallah" }, { "id": 4315, "name": "Zeghaia" },
                     { "id": 4316, "name": "Ahmed Rachedi" }, { "id": 4317, "name": "Amira Arras" }, { "id": 4318, "name": "Boufatis" },
                     { "id": 4319, "name": "Chigara" }, { "id": 4320, "name": "Ferdjioua" }, { "id": 4321, "name": "Hani" },
                     { "id": 4322, "name": "Tessala" }, { "id": 4323, "name": "Minar Zarza" }, { "id": 4324, "name": "Oued Endja" },
@@ -927,14 +934,14 @@
                     { "id": 4425, "name": "Oued Djemaa" }, { "id": 4426, "name": "Rouina" }, { "id": 4427, "name": "Sidi Lakhdar" },
                     { "id": 4428, "name": "Tachta" }, { "id": 4429, "name": "Tarik Ibn Ziyad" }, { "id": 4430, "name": "Zeddine" }
                 ],
-                "45": [ // Naâma
-                    { "id": 4501, "name": "Naâma" }, { "id": 4502, "name": "Mecheria" }, { "id": 4503, "name": "Ain Sefra" },
+                "45": [ // Naama
+                    { "id": 4501, "name": "Naama" }, { "id": 4502, "name": "Mecheria" }, { "id": 4503, "name": "Ain Sefra" },
                     { "id": 4504, "name": "Tiout" }, { "id": 4505, "name": "Sfissifa" }, { "id": 4506, "name": "Moghrar" },
                     { "id": 4507, "name": "Asla" }, { "id": 4508, "name": "Kasdir" }, { "id": 4509, "name": "Ain Ben Khelil" },
                     { "id": 4510, "name": "Makman Ben Amer" }, { "id": 4511, "name": "El Biod" }, { "id": 4512, "name": "Mecheria" }
                 ],
-                "46": [ // Aïn Témouchent
-                    { "id": 4601, "name": "Ain Témouchent" }, { "id": 4602, "name": "Hammam Bou Hadjar" }, { "id": 4603, "name": "Ain Kihel" },
+                "46": [ // Ain Temouchent
+                    { "id": 4601, "name": "Ain Temouchent" }, { "id": 4602, "name": "Hammam Bou Hadjar" }, { "id": 4603, "name": "Ain Kihel" },
                     { "id": 4604, "name": "Ain El Arbaa" }, { "id": 4605, "name": "El Malah" }, { "id": 4606, "name": "Beni Saf" },
                     { "id": 4607, "name": "Ain Tolba" }, { "id": 4608, "name": "Terga" }, { "id": 4609, "name": "Chabat El Leham" },
                     { "id": 4610, "name": "Bouzedjar" }, { "id": 4611, "name": "Hassasna" }, { "id": 4612, "name": "Oued Berkeche" },
@@ -944,16 +951,16 @@
                     { "id": 4622, "name": "Bouzedjar" }, { "id": 4623, "name": "Hassasna" }, { "id": 4624, "name": "Oued El Mellah" },
                     { "id": 4625, "name": "Sidi Ouriache" }, { "id": 4626, "name": "Tamazoura" }
                 ],
-                "47": [ // Ghardaïa
-                    { "id": 4701, "name": "Ghardaïa" }, { "id": 4702, "name": "El Atteuf" }, { "id": 4703, "name": "Bounoura" },
-                    { "id": 4704, "name": "Dhaya Ben Dahoua" }, { "id": 4705, "name": "Berriane" }, { "id": 4706, "name": "Metlili Chaâmba" },
+                "47": [ // Ghardaia
+                    { "id": 4701, "name": "Ghardaia" }, { "id": 4702, "name": "El Atteuf" }, { "id": 4703, "name": "Bounoura" },
+                    { "id": 4704, "name": "Dhaya Ben Dahoua" }, { "id": 4705, "name": "Berriane" }, { "id": 4706, "name": "Metlili Chaamba" },
                     { "id": 4707, "name": "Mansoura" }, { "id": 4708, "name": "El Guerrara" }, { "id": 4709, "name": "Sebseb" },
                     { "id": 4710, "name": "Zelfana" }, { "id": 4711, "name": "Hassi Fehal" }, { "id": 4712, "name": "El Menzah" },
                     { "id": 4713, "name": "Hassi El Gara" }
                 ],
                 "48": [ // Relizane
                     { "id": 4801, "name": "Relizane" }, { "id": 4802, "name": "Oued Rhiou" }, { "id": 4803, "name": "Mazouna" },
-                    { "id": 4804, "name": "Ain Tarek" }, { "id": 4805, "name": "Zemoura" }, { "id": 4806, "name": "Oued Djemmâa" },
+                    { "id": 4804, "name": "Ain Tarek" }, { "id": 4805, "name": "Zemoura" }, { "id": 4806, "name": "Oued Djemmaa" },
                     { "id": 4807, "name": "Beni Dergoun" }, { "id": 4808, "name": "Dar Ben Abdellah" }, { "id": 4809, "name": "Djidiouia" },
                     { "id": 4810, "name": "El H'madna" }, { "id": 4811, "name": "Had Echkalla" }, { "id": 4812, "name": "Lahlef" },
                     { "id": 4813, "name": "Mediouna" }, { "id": 4814, "name": "Mendes" }, { "id": 4815, "name": "Ouarizane" },
@@ -965,9 +972,9 @@
                 ],
                 "49": [ // Timimoun
                     { "id": 4901, "name": "Timimoun" }, { "id": 4902, "name": "Aougrout" }, { "id": 4903, "name": "Deldoul" },
-                    { "id": 4904, "name": "Charouine" }, { "id": 4905, "name": "Ouled Saïd" }, { "id": 4906, "name": "Talmine" },
+                    { "id": 4904, "name": "Charouine" }, { "id": 4905, "name": "Ouled Said" }, { "id": 4906, "name": "Talmine" },
                     { "id": 4907, "name": "Tinerkouk" }, { "id": 4908, "name": "Ksar Kaddour" }, { "id": 4909, "name": "Metarfa" },
-                    { "id": 4910, "name": "Ouled Aïssa" }
+                    { "id": 4910, "name": "Ouled Aissa" }
                 ],
                 "50": [ // Bordj Badji Mokhtar
                     { "id": 5001, "name": "Bordj Badji Mokhtar" }, { "id": 5002, "name": "Timiaouine" }
@@ -976,19 +983,19 @@
                     { "id": 5101, "name": "Ouled Djellal" }, { "id": 5102, "name": "Sidi Khaled" }, { "id": 5103, "name": "Besbes" },
                     { "id": 5104, "name": "Doucen" }, { "id": 5105, "name": "Chaiba" }
                 ],
-                "52": [ // Béni Abbès
-                    { "id": 5201, "name": "Béni Abbès" }, { "id": 5202, "name": "Tabelbala" }, { "id": 5203, "name": "Kerzaz" },
+                "52": [ // Beni Abbes
+                    { "id": 5201, "name": "Beni Abbes" }, { "id": 5202, "name": "Tabelbala" }, { "id": 5203, "name": "Kerzaz" },
                     { "id": 5204, "name": "Timoudi" }, { "id": 5205, "name": "Oughrouz" }, { "id": 5206, "name": "Tabelbala" },
                     { "id": 5207, "name": "El Ouata" }
                 ],
-                "53": [ // Timimoun (Nouvelle Wilaya) - This ID seems duplicated with an old one, clarify if needed.
+                "53": [ // Timimoun (New Wilaya) - This ID seems duplicated with an old one, clarify if needed.
                     { "id": 5301, "name": "Timimoun" }, { "id": 5302, "name": "Aougrout" }, { "id": 5303, "name": "Deldoul" },
-                    { "id": 5304, "name": "Charouine" }, { "id": 5305, "name": "Ouled Saïd" }, { "id": 5306, "name": "Talmine" },
+                    { "id": 5304, "name": "Charouine" }, { "id": 5305, "name": "Ouled Said" }, { "id": 5306, "name": "Talmine" },
                     { "id": 5307, "name": "Tinerkouk" }, { "id": 5308, "name": "Ksar Kaddour" }, { "id": 5309, "name": "Metarfa" },
-                    { "id": 5310, "name": "Ouled Aïssa" }
+                    { "id": 5310, "name": "Ouled Aissa" }
                 ],
                 "54": [ // Touggourt
-                    { "id": 5401, "name": "Touggourt" }, { "id": 5402, "name": "Nezla" }, { "id": 5403, "name": "Témacine" },
+                    { "id": 5401, "name": "Touggourt" }, { "id": 5402, "name": "Nezla" }, { "id": 5403, "name": "Temacine" },
                     { "id": 5404, "name": "Blidet Amour" }, { "id": 5405, "name": "Megarine" }, { "id": 5406, "name": "Zaouia El Abidia" },
                     { "id": 5407, "name": "El Hedjira" }, { "id": 5408, "name": "Ben Kouider" }
                 ],
@@ -1011,7 +1018,7 @@
             // Helper function to build absolute image URLs
             function buildAbsoluteImageUrl(relativePath) {
                 if (!relativePath || relativePath.trim() === '') {
-                    return 'https://placehold.co/600x400/EEEEEE/333333?text=لا+توجد+صورة';
+                    return 'https://placehold.co/600x400/EEEEEE/333333?text=No+Image';
                 }
                 if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) {
                     return relativePath;
@@ -1063,7 +1070,7 @@
                     // Update dynamic content in <head>
                     pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}${siteConfig.siteName || 'Sheeka'}`;
                     if (metaDescriptionElem) {
-                        metaDescriptionElem.content = siteConfig.metaDescription || 'متجر Sheeka الإلكتروني يوفر أجود المنتجات بأسعار تنافسية.';
+                        metaDescriptionElem.content = siteConfig.metaDescription || 'Sheeka online store offers the best products at competitive prices.';
                     }
 
                     // Update site name in modal
@@ -1102,12 +1109,12 @@
                 } catch (error) {
                     console.error("Error fetching site configuration:", error);
                     // Fallback to default values if config fetch fails
-                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}`;
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}Sheeka`;
                     if (metaDescriptionElem) {
-                        metaDescriptionElem.content = 'متجر  الإلكتروني يوفر أجود المنتجات بأسعار تنافسية.';
+                        metaDescriptionElem.content = 'Sheeka online store offers the best products at competitive prices.';
                     }
-                    modalSiteName.textContent = '';
-                    showMessage('error', 'فشل تحميل إعدادات الموقع. قد لا تكون بعض المعلومات دقيقة.');
+                    modalSiteName.textContent = 'Sheeka';
+                    showMessage('error', 'Failed to load site settings. Some information might be inaccurate.');
                 }
             }
 
@@ -1115,7 +1122,7 @@
             // --- Product Details Fetching and Display ---
             async function fetchProductDetails(id) {
                 if (!id) {
-                    loadingSpinner.innerHTML = '<p class="text-xl text-red-500 text-right">خطأ: معرف المنتج مفقود.</p>';
+                    loadingSpinner.innerHTML = '<p class="text-xl text-red-500">Error: Product ID missing.</p>';
                     return;
                 }
 
@@ -1126,29 +1133,44 @@
                     }
                     currentProduct = await response.json();
 
+                    // Simulate structured description for demonstration
+                    // In a real application, your backend would provide this structure
+                    // Using images from currentProduct.images array if available
+                    const image1 = currentProduct.images && currentProduct.images.length > 1 ? currentProduct.images[1] : 'https://placehold.co/600x400/C8797D/FFFFFF?text=Product+Feature+1';
+                    const image2 = currentProduct.images && currentProduct.images.length > 2 ? currentProduct.images[2] : 'https://placehold.co/600x400/4A4A4A/FFFFFF?text=Product+Feature+2';
+
+                    currentProduct.structuredDescription = [
+                        { type: 'text', content: currentProduct.description || 'This is a high-quality product designed for your needs. It combines durability with sleek design, making it perfect for everyday use.' },
+                        { type: 'image', url: image1, alt: 'Product Feature 1' },
+                        { type: 'text', content: 'Our product features advanced technology that ensures optimal performance and efficiency. It\'s easy to use and maintain, providing a seamless experience.' },
+                        { type: 'image', url: image2, alt: 'Product Feature 2' },
+                        { type: 'text', content: 'Crafted with premium materials, this item is built to last. Its ergonomic design ensures comfort, and its versatile nature makes it suitable for various applications.' }
+                    ];
+
+
                     // Hide loading spinner and show content
                     loadingSpinner.classList.add('hidden');
                     productContent.classList.remove('hidden');
 
-                    productNameElem.textContent = currentProduct.name || 'منتج غير معروف';
+                    productNameElem.textContent = currentProduct.name || 'Unknown Product';
+                    shortDescriptionElem.textContent = currentProduct.description || 'No short description available.'; // Use for a brief description near price
                     productPriceElem.textContent = `DA ${(currentProduct.price !== undefined && currentProduct.price !== null) ? parseFloat(currentProduct.price).toFixed(2) : '0.00'}`;
-                    productDescriptionElem.textContent = currentProduct.description || 'لا يوجد وصف متاح.';
                     updateOrderSummary(); // Initial summary calculation
 
                     // Update page title with product name
-                    pageTitleElem.textContent = `${currentProduct.name} - ${siteConfig ? siteConfig.siteName : ''}`;
+                    pageTitleElem.textContent = `${currentProduct.name} - ${siteConfig ? siteConfig.siteName : 'Sheeka'}`;
 
                     // Populate images
                     if (currentProduct.images && currentProduct.images.length > 0) {
                         mainProductImage.src = buildAbsoluteImageUrl(currentProduct.images[0]);
-                        mainProductImage.alt = currentProduct.name || 'صورة المنتج';
+                        mainProductImage.alt = currentProduct.name || 'Product Image';
 
                         // Create thumbnails
                         thumbnailGallery.innerHTML = ''; // Clear existing
                         currentProduct.images.forEach((imagePath, index) => {
                             const img = document.createElement('img');
                             img.src = buildAbsoluteImageUrl(imagePath);
-                            img.alt = `${currentProduct.name} صورة مصغرة ${index + 1}`;
+                            img.alt = `${currentProduct.name} Thumbnail ${index + 1}`;
                             img.className = 'thumbnail-image rounded-lg shadow-md';
                             img.addEventListener('click', () => {
                                 mainProductImage.src = img.src;
@@ -1161,8 +1183,8 @@
                             thumbnailGallery.appendChild(img);
                         });
                     } else {
-                        mainProductImage.src = 'https://placehold.co/800x800/E6B89C/4A4A4A?text=لا+توجد+صور';
-                        mainProductImage.alt = 'لا توجد صور متاحة';
+                        mainProductImage.src = 'https://placehold.co/800x800/E6B89C/4A4A4A?text=No+Images';
+                        mainProductImage.alt = 'No images available';
                     }
 
                     // Populate colors and sizes from variants
@@ -1222,9 +1244,31 @@
                         }
                     }
 
+                    // Populate full description with mixed content
+                    fullDescriptionContainer.innerHTML = ''; // Clear existing content
+                    if (currentProduct.structuredDescription && currentProduct.structuredDescription.length > 0) {
+                        currentProduct.structuredDescription.forEach(item => {
+                            if (item.type === 'text') {
+                                const p = document.createElement('p');
+                                p.className = 'mb-4'; // Add margin-bottom for paragraphs
+                                p.textContent = item.content;
+                                fullDescriptionContainer.appendChild(p);
+                            } else if (item.type === 'image') {
+                                const img = document.createElement('img');
+                                img.src = buildAbsoluteImageUrl(item.url);
+                                img.alt = item.alt || 'Description Image';
+                                img.className = 'w-full h-auto object-cover rounded-lg shadow-md my-6'; // Responsive image styling
+                                img.onerror = function() { this.src = 'https://placehold.co/600x400/EEEEEE/333333?text=Image+Error'; };
+                                fullDescriptionContainer.appendChild(img);
+                            }
+                        });
+                    } else {
+                        fullDescriptionContainer.innerHTML = `<p class="text-lg text-gray-700 leading-relaxed">${currentProduct.description || 'No detailed description available.'}</p>`;
+                    }
+
                 } catch (error) {
                     console.error("Error fetching product details:", error);
-                    loadingSpinner.innerHTML = `<p class="text-xl text-red-500 text-right">فشل تحميل تفاصيل المنتج. ${error.message}</p>`;
+                    loadingSpinner.innerHTML = `<p class="text-xl text-red-500">Failed to load product details. ${error.message}</p>`;
                     productContent.classList.add('hidden');
                 }
             }
@@ -1237,7 +1281,7 @@
                         await fetchSiteConfig(); // Fetch if not already loaded
                     }
 
-                    wilayaSelect.innerHTML = '<option value="" disabled selected>اختر ولاية</option>';
+                    wilayaSelect.innerHTML = '<option value="" disabled selected>Select a State/Province</option>';
                     wilayasMap.clear();
 
                     // Filter out duplicate wilaya IDs and sort by name
@@ -1265,7 +1309,7 @@
                 } catch (error) {
                     console.error("Error loading wilaya data from site config:", error);
                     // Fallback to hardcoded wilayas if backend fetch fails
-                    wilayaSelect.innerHTML = '<option value="" disabled selected>اختر ولاية</option>';
+                    wilayaSelect.innerHTML = '<option value="" disabled selected>Select a State/Province</option>';
                     wilayasMap.clear();
                     allAlgerianWilayasStatic.sort((a, b) => a.name.localeCompare(b.name)).forEach(wilaya => {
                         const option = document.createElement('option');
@@ -1275,7 +1319,7 @@
                         wilayasMap.set(wilaya.id, wilaya.name);
                     });
                     // Provide a warning to the user if the backend is inaccessible
-                    showMessage('error', 'فشل تحميل بيانات الولاية. قد لا تكون رسوم التوصيل دقيقة.');
+                    showMessage('error', 'Failed to load state/province data. Delivery fees might be inaccurate.');
                 }
             }
 
@@ -1284,9 +1328,9 @@
                 selectedWilayaId = parseInt(wilayaSelect.value); // Ensure ID is a number
                 selectedCommuneId = null; // Reset commune when Wilaya changes
                 communeSelect.value = ''; // Clear selected commune in UI
-                communeSelect.innerHTML = '<option value="" disabled selected>اختر بلدية</option>';
+                communeSelect.innerHTML = '<option value="" disabled selected>Select a Municipality</option>';
                 communeContainer.classList.remove('hidden'); // Show commune dropdown
-                summaryDeliveryPrice.textContent = 'جاري الحساب...';
+                summaryDeliveryPrice.textContent = 'Calculating...';
                 currentDeliveryFee = 0;
                 updateOrderSummary();
 
@@ -1303,7 +1347,7 @@
                     // If no specific communes are defined for a wilaya, provide a generic option
                     const option = document.createElement('option');
                     option.value = 'default_commune';
-                    option.textContent = 'بلدية افتراضية';
+                    option.textContent = 'Default Municipality';
                     communeSelect.appendChild(option);
                 }
                 // Trigger fee calculation after communes are populated (even if dummy)
@@ -1361,12 +1405,12 @@
 
                 // Client-side validation
                 if (!selectedColorInput.value || !selectedSizeInput.value || !fullNameInput.value.trim() || !phoneNumberInput.value.trim() || !wilayaSelect.value || !communeSelect.value) {
-                    showMessage('error', 'الرجاء ملء جميع الحقول المطلوبة (اللون، الحجم، الاسم، الهاتف، الولاية، البلدية).');
+                    showMessage('error', 'Please fill in all required fields (Color, Size, Full Name, Phone, State/Province, Municipality).');
                     return;
                 }
 
                 if (currentQuantity <= 0) {
-                    showMessage('error', 'الرجاء تحديد كمية صالحة (يجب أن تكون 1 أو أكثر).');
+                    showMessage('error', 'Please select a valid quantity (must be 1 or more).');
                     return;
                 }
 
@@ -1375,7 +1419,7 @@
                     fetchDeliveryFees(); // This will use the fetched fee or fallback
                     // If still 0, it means the selected wilaya doesn't have a configured fee or a default
                     if (currentDeliveryFee === 0 && selectedWilayaId) { // Only show error if a wilaya is selected and fee is still 0
-                        showMessage('error', 'الرجاء اختيار ولاية وبلدية صالحة لحساب رسوم التوصيل.');
+                        showMessage('error', 'Please select a valid state/province and municipality to calculate delivery fees.');
                         return;
                     }
                 }
@@ -1411,7 +1455,7 @@
                     if (response.ok) { // Status codes 200-299 are considered ok
                         const result = await response.json();
                         console.log('Order placed successfully:', result);
-                        showMessage('success', 'تم تقديم الطلب بنجاح!');
+                        showMessage('success', 'Order placed successfully!');
                         playSuccessSound(); // Play success sound
 
                         // --- Facebook Pixel: Track Purchase event ---
@@ -1460,7 +1504,7 @@
                         modalPhoneNumber.textContent = phoneNumberInput.value.trim();
                         modalWilaya.textContent = wilayasMap.get(parseInt(selectedWilayaId));
                         modalCommune.textContent = communesMap.has(parseInt(selectedCommuneId)) ? communesMap.get(parseInt(selectedCommuneId)).name : communeSelect.options[communeSelect.selectedIndex].text;
-                        modalStopdesk.textContent = stopdeskInput.value.trim() || 'لا يوجد'; // New: Display stopdesk
+                        modalStopdesk.textContent = stopdeskInput.value.trim() || 'N/A'; // New: Display stopdesk
                         modalProductTotalPrice.textContent = (parseFloat(currentProduct.price || 0) * currentQuantity).toFixed(2);
                         modalDeliveryPrice.textContent = currentDeliveryFee.toFixed(2);
                         modalTotalOrderPrice.textContent = (parseFloat(currentProduct.price || 0) * currentQuantity + currentDeliveryFee).toFixed(2);
@@ -1478,16 +1522,16 @@
                         selectedWilayaId = null;
                         selectedCommuneId = null;
                         wilayaSelect.value = '';
-                        communeSelect.innerHTML = '<option value="" disabled selected>اختر بلدية</option>';
+                        communeSelect.innerHTML = '<option value="" disabled selected>Select a Municipality</option>';
                         communeContainer.classList.add('hidden');
                     } else {
                         const errorData = await response.json(); // Parse error response JSON
-                        const errorMessage = errorData.message || errorData.msg || `فشل: ${response.statusText}`; // Try to get message from backend
+                        const errorMessage = errorData.message || errorData.msg || `Failed: ${response.statusText}`; // Try to get message from backend
                         throw new Error(errorMessage); // Throw a more descriptive error
                     }
                 } catch (error) {
                     console.error('Error placing order:', error);
-                    showMessage('error', `حدث خطأ ما: ${error.message}`);
+                    showMessage('error', `An error occurred: ${error.message}`);
                 }
             });
 
@@ -1513,7 +1557,7 @@
             // --- Fetch All Products for Suggestions ---
             async function fetchAllProductsForSuggestions() {
                 try {
-                    suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">جاري تحميل الاقتراحات...</p>';
+                    suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">Loading suggestions...</p>';
                     const response = await fetch(`${BASE_URL}/products`);
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
@@ -1528,7 +1572,7 @@
                     suggestionsList.innerHTML = ''; // Clear loading message
 
                     if (allProducts.length === 0) {
-                        suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">لا توجد منتجات أخرى مقترحة حاليا.</p>';
+                        suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">No other suggested products currently.</p>';
                         return;
                     }
 
@@ -1541,8 +1585,8 @@
                         productCard.className = 'bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105';
                         productCard.innerHTML = `
                             <a href="product-details.html?id=${product._id}" class="block">
-                                <img src="${buildAbsoluteImageUrl(imageUrl)}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=خطأ+في+الصورة';">
-                                <div class="p-4 text-right">
+                                <img src="${buildAbsoluteImageUrl(imageUrl)}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=Image+Error';">
+                                <div class="p-4 text-left">
                                     <h3 class="text-lg font-semibold mb-1 text-[#4A4A4A]">${product.name}</h3>
                                     <span class="text-xl font-bold text-[#C8797D]">${parseFloat(product.price).toFixed(2)} DA</span>
                                 </div>
@@ -1552,7 +1596,7 @@
                     });
                 } catch (error) {
                     console.error("Error fetching all products for suggestions:", error);
-                    suggestionsList.innerHTML = '<p class="col-span-full text-center text-red-500">فشل تحميل الاقتراحات. الرجاء المحاولة لاحقًا.</p>';
+                    suggestionsList.innerHTML = '<p class="col-span-full text-center text-red-500">Failed to load suggestions. Please try again later.</p>';
                 }
             }
 
