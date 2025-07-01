@@ -202,6 +202,7 @@
                                         <span class="p-3 border border-gray-300 rounded-lg bg-gray-100 mr-2">+213</span>
                                         <input type="text" id="phone-number" name="phoneNumber" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="الرجاء إدخال رقم هاتفك" required inputmode="tel">
                                     </div>
+                                    <p id="phone-error" class="text-red-500 text-sm mt-1 hidden">الرجاء إدخال رقم هاتف جزائري صالح (يبدأ بـ 05، 06، أو 07 متبوعًا بـ 8 أرقام).</p>
                                 </div>
                             </div>
 
@@ -242,8 +243,10 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="w-full bg-[#C8797D] text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-[#A85F64] transition duration-300 shadow-lg transform hover:scale-105 mt-6 flex items-center justify-center gap-2">
-                                اطلب الآن <i class="fas fa-shopping-cart"></i>
+                            <button type="submit" id="submit-order-btn" class="w-full bg-[#C8797D] text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-[#A85F64] transition duration-300 shadow-lg transform hover:scale-105 mt-6 flex items-center justify-center gap-2">
+                                <span id="button-text">اطلب الآن</span>
+                                <i class="fas fa-shopping-cart" id="button-icon"></i>
+                                <div id="button-spinner" class="hidden animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white ml-2"></div>
                             </button>
                         </form>
                     </div>
@@ -314,7 +317,7 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => { // Made async to await initial fetch
             const BASE_URL = 'https://sheeka.onrender.com';
 
             let currentProduct = null;
@@ -341,6 +344,10 @@
             const orderForm = document.getElementById('order-form');
             const messageBox = document.getElementById('message-box');
             const errorMessageBox = document.getElementById('error-message-box');
+            const submitOrderBtn = document.getElementById('submit-order-btn'); // Get the submit button
+            const buttonText = document.getElementById('button-text'); // Get the button text span
+            const buttonIcon = document.getElementById('button-icon'); // Get the button icon
+            const buttonSpinner = document.getElementById('button-spinner'); // Get the button spinner
 
             const colorOptionsContainer = document.getElementById('color-options');
             const sizeOptionsContainer = document.getElementById('size-options');
@@ -352,6 +359,7 @@
 
             const fullNameInput = document.getElementById('full-name');
             const phoneNumberInput = document.getElementById('phone-number');
+            const phoneErrorElem = document.getElementById('phone-error'); // New: Phone number error element
             const wilayaSelect = document.getElementById('wilaya');
             const communeSelect = document.getElementById('commune');
             const communeContainer = document.getElementById('commune-container');
@@ -1040,6 +1048,12 @@
                 }, 3000); // Hide after 3 seconds
             }
 
+            // Function to display a persistent error message in the main content area
+            function showPersistentError(element, message) {
+                element.innerHTML = `<p class="text-xl text-red-500 text-center py-20">${message}</p>`;
+                element.classList.remove('hidden');
+            }
+
             // Function to play a simple success sound using Web Audio API
             function playSuccessSound() {
                 try {
@@ -1127,8 +1141,10 @@
                         metaDescriptionElem.content = 'متجر شيقة عبر الإنترنت يقدم أفضل المنتجات بأسعار تنافسية.';
                     }
                     modalSiteName.textContent = 'شيقة';
-                    showMessage('error', 'فشل تحميل إعدادات الموقع. قد تكون بعض المعلومات غير دقيقة.');
+                    showPersistentError(loadingSpinner, 'فشل تحميل إعدادات الموقع. الرجاء تحديث الصفحة.'); // Persistent error
+                    productContent.classList.add('hidden'); // Hide product content if site config fails
                     facebookPixelDisplayElem.textContent = 'N/A (Error fetching config)'; // Indicate error
+                    throw error; // Re-throw to stop further execution if critical
                 }
             }
 
@@ -1136,7 +1152,8 @@
             // --- Product Details Fetching and Display ---
             async function fetchProductDetails(id) {
                 if (!id) {
-                    loadingSpinner.innerHTML = '<p class="text-xl text-red-500">خطأ: معرف المنتج مفقود.</p>';
+                    showPersistentError(loadingSpinner, 'خطأ: معرف المنتج مفقود في الرابط.');
+                    productContent.classList.add('hidden');
                     return;
                 }
 
@@ -1227,6 +1244,7 @@
                                 }
                                 colorDiv.className = 'color-option';
                                 colorDiv.style.backgroundColor = bgColor;
+                                colorDiv.title = color; // Add title for accessibility
                                 if (bgColor === '#FFFFFF') { // Add a border for white color option
                                     colorDiv.style.border = '1px solid #ddd';
                                 }
@@ -1282,8 +1300,9 @@
 
                 } catch (error) {
                     console.error("Error fetching product details:", error);
-                    loadingSpinner.innerHTML = `<p class="text-xl text-red-500">فشل تحميل تفاصيل المنتج. ${error.message}</p>`;
+                    showPersistentError(loadingSpinner, `فشل تحميل تفاصيل المنتج. ${error.message}. الرجاء التأكد من صحة معرف المنتج.`);
                     productContent.classList.add('hidden');
+                    throw error; // Re-throw to stop further execution if critical
                 }
             }
 
@@ -1373,6 +1392,19 @@
                 fetchDeliveryFees(); // Fetch fees whenever commune changes
             });
 
+            // --- Phone Number Validation ---
+            phoneNumberInput.addEventListener('input', () => {
+                const phoneNumber = phoneNumberInput.value.trim();
+                // Regex for Algerian phone numbers: starts with 05, 06, or 07, followed by 8 digits
+                const phoneRegex = /^(05|06|07)\d{8}$/;
+                if (phoneNumber === '' || phoneRegex.test(phoneNumber)) {
+                    phoneErrorElem.classList.add('hidden');
+                } else {
+                    phoneErrorElem.classList.remove('hidden');
+                }
+            });
+
+
             // --- Fetch Delivery Fees (Now dynamically fetched from SiteConfig) ---
             function fetchDeliveryFees() {
                 if (selectedWilayaId) {
@@ -1423,6 +1455,17 @@
                     return;
                 }
 
+                // Phone number validation
+                const phoneNumber = phoneNumberInput.value.trim();
+                const phoneRegex = /^(05|06|07)\d{8}$/;
+                if (!phoneRegex.test(phoneNumber)) {
+                    showMessage('error', 'الرجاء إدخال رقم هاتف جزائري صالح (يبدأ بـ 05، 06، أو 07 متبوعًا بـ 8 أرقام).');
+                    phoneErrorElem.classList.remove('hidden');
+                    return;
+                } else {
+                    phoneErrorElem.classList.add('hidden');
+                }
+
                 if (currentQuantity <= 0) {
                     showMessage('error', 'الرجاء تحديد كمية صالحة (يجب أن تكون 1 أو أكثر).');
                     return;
@@ -1437,6 +1480,13 @@
                         return;
                     }
                 }
+
+                // Show loading state
+                submitOrderBtn.disabled = true;
+                buttonText.classList.add('hidden');
+                buttonIcon.classList.add('hidden');
+                buttonSpinner.classList.remove('hidden');
+
 
                 const orderData = {
                     fullName: fullNameInput.value.trim(),
@@ -1531,6 +1581,12 @@
                 } catch (error) {
                     console.error('Error placing order:', error);
                     showMessage('error', `حدث خطأ: ${error.message}`);
+                } finally {
+                    // Hide loading state regardless of success or failure
+                    submitOrderBtn.disabled = false;
+                    buttonText.classList.remove('hidden');
+                    buttonIcon.classList.remove('hidden');
+                    buttonSpinner.classList.add('hidden');
                 }
             });
 
@@ -1603,12 +1659,16 @@
             // Initial calls on page load
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
-            // Ensure wilaya data and delivery fees are loaded before product details
-            loadWilayasAndCommunesData().then(() => {
-                fetchProductDetails(productId).then(() => {
-                    fetchAllProductsForSuggestions(); // Fetch suggestions after main product is loaded
-                });
-            });
+
+            try {
+                await fetchSiteConfig(); // First, fetch site configuration
+                await loadWilayasAndCommunesData(); // Then, load wilaya/commune data using site config
+                await fetchProductDetails(productId); // Finally, fetch product details
+                await fetchAllProductsForSuggestions(); // Fetch suggestions after main product is loaded
+            } catch (error) {
+                console.error("Critical error during page initialization:", error);
+                // Errors are already handled by showPersistentError in respective functions
+            }
         });
     </script>
 </body>
