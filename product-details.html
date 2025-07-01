@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Loading... - Sheeka</title> <!-- Dynamic title -->
-    <meta name="description" id="meta-description" content="Browse the best products at Sheeka."> <!-- Dynamic description -->
+    <title id="page-title">جار التحميل... - شيقة</title> <!-- Dynamic title -->
+    <meta name="description" id="meta-description" content="تصفح أفضل المنتجات في شيقة."> <!-- Dynamic description -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -132,9 +132,9 @@
 <body class="overflow-x-hidden">
     <header class="bg-white shadow-sm py-4 fixed w-full z-50">
         <nav class="container mx-auto px-6 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-extrabold text-[#C8797D] rounded-lg p-2 hover:text-[#A85F64] transition duration-300">Sheeka</a>
+            <a href="index.html" class="text-3xl font-extrabold text-[#C8797D] rounded-lg p-2 hover:text-[#A85F64] transition duration-300">شيقة</a>
             <a href="index.html" class="text-gray-700 hover:text-[#C8797D] font-medium transition duration-300 rounded-md p-2 flex items-center gap-2">
-                Back to Home <i class="fas fa-arrow-left"></i>
+                العودة إلى الرئيسية <i class="fas fa-arrow-left"></i>
             </a>
         </nav>
     </header>
@@ -143,13 +143,13 @@
         <div id="product-detail-container" class="container mx-auto px-6">
             <div id="loading-spinner" class="text-center py-20">
                 <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#C8797D] mx-auto mb-4"></div>
-                <p class="text-xl text-gray-700">Loading product details...</p>
+                <p class="text-xl text-gray-700">جارٍ تحميل تفاصيل المنتج...</p>
             </div>
 
             <div id="product-content" class="hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     <div class="lg:col-span-1">
-                        <img id="main-product-image" src="https://placehold.co/800x800/E6B89C/4A4A4A?text=Loading..." alt="Main Product Image" class="main-image rounded-xl shadow-lg mb-6">
+                        <img id="main-product-image" src="https://placehold.co/800x800/E6B89C/4A4A4A?text=Loading..." alt="صورة المنتج الرئيسية" class="main-image rounded-xl shadow-lg mb-6">
                         <div id="thumbnail-gallery" class="flex flex-wrap gap-4 justify-center">
                             <!-- Thumbnails will be injected here -->
                         </div>
@@ -162,7 +162,7 @@
 
                         <form id="order-form" class="space-y-6">
                             <div>
-                                <label class="block text-lg font-medium text-gray-800 mb-2">Color</label>
+                                <label class="block text-lg font-medium text-gray-800 mb-2">اللون</label>
                                 <div id="color-options" class="flex flex-wrap gap-4 justify-start">
                                     <!-- Color options will be injected here -->
                                 </div>
@@ -170,7 +170,7 @@
                             </div>
 
                             <div>
-                                <label class="block text-lg font-medium text-gray-800 mb-2">Size</label>
+                                <label class="block text-lg font-medium text-gray-800 mb-2">المقاس</label>
                                 <div id="size-options" class="flex flex-wrap gap-4 justify-start">
                                     <!-- Size options will be injected here -->
                                 </div>
@@ -178,7 +178,7 @@
                             </div>
 
                             <div>
-                                <label for="quantity" class="block text-lg font-medium text-gray-800 mb-2">Quantity</label>
+                                <label for="quantity" class="block text-lg font-medium text-gray-800 mb-2">الكمية</label>
                                 <div class="flex items-center space-x-4">
                                     <button type="button" id="decrease-qty" class="qty-button">
                                         <i class="fas fa-minus"></i>
@@ -191,75 +191,75 @@
                             </div>
 
                             <div class="pt-6 border-t border-gray-200">
-                                <h2 class="text-xl font-bold text-[#4A4A4A] mb-4">Customer Information</h2>
+                                <h2 class="text-xl font-bold text-[#4A4A4A] mb-4">معلومات العميل</h2>
                                 <div>
-                                    <label for="full-name" class="block text-lg font-medium text-gray-800 mb-2">Full Name</label>
-                                    <input type="text" id="full-name" name="fullName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="Please enter your full name" required>
+                                    <label for="full-name" class="block text-lg font-medium text-gray-800 mb-2">الاسم الكامل</label>
+                                    <input type="text" id="full-name" name="fullName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="الرجاء إدخال اسمك الكامل" required>
                                 </div>
                                 <div>
-                                    <label for="phone-number" class="block text-lg font-medium text-gray-800 mb-2">Phone Number</label>
+                                    <label for="phone-number" class="block text-lg font-medium text-gray-800 mb-2">رقم الهاتف</label>
                                     <div class="flex">
                                         <span class="p-3 border border-gray-300 rounded-lg bg-gray-100 mr-2">+213</span>
-                                        <input type="text" id="phone-number" name="phoneNumber" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="Please enter your phone number" required inputmode="tel">
+                                        <input type="text" id="phone-number" name="phoneNumber" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="الرجاء إدخال رقم هاتفك" required inputmode="tel">
                                     </div>
                                 </div>
                             </div>
 
                             <div>
-                                <label for="wilaya" class="block text-lg font-medium text-gray-800 mb-2">State/Province</label>
+                                <label for="wilaya" class="block text-lg font-medium text-gray-800 mb-2">الولاية/المحافظة</label>
                                 <select id="wilaya" name="wilaya" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 bg-white" required>
-                                    <option value="" disabled selected>Select a State/Province</option>
+                                    <option value="" disabled selected>اختر ولاية/محافظة</option>
                                 </select>
                             </div>
 
                             <div id="commune-container" class="hidden">
-                                <label for="commune" class="block text-lg font-medium text-gray-800 mb-2">Municipality</label>
+                                <label for="commune" class="block text-lg font-medium text-gray-800 mb-2">البلدية</label>
                                 <select id="commune" name="commune" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300 bg-white" required>
-                                    <option value="" disabled selected>Select a Municipality</option>
+                                    <option value="" disabled selected>اختر بلدية</option>
                                 </select>
                             </div>
 
                             <!-- New Stopdesk Field -->
                             <div>
-                                <label for="stopdesk" class="block text-lg font-medium text-gray-800 mb-2">Stopdesk (Optional)</label>
-                                <input type="text" id="stopdesk" name="stopdesk" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="Stopdesk Name (Optional)">
+                                <label for="stopdesk" class="block text-lg font-medium text-gray-800 mb-2">نقطة التوقف (اختياري)</label>
+                                <input type="text" id="stopdesk" name="stopdesk" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#C8797D] focus:border-[#C8797D] transition duration-300" placeholder="اسم نقطة التوقف (اختياري)">
                             </div>
 
                             <div class="bg-gray-50 p-6 rounded-xl shadow-inner mt-8 border border-gray-200">
-                                <h2 class="text-xl font-bold text-[#4A4A4A] mb-4">Order Summary</h2>
+                                <h2 class="text-xl font-bold text-[#4A4A4A] mb-4">ملخص الطلب</h2>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-lg text-gray-700">Product Price</span>
+                                    <span class="text-lg text-gray-700">سعر المنتج</span>
                                     <span id="summary-product-price" class="text-lg font-semibold text-[#C8797D]"></span>
                                 </div>
                                 <div class="flex justify-between items-center mb-2">
-                                    <span class="text-lg text-gray-700">Delivery Fee</span>
-                                    <span id="summary-delivery-price" class="text-lg font-semibold text-[#C8797D]">Calculating...</span>
+                                    <span class="text-lg text-gray-700">رسوم التوصيل</span>
+                                    <span id="summary-delivery-price" class="text-lg font-semibold text-[#C8797D]">جارٍ الحساب...</span>
                                 </div>
                                 <div class="border-t border-gray-300 my-4"></div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-extrabold text-[#4A4A4A]">Total</span>
+                                    <span class="text-2xl font-extrabold text-[#4A4A4A]">الإجمالي</span>
                                     <span id="summary-total-price" class="text-2xl font-extrabold text-[#4A4A4A]"></span>
                                 </div>
                             </div>
 
                             <button type="submit" class="w-full bg-[#C8797D] text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-[#A85F64] transition duration-300 shadow-lg transform hover:scale-105 mt-6 flex items-center justify-center gap-2">
-                                Order Now <i class="fas fa-shopping-cart"></i>
+                                اطلب الآن <i class="fas fa-shopping-cart"></i>
                             </button>
                         </form>
                     </div>
                 </div>
 
                 <div class="mt-16 bg-white p-8 rounded-xl shadow-lg">
-                    <h2 class="text-3xl font-bold text-[#4A4A4A] mb-6">Description</h2>
+                    <h2 class="text-3xl font-bold text-[#4A4A4A] mb-6">الوصف</h2>
                     <div id="full-description" class="text-lg text-gray-700 leading-relaxed">
                         <!-- Dynamic description content (text and images) will be injected here -->
                     </div>
                 </div>
 
                 <div class="mt-16">
-                    <h2 class="text-3xl font-bold text-[#4A4A4A] mb-6">Our Suggestions for You</h2>
+                    <h2 class="text-3xl font-bold text-[#4A4A4A] mb-6">اقتراحاتنا لك</h2>
                     <div id="suggestions-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <p class="col-span-full text-center text-gray-500">Loading suggestions...</p>
+                        <p class="col-span-full text-center text-gray-500">جارٍ تحميل الاقتراحات...</p>
                     </div>
                 </div>
             </div>
@@ -273,39 +273,39 @@
 
     <footer class="bg-[#4A4A4A] text-white py-10 mt-16">
         <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-400">© 2025 Sheeka. All rights reserved.</p>
+            <p class="text-gray-400">© 2025 شيقة. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
     <!-- Order Confirmation Modal -->
     <div id="order-confirmation-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
         <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full text-center">
-            <h2 class="text-3xl font-bold text-[#C8797D] mb-6">✅ Order Received!</h2>
-            <p class="text-lg text-gray-700 mb-6">Thank you for your order from <span id="modal-site-name">Sheeka</span>. Your order has been successfully received and will be processed soon.</p>
+            <h2 class="text-3xl font-bold text-[#C8797D] mb-6">✅ تم استلام الطلب!</h2>
+            <p class="text-lg text-gray-700 mb-6">شكراً لطلبك من <span id="modal-site-name">شيقة</span>. لقد تم استلام طلبك بنجاح وسيتم معالجته قريباً.</p>
 
             <div class="text-left mb-6">
-                <h3 class="text-xl font-semibold text-general mb-2">Order Details:</h3>
-                <p><strong>Order ID:</strong> <span id="modal-order-id" dir="ltr"></span></p>
-                <p><strong>Product:</strong> <span id="modal-product-name"></span></p>
-                <p><strong>Quantity:</strong> <span id="modal-quantity"></span></p>
-                <p><strong>Color:</strong> <span id="modal-color"></span></p>
-                <p><strong>Size:</strong> <span id="modal-size"></span></p>
-                <p><strong>Full Name:</strong> <span id="modal-full-name"></span></p>
-                <p><strong>Phone Number:</strong> <span id="modal-phone-number" dir="ltr"></span></p>
-                <p><strong>State/Province:</strong> <span id="modal-wilaya"></span></p>
-                <p><strong>Municipality:</strong> <span id="modal-commune"></span></p>
-                <p><strong>Stopdesk:</strong> <span id="modal-stopdesk"></span></p> <!-- New: Stopdesk in modal -->
-                <p><strong>Product Total Price:</strong> <span id="modal-product-total-price" dir="ltr"></span> DA</p>
-                <p><strong>Delivery Fee:</strong> <span id="modal-delivery-price" dir="ltr"></span> DA</p>
-                <p class="text-2xl font-bold mt-4"><strong>Total Order Price:</strong> <span id="modal-total-order-price" dir="ltr"></span> DA</p>
+                <h3 class="text-xl font-semibold text-general mb-2">تفاصيل الطلب:</h3>
+                <p><strong>معرف الطلب:</strong> <span id="modal-order-id" dir="ltr"></span></p>
+                <p><strong>المنتج:</strong> <span id="modal-product-name"></span></p>
+                <p><strong>الكمية:</strong> <span id="modal-quantity"></span></p>
+                <p><strong>اللون:</strong> <span id="modal-color"></span></p>
+                <p><strong>المقاس:</strong> <span id="modal-size"></span></p>
+                <p><strong>الاسم الكامل:</strong> <span id="modal-full-name"></span></p>
+                <p><strong>رقم الهاتف:</strong> <span id="modal-phone-number" dir="ltr"></span></p>
+                <p><strong>الولاية/المحافظة:</strong> <span id="modal-wilaya"></span></p>
+                <p><strong>البلدية:</strong> <span id="modal-commune"></span></p>
+                <p><strong>نقطة التوقف:</strong> <span id="modal-stopdesk"></span></p> <!-- New: Stopdesk in modal -->
+                <p><strong>إجمالي سعر المنتج:</strong> <span id="modal-product-total-price" dir="ltr"></span> دج</p>
+                <p><strong>رسوم التوصيل:</strong> <span id="modal-delivery-price" dir="ltr"></span> دج</p>
+                <p class="text-2xl font-bold mt-4"><strong>إجمالي سعر الطلب:</strong> <span id="modal-total-order-price" dir="ltr"></span> دج</p>
             </div>
 
             <div class="flex justify-center gap-4 mt-6">
                 <button id="print-receipt-btn" class="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition duration-300">
-                    Print Receipt <i class="fas fa-print ml-2"></i>
+                    طباعة الإيصال <i class="fas fa-print ml-2"></i>
                 </button>
                 <button id="continue-shopping-btn" class="bg-[#C8797D] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#A85F64] transition duration-300">
-                    Continue Shopping
+                    متابعة التسوق
                 </button>
             </div>
         </div>
@@ -386,6 +386,7 @@
 
             // --- ALL 58 ALGERIAN WILAYAS (English Names) ---
             // This list is now primarily for populating communes, wilaya names from backend config
+            // Note: For a fully localized experience, these names should ideally come from the backend in Arabic.
             const allAlgerianWilayasStatic = [
                 { "id": 1, "name": "Adrar" }, { "id": 2, "name": "Chlef" }, { "id": 3, "name": "Laghouat" },
                 { "id": 4, "name": "Oum El Bouaghi" }, { "id": 5, "name": "Batna" }, { "id": 6, "name": "Bejaia" },
@@ -410,6 +411,7 @@
             ];
 
             // All Algerian Communes by Wilaya (Comprehensive List) - Translated
+            // Note: For a fully localized experience, these names should ideally come from the backend in Arabic.
             const simplifiedCommunesByWilaya = {
                 "1": [ // Adrar
                     { "id": 101, "name": "Adrar" }, { "id": 102, "name": "Tamest" }, { "id": 103, "name": "Charouine" },
@@ -1082,20 +1084,20 @@
                     siteConfig = await response.json();
 
                     // Update dynamic content in <head>
-                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}${siteConfig.siteName || 'Sheeka'}`;
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}${siteConfig.siteName || 'شيقة'}`;
                     if (metaDescriptionElem) {
-                        metaDescriptionElem.content = siteConfig.metaDescription || 'Sheeka online store offers the best products at competitive prices.';
+                        metaDescriptionElem.content = siteConfig.metaDescription || 'متجر شيقة عبر الإنترنت يقدم أفضل المنتجات بأسعار تنافسية.';
                     }
 
                     // Update site name in modal
-                    modalSiteName.textContent = siteConfig.siteName || 'Sheeka';
+                    modalSiteName.textContent = siteConfig.siteName || 'شيقة';
 
                     // Store fetched delivery fees
                     allDeliveryFeesFromConfig = siteConfig.deliveryFees || [];
 
                     // --- Initialize Meta (Facebook) Pixel with fetched ID ---
                     if (siteConfig.facebookPixelId) {
-                        console.log("Initializing Meta (Facebook) Pixel with ID:", siteConfig.facebookPixelId);
+                        console.log("Initializing Meta (Facebook) Pixel with ID:", siteConfig.facebookPixelId); // Debugging: Log the pixel ID
                         fbq('init', siteConfig.facebookPixelId); // Use dynamic ID
                         fbq('track', 'PageView'); // Track PageView after initialization
                         // Create and append noscript tag dynamically
@@ -1105,7 +1107,7 @@
                         />`;
                         document.head.appendChild(noscript);
                     } else {
-                        console.warn("Facebook Pixel ID not found in site config.");
+                        console.warn("Facebook Pixel ID not found in site config. Pixel will not track.");
                     }
 
                     // TikTok Pixel code is removed as per user request.
@@ -1113,12 +1115,12 @@
                 } catch (error) {
                     console.error("Error fetching site configuration:", error);
                     // Fallback to default values if config fetch fails
-                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}Sheeka`;
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}شيقة`;
                     if (metaDescriptionElem) {
-                        metaDescriptionElem.content = 'Sheeka online store offers the best products at competitive prices.';
+                        metaDescriptionElem.content = 'متجر شيقة عبر الإنترنت يقدم أفضل المنتجات بأسعار تنافسية.';
                     }
-                    modalSiteName.textContent = 'Sheeka';
-                    showMessage('error', 'Failed to load site settings. Some information might be inaccurate.');
+                    modalSiteName.textContent = 'شيقة';
+                    showMessage('error', 'فشل تحميل إعدادات الموقع. قد تكون بعض المعلومات غير دقيقة.');
                 }
             }
 
@@ -1126,14 +1128,14 @@
             // --- Product Details Fetching and Display ---
             async function fetchProductDetails(id) {
                 if (!id) {
-                    loadingSpinner.innerHTML = '<p class="text-xl text-red-500">Error: Product ID missing.</p>';
+                    loadingSpinner.innerHTML = '<p class="text-xl text-red-500">خطأ: معرف المنتج مفقود.</p>';
                     return;
                 }
 
                 try {
                     const response = await fetch(`${BASE_URL}/products/${id}`);
                     if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                        throw new Error(`خطأ HTTP! الحالة: ${response.status}`);
                     }
                     currentProduct = await response.json();
 
@@ -1144,11 +1146,11 @@
                     const image2 = currentProduct.images && currentProduct.images.length > 2 ? currentProduct.images[2] : 'https://placehold.co/600x400/4A4A4A/FFFFFF?text=Product+Feature+2';
 
                     currentProduct.structuredDescription = [
-                        { type: 'text', content: currentProduct.description || 'This is a high-quality product designed for your needs. It combines durability with sleek design, making it perfect for everyday use.' },
-                        { type: 'image', url: image1, alt: 'Product Feature 1' },
-                        { type: 'text', content: 'Our product features advanced technology that ensures optimal performance and efficiency. It\'s easy to use and maintain, providing a seamless experience.' },
-                        { type: 'image', url: image2, alt: 'Product Feature 2' },
-                        { type: 'text', content: 'Crafted with premium materials, this item is built to last. Its ergonomic design ensures comfort, and its versatile nature makes it suitable for various applications.' }
+                        { type: 'text', content: currentProduct.description || 'هذا منتج عالي الجودة مصمم لتلبية احتياجاتك. يجمع بين المتانة والتصميم الأنيق، مما يجعله مثالياً للاستخدام اليومي.' },
+                        { type: 'image', url: image1, alt: 'ميزة المنتج 1' },
+                        { type: 'text', content: 'يتميز منتجنا بتقنية متقدمة تضمن الأداء الأمثل والكفاءة. إنه سهل الاستخدام والصيانة، مما يوفر تجربة سلسة.' },
+                        { type: 'image', url: image2, alt: 'ميزة المنتج 2' },
+                        { type: 'text', content: 'صُنع هذا المنتج من مواد فاخرة، وهو مصمم ليدوم طويلاً. يضمن تصميمه المريح الراحة، وتعدد استخداماته يجعله مناسباً لمختلف التطبيقات.' }
                     ];
 
 
@@ -1156,25 +1158,25 @@
                     loadingSpinner.classList.add('hidden');
                     productContent.classList.remove('hidden');
 
-                    productNameElem.textContent = currentProduct.name || 'Unknown Product';
-                    shortDescriptionElem.textContent = currentProduct.description || 'No short description available.'; // Use for a brief description near price
-                    productPriceElem.textContent = `DA ${(currentProduct.price !== undefined && currentProduct.price !== null) ? parseFloat(currentProduct.price).toFixed(2) : '0.00'}`;
+                    productNameElem.textContent = currentProduct.name || 'منتج غير معروف';
+                    shortDescriptionElem.textContent = currentProduct.description || 'لا يوجد وصف قصير متاح.'; // Use for a brief description near price
+                    productPriceElem.textContent = `دج ${(currentProduct.price !== undefined && currentProduct.price !== null) ? parseFloat(currentProduct.price).toFixed(2) : '0.00'}`;
                     updateOrderSummary(); // Initial summary calculation
 
                     // Update page title with product name
-                    pageTitleElem.textContent = `${currentProduct.name} - ${siteConfig ? siteConfig.siteName : 'Sheeka'}`;
+                    pageTitleElem.textContent = `${currentProduct.name} - ${siteConfig ? siteConfig.siteName : 'شيقة'}`;
 
                     // Populate images
                     if (currentProduct.images && currentProduct.images.length > 0) {
                         mainProductImage.src = buildAbsoluteImageUrl(currentProduct.images[0]);
-                        mainProductImage.alt = currentProduct.name || 'Product Image';
+                        mainProductImage.alt = currentProduct.name || 'صورة المنتج';
 
                         // Create thumbnails
                         thumbnailGallery.innerHTML = ''; // Clear existing
                         currentProduct.images.forEach((imagePath, index) => {
                             const img = document.createElement('img');
                             img.src = buildAbsoluteImageUrl(imagePath);
-                            img.alt = `${currentProduct.name} Thumbnail ${index + 1}`;
+                            img.alt = `${currentProduct.name} صورة مصغرة ${index + 1}`;
                             img.className = 'thumbnail-image rounded-lg shadow-md';
                             img.addEventListener('click', () => {
                                 mainProductImage.src = img.src;
@@ -1187,8 +1189,8 @@
                             thumbnailGallery.appendChild(img);
                         });
                     } else {
-                        mainProductImage.src = 'https://placehold.co/800x800/E6B89C/4A4A4A?text=No+Images';
-                        mainProductImage.alt = 'No images available';
+                        mainProductImage.src = 'https://placehold.co/800x800/E6B89C/4A4A4A?text=لا+توجد+صور';
+                        mainProductImage.alt = 'لا توجد صور متاحة';
                     }
 
                     // Populate colors and sizes from variants
@@ -1260,19 +1262,19 @@
                             } else if (item.type === 'image') {
                                 const img = document.createElement('img');
                                 img.src = buildAbsoluteImageUrl(item.url);
-                                img.alt = item.alt || 'Description Image';
+                                img.alt = item.alt || 'صورة الوصف';
                                 img.className = 'w-full h-auto object-cover rounded-lg shadow-md my-6'; // Responsive image styling
-                                img.onerror = function() { this.src = 'https://placehold.co/600x400/EEEEEE/333333?text=Image+Error'; };
+                                img.onerror = function() { this.src = 'https://placehold.co/600x400/EEEEEE/333333?text=خطأ+في+الصورة'; };
                                 fullDescriptionContainer.appendChild(img);
                             }
                         });
                     } else {
-                        fullDescriptionContainer.innerHTML = `<p class="text-lg text-gray-700 leading-relaxed">${currentProduct.description || 'No detailed description available.'}</p>`;
+                        fullDescriptionContainer.innerHTML = `<p class="text-lg text-gray-700 leading-relaxed">${currentProduct.description || 'لا يوجد وصف تفصيلي متاح.'}</p>`;
                     }
 
                 } catch (error) {
                     console.error("Error fetching product details:", error);
-                    loadingSpinner.innerHTML = `<p class="text-xl text-red-500">Failed to load product details. ${error.message}</p>`;
+                    loadingSpinner.innerHTML = `<p class="text-xl text-red-500">فشل تحميل تفاصيل المنتج. ${error.message}</p>`;
                     productContent.classList.add('hidden');
                 }
             }
@@ -1285,7 +1287,7 @@
                         await fetchSiteConfig(); // Fetch if not already loaded
                     }
 
-                    wilayaSelect.innerHTML = '<option value="" disabled selected>Select a State/Province</option>';
+                    wilayaSelect.innerHTML = '<option value="" disabled selected>اختر ولاية/محافظة</option>';
                     wilayasMap.clear();
 
                     // Filter out duplicate wilaya IDs and sort by name
@@ -1313,7 +1315,7 @@
                 } catch (error) {
                     console.error("Error loading wilaya data from site config:", error);
                     // Fallback to hardcoded wilayas if backend fetch fails
-                    wilayaSelect.innerHTML = '<option value="" disabled selected>Select a State/Province</option>';
+                    wilayaSelect.innerHTML = '<option value="" disabled selected>اختر ولاية/محافظة</option>';
                     wilayasMap.clear();
                     allAlgerianWilayasStatic.sort((a, b) => a.name.localeCompare(b.name)).forEach(wilaya => {
                         const option = document.createElement('option');
@@ -1323,7 +1325,7 @@
                         wilayasMap.set(wilaya.id, wilaya.name);
                     });
                     // Provide a warning to the user if the backend is inaccessible
-                    showMessage('error', 'Failed to load state/province data. Delivery fees might be inaccurate.');
+                    showMessage('error', 'فشل تحميل بيانات الولاية/المحافظة. قد تكون رسوم التوصيل غير دقيقة.');
                 }
             }
 
@@ -1332,9 +1334,9 @@
                 selectedWilayaId = parseInt(wilayaSelect.value); // Ensure ID is a number
                 selectedCommuneId = null; // Reset commune when Wilaya changes
                 communeSelect.value = ''; // Clear selected commune in UI
-                communeSelect.innerHTML = '<option value="" disabled selected>Select a Municipality</option>';
+                communeSelect.innerHTML = '<option value="" disabled selected>اختر بلدية</option>';
                 communeContainer.classList.remove('hidden'); // Show commune dropdown
-                summaryDeliveryPrice.textContent = 'Calculating...';
+                summaryDeliveryPrice.textContent = 'جارٍ الحساب...';
                 currentDeliveryFee = 0;
                 updateOrderSummary();
 
@@ -1351,7 +1353,7 @@
                     // If no specific communes are defined for a wilaya, provide a generic option
                     const option = document.createElement('option');
                     option.value = 'default_commune';
-                    option.textContent = 'Default Municipality';
+                    option.textContent = 'بلدية افتراضية';
                     communeSelect.appendChild(option);
                 }
                 // Trigger fee calculation after communes are populated (even if dummy)
@@ -1372,7 +1374,7 @@
                 } else {
                     currentDeliveryFee = 0; // No wilaya selected
                 }
-                summaryDeliveryPrice.textContent = `DA ${currentDeliveryFee.toFixed(2)}`;
+                summaryDeliveryPrice.textContent = `دج ${currentDeliveryFee.toFixed(2)}`;
                 updateOrderSummary();
             }
 
@@ -1398,8 +1400,8 @@
                     const currentItemPrice = productPrice * currentQuantity;
                     const totalOrderPrice = currentItemPrice + currentDeliveryFee; // Use dynamic delivery fee
 
-                    summaryProductPrice.textContent = `DA ${currentItemPrice.toFixed(2)}`;
-                    summaryTotalPrice.textContent = `DA ${totalOrderPrice.toFixed(2)}`;
+                    summaryProductPrice.textContent = `دج ${currentItemPrice.toFixed(2)}`;
+                    summaryTotalPrice.textContent = `دج ${totalOrderPrice.toFixed(2)}`;
                 }
             }
 
@@ -1409,12 +1411,12 @@
 
                 // Client-side validation
                 if (!selectedColorInput.value || !selectedSizeInput.value || !fullNameInput.value.trim() || !phoneNumberInput.value.trim() || !wilayaSelect.value || !communeSelect.value) {
-                    showMessage('error', 'Please fill in all required fields (Color, Size, Full Name, Phone, State/Province, Municipality).');
+                    showMessage('error', 'الرجاء ملء جميع الحقول المطلوبة (اللون، المقاس، الاسم الكامل، الهاتف، الولاية/المحافظة، البلدية).');
                     return;
                 }
 
                 if (currentQuantity <= 0) {
-                    showMessage('error', 'Please select a valid quantity (must be 1 or more).');
+                    showMessage('error', 'الرجاء تحديد كمية صالحة (يجب أن تكون 1 أو أكثر).');
                     return;
                 }
 
@@ -1423,7 +1425,7 @@
                     fetchDeliveryFees(); // This will use the fetched fee or fallback
                     // If still 0, it means the selected wilaya doesn't have a configured fee or a default
                     if (currentDeliveryFee === 0 && selectedWilayaId) { // Only show error if a wilaya is selected and fee is still 0
-                        showMessage('error', 'Please select a valid state/province and municipality to calculate delivery fees.');
+                        showMessage('error', 'الرجاء تحديد ولاية/محافظة وبلدية صالحة لحساب رسوم التوصيل.');
                         return;
                     }
                 }
@@ -1459,7 +1461,7 @@
                     if (response.ok) { // Status codes 200-299 are considered ok
                         const result = await response.json();
                         console.log('Order placed successfully:', result);
-                        showMessage('success', 'Order placed successfully!');
+                        showMessage('success', 'تم تقديم الطلب بنجاح!');
                         playSuccessSound(); // Play success sound
 
                         // --- Facebook Pixel: Track Purchase event ---
@@ -1526,16 +1528,16 @@
                         selectedWilayaId = null;
                         selectedCommuneId = null;
                         wilayaSelect.value = '';
-                        communeSelect.innerHTML = '<option value="" disabled selected>Select a Municipality</option>';
+                        communeSelect.innerHTML = '<option value="" disabled selected>اختر بلدية</option>';
                         communeContainer.classList.add('hidden');
                     } else {
                         const errorData = await response.json(); // Parse error response JSON
-                        const errorMessage = errorData.message || errorData.msg || `Failed: ${response.statusText}`; // Try to get message from backend
+                        const errorMessage = errorData.message || errorData.msg || `فشل: ${response.statusText}`; // Try to get message from backend
                         throw new Error(errorMessage); // Throw a more descriptive error
                     }
                 } catch (error) {
                     console.error('Error placing order:', error);
-                    showMessage('error', `An error occurred: ${error.message}`);
+                    showMessage('error', `حدث خطأ: ${error.message}`);
                 }
             });
 
@@ -1561,10 +1563,10 @@
             // --- Fetch All Products for Suggestions ---
             async function fetchAllProductsForSuggestions() {
                 try {
-                    suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">Loading suggestions...</p>';
+                    suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">جارٍ تحميل الاقتراحات...</p>';
                     const response = await fetch(`${BASE_URL}/products`);
                     if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                        throw new Error(`خطأ HTTP! الحالة: ${response.status}`);
                     }
                     let allProducts = await response.json();
 
@@ -1576,7 +1578,7 @@
                     suggestionsList.innerHTML = ''; // Clear loading message
 
                     if (allProducts.length === 0) {
-                        suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">No other suggested products currently.</p>';
+                        suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">لا توجد منتجات مقترحة أخرى حالياً.</p>';
                         return;
                     }
 
@@ -1589,10 +1591,10 @@
                         productCard.className = 'bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105';
                         productCard.innerHTML = `
                             <a href="product-details.html?id=${product._id}" class="block">
-                                <img src="${buildAbsoluteImageUrl(imageUrl)}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=Image+Error';">
+                                <img src="${buildAbsoluteImageUrl(imageUrl)}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=خطأ+في+الصورة';">
                                 <div class="p-4 text-left">
                                     <h3 class="text-lg font-semibold mb-1 text-[#4A4A4A]">${product.name}</h3>
-                                    <span class="text-xl font-bold text-[#C8797D]">${parseFloat(product.price).toFixed(2)} DA</span>
+                                    <span class="text-xl font-bold text-[#C8797D]">${parseFloat(product.price).toFixed(2)} دج</span>
                                 </div>
                             </a>
                         `;
@@ -1600,7 +1602,7 @@
                     });
                 } catch (error) {
                     console.error("Error fetching all products for suggestions:", error);
-                    suggestionsList.innerHTML = '<p class="col-span-full text-center text-red-500">Failed to load suggestions. Please try again later.</p>';
+                    suggestionsList.innerHTML = '<p class="col-span-full text-center text-red-500">فشل تحميل الاقتراحات. الرجاء المحاولة مرة أخرى لاحقاً.</p>';
                 }
             }
 
