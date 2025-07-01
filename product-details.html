@@ -1096,18 +1096,30 @@
                     allDeliveryFeesFromConfig = siteConfig.deliveryFees || [];
 
                     // --- Initialize Meta (Facebook) Pixel with fetched ID ---
-                    if (siteConfig.facebookPixelId) {
-                        console.log("Initializing Meta (Facebook) Pixel with ID:", siteConfig.facebookPixelId); // Debugging: Log the pixel ID
-                        fbq('init', siteConfig.facebookPixelId); // Use dynamic ID
+                    let pixelIdToUse = siteConfig.facebookPixelId;
+                    console.log("Fetched siteConfig.facebookPixelId:", pixelIdToUse); // Debugging: Log the fetched pixel ID
+
+                    if (!pixelIdToUse) {
+                        console.warn("Facebook Pixel ID not found in site config. Using dummy ID for testing.");
+                        // TEMPORARY: Use a dummy pixel ID for local testing if backend doesn't provide one.
+                        // REMOVE THIS LINE IN PRODUCTION AFTER VERIFYING YOUR BACKEND SENDS THE CORRECT ID.
+                        pixelIdToUse = 'YOUR_DUMMY_PIXEL_ID_HERE'; // Replace with your actual pixel ID for testing
+                    }
+
+                    if (pixelIdToUse && pixelIdToUse !== 'YOUR_DUMMY_PIXEL_ID_HERE') { // Only init if a valid ID is present
+                        console.log("Initializing Meta (Facebook) Pixel with ID:", pixelIdToUse);
+                        fbq('init', pixelIdToUse); // Use dynamic ID
                         fbq('track', 'PageView'); // Track PageView after initialization
                         // Create and append noscript tag dynamically
                         const noscript = document.createElement('noscript');
                         noscript.innerHTML = `<img height="1" width="1" style="display:none"
-                        src="https://www.facebook.com/tr?id=${siteConfig.facebookPixelId}&ev=PageView&noscript=1"
+                        src="https://www.facebook.com/tr?id=${pixelIdToUse}&ev=PageView&noscript=1"
                         />`;
                         document.head.appendChild(noscript);
+                    } else if (pixelIdToUse === 'YOUR_DUMMY_PIXEL_ID_HERE') {
+                         console.warn("Facebook Pixel is using a dummy ID. Please update your backend site config.");
                     } else {
-                        console.warn("Facebook Pixel ID not found in site config. Pixel will not track.");
+                        console.warn("Facebook Pixel not initialized as no valid ID was provided.");
                     }
 
                     // TikTok Pixel code is removed as per user request.
