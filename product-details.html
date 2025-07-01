@@ -1099,14 +1099,7 @@
                     let pixelIdToUse = siteConfig.facebookPixelId;
                     console.log("Fetched siteConfig.facebookPixelId:", pixelIdToUse); // Debugging: Log the fetched pixel ID
 
-                    if (!pixelIdToUse) {
-                        console.warn("Facebook Pixel ID not found in site config. Using dummy ID for testing.");
-                        // TEMPORARY: Use a dummy pixel ID for local testing if backend doesn't provide one.
-                        // REMOVE THIS LINE IN PRODUCTION AFTER VERIFYING YOUR BACKEND SENDS THE CORRECT ID.
-                        pixelIdToUse = 'YOUR_DUMMY_PIXEL_ID_HERE'; // Replace with your actual pixel ID for testing
-                    }
-
-                    if (pixelIdToUse && pixelIdToUse !== 'YOUR_DUMMY_PIXEL_ID_HERE') { // Only init if a valid ID is present
+                    if (pixelIdToUse) { // Only init if a valid ID is present
                         console.log("Initializing Meta (Facebook) Pixel with ID:", pixelIdToUse);
                         fbq('init', pixelIdToUse); // Use dynamic ID
                         fbq('track', 'PageView'); // Track PageView after initialization
@@ -1116,10 +1109,8 @@
                         src="https://www.facebook.com/tr?id=${pixelIdToUse}&ev=PageView&noscript=1"
                         />`;
                         document.head.appendChild(noscript);
-                    } else if (pixelIdToUse === 'YOUR_DUMMY_PIXEL_ID_HERE') {
-                         console.warn("Facebook Pixel is using a dummy ID. Please update your backend site config.");
                     } else {
-                        console.warn("Facebook Pixel not initialized as no valid ID was provided.");
+                        console.warn("Facebook Pixel not initialized as no valid ID was provided by the backend.");
                     }
 
                     // TikTok Pixel code is removed as per user request.
@@ -1171,8 +1162,8 @@
                     productContent.classList.remove('hidden');
 
                     productNameElem.textContent = currentProduct.name || 'منتج غير معروف';
-                    shortDescriptionElem.textContent = currentProduct.description || 'لا يوجد وصف قصير متاح.'; // Use for a brief description near price
                     productPriceElem.textContent = `دج ${(currentProduct.price !== undefined && currentProduct.price !== null) ? parseFloat(currentProduct.price).toFixed(2) : '0.00'}`;
+                    shortDescriptionElem.textContent = currentProduct.description || 'لا يوجد وصف قصير متاح.'; // Use for a brief description near price
                     updateOrderSummary(); // Initial summary calculation
 
                     // Update page title with product name
