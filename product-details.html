@@ -1136,11 +1136,11 @@
                 } catch (error) {
                     console.error("Error fetching site configuration:", error);
                     // Fallback to default values if config fetch fails
-                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}شيقة`;
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}SHEEKA`;
                     if (metaDescriptionElem) {
                         metaDescriptionElem.content = 'متجر شيقة عبر الإنترنت يقدم أفضل المنتجات بأسعار تنافسية.';
                     }
-                    modalSiteName.textContent = 'شيقة';
+                    modalSiteName.textContent = 'SHEEKA';
                     showPersistentError(loadingSpinner, 'فشل تحميل إعدادات الموقع. الرجاء تحديث الصفحة.'); // Persistent error
                     productContent.classList.add('hidden'); // Hide product content if site config fails
                     facebookPixelDisplayElem.textContent = 'N/A (Error fetching config)'; // Indicate error
