@@ -1090,94 +1090,65 @@
             // End of Meta (Facebook) Pixel Base Code
 
             // --- New function: Fetch and Initialize Facebook Pixel ---
-    // Ensure fbq is defined globally before this script runs,
-// typically by including the Facebook Pixel base code in your HTML <head>.
-// Example:
-// !function(f,b,e,v,n,t,s)
-// {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-// n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-// if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-// n.queue=[];t=b.createElement(e);t.async=!0;
-// t.src=v;s=b.getElementsByTagName(e)[0];
-// s.parentNode.insertBefore(t,s)}(window, document,'script',
-// 'https://connect.facebook.net/en_US/fbevents.js');
-// fbq('set', 'autoConfig', false, 'YOUR_PIXEL_ID'); // This line is important if you manage multiple pixels or want to control auto-configuration.
+            async function fetchAndInitializeFacebookPixel(pixelId) {
+                if (pixelId) { // Only init if a valid ID is present
+                    console.log("Initializing Meta (Facebook) Pixel with ID:", pixelId);
+                    fbq('init', pixelId); // Use dynamic ID
+                    fbq('track', 'PageView'); // Track PageView after initialization
+                    // Create and append noscript tag dynamically
+                    const noscript = document.createElement('noscript');
+                    noscript.innerHTML = `<img height="1" width="1" style="display:none"
+                    src="https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1"
+                    />`;
+                    document.head.appendChild(noscript);
+                    facebookPixelDisplayElem.textContent = pixelId; // Display pixel ID on page
+                } else {
+                    console.warn("Facebook Pixel not initialized as no valid ID was provided.");
+                    facebookPixelDisplayElem.textContent = 'N/A (No ID)'; // Indicate no ID
+                }
+            }
 
 
-// Assume BASE_URL is defined elsewhere, e.g., const BASE_URL = 'http://localhost:3000';
-// Assume facebookPixelDisplayElem is an HTML element where you want to display the pixel ID.
-// Example: <p>Facebook Pixel ID: <span id="facebookPixelDisplay">N/A</span></p>
-// const facebookPixelDisplayElem = document.getElementById('facebookPixelDisplay');
+            // --- Site Configuration Fetching and Pixel Initialization ---
+            async function fetchSiteConfig() {
+                try {
+                    const response = await fetch(`${BASE_URL}/api/site-config`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    siteConfig = await response.json();
 
+                    // Update dynamic content in <head>
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}${siteConfig.siteName || 'شيقة'}`;
+                    if (metaDescriptionElem) {
+                        metaDescriptionElem.content = siteConfig.metaDescription || 'متجر شيقة عبر الإنترنت يقدم أفضل المنتجات بأسعار تنافسية.';
+                    }
 
-/**
- * Initializes the Facebook Pixel if a valid ID is provided.
- * @param {string|null} pixelId - The Facebook Pixel ID.
- */
-async function fetchAndInitializeFacebookPixel(pixelId) {
-    if (pixelId) { // Only init if a valid ID is present
-        console.log("Initializing Meta (Facebook) Pixel with ID:", pixelId);
-        fbq('init', pixelId); // Use dynamic ID
-        fbq('track', 'PageView'); // Track PageView after initialization
+                    // Update site name in modal
+                    modalSiteName.textContent = siteConfig.siteName || 'شيقة';
 
-        // Create and append noscript tag dynamically for users with JavaScript disabled
-        const noscript = document.createElement('noscript');
-        noscript.innerHTML = `<img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1"
-        />`;
-        document.head.appendChild(noscript);
+                    // Store fetched delivery fees
+                    allDeliveryFeesFromConfig = siteConfig.deliveryFees || [];
 
-        // Update the display element (if it exists)
-        if (typeof facebookPixelDisplayElem !== 'undefined' && facebookPixelDisplayElem !== null) {
-            facebookPixelDisplayElem.textContent = pixelId; // Display pixel ID on page
-        }
-    } else {
-        console.warn("Facebook Pixel not initialized as no valid ID was provided.");
-        // Update the display element (if it exists)
-        if (typeof facebookPixelDisplayElem !== 'undefined' && facebookPixelDisplayElem !== null) {
-            facebookPixelDisplayElem.textContent = 'N/A (No ID)'; // Indicate no ID
-        }
-    }
-}
+                    // Call the new function to handle Facebook Pixel initialization
+                    fetchAndInitializeFacebookPixel(siteConfig.facebookPixelId);
 
-/**
- * Fetches pixel configuration from the backend and initializes pixels.
- * This function is now specifically for pixels, as per the backend changes.
- */
-async function fetchPixelConfig() {
-    try {
-        // Fetch pixel data from the /api/pixels endpoint
-        const response = await fetch(`${BASE_URL}/api/pixels`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
+                    // TikTok Pixel code is removed as per user request.
 
-        // The /api/pixels endpoint returns an object with a 'pixels' array.
-        // We assume we want to use the first pixel entry found, if any.
-        const pixelConfig = data.pixels && data.pixels.length > 0 ? data.pixels[0] : null;
-
-        // Initialize Facebook Pixel with the fetched ID
-        // Note: TikTok Pixel initialization code is removed as per previous request.
-        fetchAndInitializeFacebookPixel(pixelConfig ? pixelConfig.fbPixelId : null);
-
-    } catch (error) {
-        console.error("Error fetching pixel configuration:", error);
-        // Indicate error on the display element
-        if (typeof facebookPixelDisplayElem !== 'undefined' && facebookPixelDisplayElem !== null) {
-            facebookPixelDisplayElem.textContent = 'N/A (Error fetching config)'; // Indicate error
-        }
-        // You might want to show a persistent error message to the user here
-        // if (typeof showPersistentError !== 'undefined') {
-        //     showPersistentError(loadingSpinner, 'فشل تحميل إعدادات البكسل. الرجاء تحديث الصفحة.');
-        // }
-        throw error; // Re-throw to stop further execution if critical
-    }
-}
-
-// Example of how you might call fetchPixelConfig when your page loads:
-// document.addEventListener('DOMContentLoaded', fetchPixelConfig);
-
+                } catch (error) {
+                    console.error("Error fetching site configuration:", error);
+                    // Fallback to default values if config fetch fails
+                    pageTitleElem.textContent = `${currentProduct ? currentProduct.name + ' - ' : ''}شيقة`;
+                    if (metaDescriptionElem) {
+                        metaDescriptionElem.content = 'متجر شيقة عبر الإنترنت يقدم أفضل المنتجات بأسعار تنافسية.';
+                    }
+                    modalSiteName.textContent = 'شيقة';
+                    showPersistentError(loadingSpinner, 'فشل تحميل إعدادات الموقع. الرجاء تحديث الصفحة.'); // Persistent error
+                    productContent.classList.add('hidden'); // Hide product content if site config fails
+                    facebookPixelDisplayElem.textContent = 'N/A (Error fetching config)'; // Indicate error
+                    throw error; // Re-throw to stop further execution if critical
+                }
+            }
 
 
             // --- Product Details Fetching and Display ---
