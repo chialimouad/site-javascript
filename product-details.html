@@ -247,7 +247,7 @@
                                 <i class="fas fa-shopping-cart" id="button-icon"></i>
                                 <div id="button-spinner" class="hidden animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white ml-2"></div>
                             </button>
-                                                    <p id="short-description" class="text-lg text-gray-700"></p>
+                            <p id="short-description" class="text-lg text-gray-700"></p>
 
                         </form>
                     </div>
@@ -632,7 +632,7 @@
                     { "id": 1613, "name": "Ben Aknoun" }, { "id": 1614, "name": "Hydra" }, { "id": 1615, "name": "Mohammadia" },
                     { "id": 1616, "name": "Dar El Beida" }, { "id": 1617, "name": "Bab Ezzouar" }, { "id": 1618, "name": "Bordj El Kiffan" },
                     { "id": 1619, "name": "El Harrach" }, { "id": 1620, "name": "Baraki" }, { "id": 1621, "name": "Oued Smar" },
-                    { "id": 1622, "name": "Les Eucalyptus" }, { "id": 1623, "name": "Hussein Dey" }, { "id": 1624, "name": "Kouba" },
+                    { "id": 1622, "name": "Les Eucalyptus" }, { "id": 23, "name": "Hussein Dey" }, { "id": 1624, "name": "Kouba" },
                     { "id": 1625, "name": "Bourouba" }, { "id": 1626, "name": "Tessala El Merdja" }, { "id": 1627, "name": "Birkhadem" },
                     { "id": 1628, "name": "Saoula" }, { "id": 1629, "name": "Draria" }, { "id": 1630, "name": "Douera" },
                     { "id": 1631, "name": "Khraicia" }, { "id": 1632, "name": "Mahelma" }, { "id": 1633, "name": "Staoueli" },
@@ -978,7 +978,8 @@
                     { "id": 4810, "name": "El H'madna" }, { "id": 4811, "name": "Had Echkalla" }, { "id": 4812, "name": "Lahlef" },
                     { "id": 4813, "name": "Mediouna" }, { "id": 4814, "name": "Mendes" }, { "id": 4815, "name": "Ouarizane" },
                     { "id": 4816, "name": "Sidi Lazreg" }, { "id": 4817, "name": "Sidi M'Hamed Ben Ali" }, { "id": 4818, "name": "Sidi Saada" },
-                    { "id": 4819, "name": "Ramka" }, { "id": 4820, "name": "Yellel" }, { "id": 4821, "name": "Bouzegza" },
+                    { "id": 4819,
+"name": "Ramka" }, { "id": 4820, "name": "Yellel" }, { "id": 4821, "name": "Bouzegza" },
                     { "id": 4822, "name": "Souk El Had" }, { "id": 4823, "name": "Ammi Moussa" }, { "id": 4824, "name": "Ain El Hammam" },
                     { "id": 4825, "name": "Ouled Sidi Mihoub" }, { "id": 4826, "name": "El Guettar" }, { "id": 4827, "name": "Dahra" },
                     { "id": 4828, "name": "Beni Zentis" }
@@ -1159,6 +1160,7 @@
                 }
 
                 try {
+                    // Endpoint for individual product details remains with /site/
                     const response = await fetch(`${BASE_URL}/products/${id}`);
                     if (!response.ok) {
                         throw new Error(`خطأ HTTP! الحالة: ${response.status}`);
@@ -1509,6 +1511,7 @@
                 };
 
                 try {
+                    // Endpoint for orders remains with /site/
                     const response = await fetch(`${BASE_URL}/orders`, {
                         method: 'POST',
                         headers: {
@@ -1614,6 +1617,8 @@
             async function fetchAllProductsForSuggestions() {
                 try {
                     suggestionsList.innerHTML = '<p class="col-span-full text-center text-gray-500">جارٍ تحميل الاقتراحات...</p>';
+                    // Reverted endpoint for fetching all products to directly under BASE_URL
+                    console.log(`Fetching all products for suggestions from: ${BASE_URL}/products`); // Log the URL for debugging
                     const response = await fetch(`${BASE_URL}/products`);
                     if (!response.ok) {
                         throw new Error(`خطأ HTTP! الحالة: ${response.status}`);
@@ -1672,5 +1677,18 @@
             }
         });
     </script>
+    <!-- TikTok Pixel Code Start -->
+    <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+      ttq.load('D1I73BJC77U39E3O1GAG');
+      ttq.page();
+    }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
 </body>
 </html>
