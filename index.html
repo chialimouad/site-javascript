@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title"></title>
     <!-- Meta description for SEO, will be dynamically updated by JS -->
-    <meta name="description" id="meta-description" content="Découvrez les dernières tendances et les classiques intemporels chez Sheeka Store.">
+    <meta name="description" id="meta-description" content="Découvrez les dernières tendances et les classiques intemporels chez KNCollection Store.">
     
     <!-- Canonical URL to prevent duplicate content issues -->
-    <link rel="canonical" href="https://sheeka.onrender.com/index.html">
+    <link rel="canonical" href="https://kncollectionserver.onrender.com/index.html">
 
     <!-- Security Headers (Best Practices) -->
     <!-- X-Frame-Options: DENY to prevent clickjacking -->
@@ -19,7 +19,7 @@
     <!-- NOTE: 'unsafe-inline' is used for style-src and script-src because the CSS and JavaScript are embedded directly in this HTML file.
         For a more robust CSP in a production environment with external files, 'unsafe-inline' should be avoided.
         Ensure all external domains are explicitly listed. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://placehold.co https://sheeka.onrender.com http://localhost:5000; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co https://res.cloudinary.com; media-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://placehold.co https://kncollectionserver.onrender.com http://localhost:5000; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co https://res.cloudinary.com; media-src 'self';">
     
     <!-- Preconnect for faster loading of critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://placehold.co">
-    <link rel="preconnect" href="https://sheeka.onrender.com">
+    <link rel="preconnect" href="https://kncollectionserver.onrender.com">
     <link rel="preconnect" href="http://localhost:5000"> <!-- Preconnect to your Node.js backend -->
 
     <!-- Preload critical fonts for faster LCP (Largest Contentful Paint) -->
@@ -142,11 +142,11 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Sheeka Store",
-      "url": "https://sheeka.onrender.com",
+      "name": "KNCollection Store",
+      "url": "https://kncollectionserver.onrender.com",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://sheeka.onrender.com/search?q={search_term_string}",
+        "target": "https://kncollectionserver.onrender.com/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -155,18 +155,18 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Sheeka Store",
-      "url": "https://sheeka.onrender.com",
-      "logo": "https://placehold.co/150x50/C8797D/FFFFFF?text=SheekaLogo",
+      "name": "KNCollection Store",
+      "url": "https://kncollectionserver.onrender.com",
+      "logo": "https://placehold.co/150x50/C8797D/FFFFFF?text=KNCollectionLogo",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+213-555-1234",
         "contactType": "Customer Service"
       },
       "sameAs": [
-        "https://www.facebook.com/sheekastore",
-        "https://www.instagram.com/sheekastore",
-        "https://www.twitter.com/sheekastore"
+        "https://www.facebook.com/kncollectionstore",
+        "https://www.instagram.com/kncollectionstore",
+        "https://www.twitter.com/kncollectionstore"
       ]
     }
     </script>
@@ -175,7 +175,7 @@
     <!-- Header -->
     <header class="bg-white shadow-sm py-4 fixed w-full z-50">
         <nav class="container mx-auto px-6 flex justify-between items-center">
-            <a href="index.html" id="site-name-header" class="text-3xl font-extrabold text-primary rounded-lg p-2 hover:text-secondary transition duration-300" aria-label="Sheeka Store Home"></a>
+            <a href="index.html" id="site-name-header" class="text-3xl font-extrabold text-primary rounded-lg p-2 hover:text-secondary transition duration-300" aria-label="KNCollection Store Home"></a>
             <div class="hidden md:flex space-x-8">
                 <!-- Navigation links pointing back to index.html with section IDs -->
                 <a href="index.html#hero" class="text-general hover:text-primary font-medium transition duration-300 rounded-md p-2">Home</a>
@@ -271,7 +271,7 @@
             <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/2">
                     <!-- Added loading="lazy" for performance and explicit width/height for CLS -->
-                    <img id="about-us-image" src="https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Sheeka" alt="À propos de Sheeka Store" class="rounded-xl shadow-xl w-full h-auto object-cover transform transition duration-500 hover:scale-105" loading="lazy" width="800" height="600">
+                    <img id="about-us-image" src="https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+KNCollection" alt="À propos de KNCollection Store" class="rounded-xl shadow-xl w-full h-auto object-cover transform transition duration-500 hover:scale-105" loading="lazy" width="800" height="600">
                 </div>
                 <div class="lg:w-1/2 text-center lg:text-left">
                     <h2 class="text-4xl font-bold mb-6 text-general">About Us</h2>
@@ -386,10 +386,10 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             // Base URL for your backend API (your existing e-commerce backend)
-            const BASE_URL = 'https://sheeka.onrender.com';
+            const BASE_URL = 'https://kncollectionserver.onrender.com';
             // Base URL for your Node.js real-time visitor tracking backend
             // IMPORTANT: Adjust this to your Node.js backend's URL (e.g., 'http://localhost:5000' if running locally)
-            const VISITOR_TRACKING_BASE_URL = 'https://sheeka.onrender.com'; 
+            const VISITOR_TRACKING_BASE_URL = 'https://kncollectionserver.onrender.com'; 
 
             // DOM elements
             const pageTitle = document.getElementById('page-title');
@@ -438,7 +438,7 @@
             // Define multiple design configurations
             const designConfigurations = [
                 { 
-                    name: 'Default Sheeka Pink',
+                    name: 'Default KNCollection Pink',
                     layoutType: 'default', 
                     primaryColor: '#C8797D',
                     secondaryColor: '#A85F64',
@@ -451,12 +451,12 @@
                     heroGradientTo: '#A85F64',
                     sectionBgPrimary: '#FDF5E6',
                     sectionBgSecondary: '#F5F0F0',
-                    heroDefaultImage: 'https://placehold.co/1920x1080/c7c7c7/ffffff?text=SHEEKA+COLLECTION+DEFAULT',
+                    heroDefaultImage: 'https://placehold.co/1920x1080/c7c7c7/ffffff?text=KNCOLLECTION+DEFAULT',
                     productSectionTitle: 'Featured Products', 
                     categorySectionTitle: 'Shop by Category',
                     // Default section order
                     sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact'],
-                    defaultMetaDescription: 'Découvrez les dernières tendances et les classiques intemporels chez Sheeka Store. Élégance et confort garantis.'
+                    defaultMetaDescription: 'Découvrez les dernières tendances et les classiques intemporels chez KNCollection Store. Élégance et confort garantis.'
                 },
                 { 
                     name: 'Ocean Breeze',
@@ -478,7 +478,7 @@
                     categorySectionTitle: 'Explore Unique Themes',
                     // Reordered sections: Categories first, then products
                     sectionOrder: ['hero', 'categories', 'products', 'newsletter', 'about', 'contact'],
-                    defaultMetaDescription: 'Explorez la collection Ocean Breeze de Sheeka Store. Des vêtements qui allient sérénité et style pour une expérience unique.'
+                    defaultMetaDescription: 'Explorez la collection Ocean Breeze de KNCollection Store. Des vêtements qui allient sérénité et style pour une expérience unique.'
                 },
                 { 
                     name: 'Forest Earth',
@@ -500,7 +500,7 @@
                     categorySectionTitle: 'Collections from the Wild',
                     // Different order: About Us after hero, then products & categories
                     sectionOrder: ['hero', 'about', 'products', 'categories', 'contact', 'newsletter'],
-                    defaultMetaDescription: 'Découvrez la collection Forest Earth de Sheeka Store. Des pièces inspirées par la nature pour un style authentique et confortable.'
+                    defaultMetaDescription: 'Découvrez la collection Forest Earth de KNCollection Store. Des pièces inspirées par la nature pour un style authentique et confortable.'
                 },
                 { 
                     name: 'Modern Monochrome',
@@ -521,7 +521,7 @@
                     categorySectionTitle: 'Minimalist Collections',
                     // Order emphasizing contact and newsletter earlier
                     sectionOrder: ['hero', 'newsletter', 'products', 'categories', 'about', 'contact'],
-                    defaultMetaDescription: 'Explorez le style épuré et moderne de la collection Monochrome de Sheeka Store. L\'élégance dans la simplicité.'
+                    defaultMetaDescription: 'Explorez le style épuré et moderne de la collection Monochrome de KNCollection Store. L\'élégance dans la simplicité.'
                 },
                 { 
                     name: 'Royal Purple & Gold',
@@ -542,7 +542,7 @@
                     categorySectionTitle: 'Opulent Collections',
                     // Another custom order
                     sectionOrder: ['hero', 'about', 'newsletter', 'products', 'categories', 'contact'],
-                    defaultMetaDescription: 'Plongez dans le luxe avec la collection Royal Purple & Gold de Sheeka Store. Des pièces opulentes pour un style majestueux.'
+                    defaultMetaDescription: 'Plongez dans le luxe avec la collection Royal Purple & Gold de KNCollection Store. Des pièces opulentes pour un style majestueux.'
                 },
                 { 
                     name: 'Warm Sunset',
@@ -563,7 +563,7 @@
                     categorySectionTitle: 'Golden Hour Collections',
                     // Standard order for this design
                     sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact'],
-                    defaultMetaDescription: 'Adoptez la chaleur du coucher de soleil avec la collection Warm Sunset de Sheeka Store. Des vêtements confortables et élégants.'
+                    defaultMetaDescription: 'Adoptez la chaleur du coucher de soleil avec la collection Warm Sunset de KNCollection Store. Des vêtements confortables et élégants.'
                 },
                 {
                     name: 'Midnight Elegance',
@@ -583,7 +583,7 @@
                     productSectionTitle: 'Exquisite Selections',
                     categorySectionTitle: 'Discover Our Boutiques',
                     sectionOrder: ['hero', 'about', 'products', 'categories', 'newsletter', 'contact'],
-                    defaultMetaDescription: 'Découvrez l\'élégance intemporelle et le luxe discret chez Sheeka Store. Des collections raffinées pour les sociétés distinguées.'
+                    defaultMetaDescription: 'Découvrez l\'élégance intemporelle et le luxe discret chez KNCollection Store. Des collections raffinées pour les sociétés distinguées.'
                 },
                 {
                     name: 'Avant-Garde Chic',
@@ -603,7 +603,7 @@
                     productSectionTitle: 'Curated Masterpieces',
                     categorySectionTitle: 'Explore Our Collections',
                     sectionOrder: ['hero', 'newsletter', 'categories', 'products', 'about', 'contact'],
-                    defaultMetaDescription: 'Découvrez l\'avant-garde de la mode chez Sheeka Store. Des créations audacieuses et uniques pour une expression de style inégalée.'
+                    defaultMetaDescription: 'Découvrez l\'avant-garde de la mode chez KNCollection Store. Des créations audacieuses et uniques pour une expression de style inégalée.'
                 },
                 {
                     name: 'Opulent Renaissance',
@@ -623,7 +623,7 @@
                     productSectionTitle: 'Treasures of the Collection',
                     categorySectionTitle: 'Grand Collections',
                     sectionOrder: ['hero', 'about', 'categories', 'products', 'newsletter', 'contact'],
-                    defaultMetaDescription: 'Plongez dans le luxe et la grandeur avec la collection Opulent Renaissance de Sheeka Store. Des pièces d\'une richesse inégalée pour un style majestueux.'
+                    defaultMetaDescription: 'Plongez dans le luxe et la grandeur avec la collection Opulent Renaissance de KNCollection Store. Des pièces d\'une richesse inégalée pour un style majestueux.'
                 },
                 {
                     name: 'Modern Green & Black',
@@ -643,7 +643,7 @@
                     productSectionTitle: 'Our Latest Styles',
                     categorySectionTitle: 'Shop by Collection',
                     sectionOrder: ['hero', 'products', 'categories', 'about', 'newsletter', 'contact'],
-                    defaultMetaDescription: 'Découvrez l\'élégance moderne avec la collection Vert & Noir de Sheeka Store. Style intemporel et chic.'
+                    defaultMetaDescription: 'Découvrez l\'élégance moderne avec la collection Vert & Noir de KNCollection Store. Style intemporel et chic.'
                 }
             ];
 
@@ -838,8 +838,8 @@
 
                     // Apply About Us Image (safe as it's not in hero-dynamic-content)
                     if (aboutUsImageElem) {
-                        aboutUsImageElem.src = buildAbsoluteUrl(config.aboutUsImageUrl || 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us');
-                        aboutUsImageElem.alt = `À propos de Sheeka Store - ${config.siteName}`; // More descriptive alt text
+                        aboutUsImageElem.src = buildAbsoluteUrl(config.aboutUsImageUrl || 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+KNCollection');
+                        aboutUsImageElem.alt = `À propos de KNCollection Store - ${config.siteName}`; // More descriptive alt text
                     }
 
                     // Apply social media links
@@ -863,12 +863,12 @@
                     console.error("Error fetching site configuration:", error);
                     // Fallback to default design and content on error
                     const defaultSiteConfig = { 
-                        siteName: 'Sheeka', 
+                        siteName: 'KNCollection', 
                         slogan: 'Elevate Your Style', 
-                        aboutUsText: `At <strong class="text-primary">Sheeka</strong>, we believe that fashion is a powerful form of self-expression. Our brand is dedicated to providing high-quality, stylish, and comfortable clothing that empowers you to express your unique personality.
+                        aboutUsText: `At <strong class="text-primary">KNCollection</strong>, we believe that fashion is a powerful form of self-expression. Our brand is dedicated to providing high-quality, stylish, and comfortable clothing that empowers you to express your unique personality.
 
-From conceptualization to creation, every piece is crafted with meticulous attention to detail and a passion for design. We're committed to sustainable practices and ethical production, ensuring that your style choices make a positive impact. Join the Sheeka family and redefine your wardrobe.`, 
-                        aboutUsImageUrl: 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us',
+From conceptualization to creation, every piece is crafted with meticulous attention to detail and a passion for design. We're committed to sustainable practices and ethical production, ensuring that your style choices make a positive impact. Join the KNCollection family and redefine your wardrobe.`, 
+                        aboutUsImageUrl: 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+KNCollection',
                         bannerHeadline: 'Welcome to our Collection', // Fallback for banner
                         heroVideoUrl: '', // No default video URL for fallback
                         socialMediaLinks: [ // Fallback social links
@@ -876,7 +876,7 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                             { url: '#', iconClass: 'fab fa-instagram', platform: 'Instagram' },
                             { url: '#', iconClass: 'fab fa-twitter', platform: 'Twitter' }
                         ],
-                        metaDescription: 'Découvrez les dernières tendances et les classiques intemporels chez Sheeka Store. Élégance et confort garantis.'
+                        metaDescription: 'Découvrez les dernières tendances et les classiques intemporels chez KNCollection Store. Élégance et confort garantis.'
                     };
                     // Apply the new "Modern Green & Black" design by default if there's an error fetching config
                     applyDesign(9, defaultSiteConfig); // Changed to index 9 for the new theme
@@ -1134,10 +1134,10 @@ From conceptualization to creation, every piece is crafted with meticulous atten
             }
 
             // --- Real-time Visitor Tracking Logic ---
-            let clientId = localStorage.getItem('sheeka_client_id');
+            let clientId = localStorage.getItem('kncollection_client_id');
             if (!clientId) {
                 clientId = crypto.randomUUID(); // Generate a unique ID for this client
-                localStorage.setItem('sheeka_client_id', clientId);
+                localStorage.setItem('kncollection_client_id', clientId);
             }
 
             /**
