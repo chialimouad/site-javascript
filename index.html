@@ -17,9 +17,9 @@
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
     <!-- Content-Security-Policy: Basic policy to prevent XSS. Adjust as needed for your specific resources. -->
     <!-- NOTE: 'unsafe-inline' is used for style-src and script-src because the CSS and JavaScript are embedded directly in this HTML file.
-         For a more robust CSP in a production environment with external files, 'unsafe-inline' should be avoided.
-         Ensure all external domains are explicitly listed. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://placehold.co https://sheeka.onrender.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co https://res.cloudinary.com; media-src 'self';">
+        For a more robust CSP in a production environment with external files, 'unsafe-inline' should be avoided.
+        Ensure all external domains are explicitly listed. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://placehold.co https://sheeka.onrender.com http://localhost:5000; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co https://res.cloudinary.com; media-src 'self';">
     
     <!-- Preconnect for faster loading of critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +28,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://placehold.co">
     <link rel="preconnect" href="https://sheeka.onrender.com">
+    <link rel="preconnect" href="http://localhost:5000"> <!-- Preconnect to your Node.js backend -->
 
     <!-- Preload critical fonts for faster LCP (Largest Contentful Paint) -->
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5.woff2" as="font" type="font/woff2" crossorigin>
@@ -182,6 +183,11 @@
                 <a href="index.html#categories" class="text-general hover:text-primary font-medium transition duration-300 rounded-md p-2">Categories</a>
                 <a href="index.html#about" class="text-general hover:text-primary font-medium transition duration-300 rounded-md p-2">About Us</a>
                 <a href="index.html#contact" class="text-general hover:text-primary font-medium transition duration-300 rounded-md p-2">Contact</a>
+            </div>
+            <!-- Real-time Visitor Count Display -->
+            <div class="flex items-center space-x-2 text-general text-sm font-semibold">
+                <i class="fas fa-eye text-primary"></i> <!-- Eye icon -->
+                <span id="realtime-visitor-count">0</span>
             </div>
             <!-- Mobile Menu Button - Added aria-label for accessibility -->
             <button id="mobile-menu-button" class="md:hidden text-general hover:text-primary focus:outline-none" aria-label="Open mobile menu">
@@ -379,8 +385,11 @@
         let currentActiveDesign = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Base URL for your backend API
+            // Base URL for your backend API (your existing e-commerce backend)
             const BASE_URL = 'https://sheeka.onrender.com';
+            // Base URL for your Node.js real-time visitor tracking backend
+            // IMPORTANT: Adjust this to your Node.js backend's URL (e.g., 'http://localhost:5000' if running locally)
+            const VISITOR_TRACKING_BASE_URL = 'https://sheeka.onrender.com'; 
 
             // DOM elements
             const pageTitle = document.getElementById('page-title');
@@ -393,6 +402,7 @@
             const footerSlogan = document.getElementById('footer-slogan');
             const copyrightSiteName = document.getElementById('copyright-site-name');
             const socialMediaLinksContainer = document.getElementById('social-media-links');
+            const realtimeVisitorCountElement = document.getElementById('realtime-visitor-count'); // New element for visitor count
 
             const productListContainer = document.getElementById('product-list');
             const categoriesSectionTitle = document.getElementById('categories-section-title');
@@ -1036,7 +1046,7 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                     }
 
                     try {
-                        const response = await fetch(`${BASE_URL}/api/emails`, {
+                        const response = await fetch(`${BASE_URL}/api/emails/emails`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -1122,6 +1132,97 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                     showMessage('info', 'Cookies declined. Some features might be limited.');
                 });
             }
+
+            // --- Real-time Visitor Tracking Logic ---
+            let clientId = localStorage.getItem('sheeka_client_id');
+            if (!clientId) {
+                clientId = crypto.randomUUID(); // Generate a unique ID for this client
+                localStorage.setItem('sheeka_client_id', clientId);
+            }
+
+            /**
+             * Sends an activity signal to the backend to track real-time visitors.
+             * Includes retry logic with exponential backoff for resilience.
+             * @param {number} retries - Number of retries remaining.
+             * @param {number} delay - Current delay before retrying (in ms).
+             */
+            async function sendActivitySignal(retries = 3, delay = 1000) {
+                try {
+                    const response = await fetch(`${VISITOR_TRACKING_BASE_URL}/visitors/realtime`, {
+                        method: 'GET',
+                        headers: {
+                            'X-Client-ID': clientId, // Send the unique client ID
+                            'Content-Type': 'application/json' // Even for GET, good practice
+                        }
+                    });
+
+                    if (!response.ok) {
+                        if (retries > 0) {
+                            console.warn(`Failed to send activity signal (status: ${response.status}). Retrying in ${delay / 1000}s...`);
+                            await new Promise(res => setTimeout(res, delay));
+                            return sendActivitySignal(retries - 1, delay * 2); // Exponential backoff
+                        } else {
+                            console.error(`Failed to send activity signal after multiple retries: ${response.status} ${response.statusText}`);
+                        }
+                    }
+                } catch (error) {
+                    if (retries > 0) {
+                        console.warn(`Network error sending activity signal. Retrying in ${delay / 1000}s...`, error);
+                        await new Promise(res => setTimeout(res, delay));
+                        return sendActivitySignal(retries - 1, delay * 2); // Exponential backoff
+                    } else {
+                        console.error('Network error sending activity signal after multiple retries:', error);
+                    }
+                }
+            }
+
+            /**
+             * Fetches and displays the real-time visitor count from the backend.
+             * Includes retry logic with exponential backoff for resilience.
+             * @param {number} retries - Number of retries remaining.
+             * @param {number} delay - Current delay before retrying (in ms).
+             */
+            async function fetchRealtimeVisitorCount(retries = 3, delay = 1000) {
+                try {
+                    const response = await fetch(`${VISITOR_TRACKING_BASE_URL}/visitors/stats`);
+                    if (!response.ok) {
+                        if (retries > 0) {
+                            console.warn(`Failed to fetch visitor count (status: ${response.status}). Retrying in ${delay / 1000}s...`);
+                            await new Promise(res => setTimeout(res, delay));
+                            return fetchRealtimeVisitorCount(retries - 1, delay * 2);
+                        } else {
+                            throw new Error(`HTTP error! status: ${response.status}`); // Throw error after all retries fail
+                        }
+                    }
+                    const data = await response.json();
+                    if (realtimeVisitorCountElement) {
+                        realtimeVisitorCountElement.textContent = data.count;
+                    }
+                } catch (error) {
+                    if (retries > 0) {
+                        console.warn(`Network error fetching visitor count. Retrying in ${delay / 1000}s...`, error);
+                        await new Promise(res => setTimeout(res, delay));
+                        return fetchRealtimeVisitorCount(retries - 1, delay * 2);
+                    } else {
+                        console.error('Error fetching real-time visitor count after multiple retries:', error);
+                        if (realtimeVisitorCountElement) {
+                            realtimeVisitorCountElement.textContent = 'N/A'; // Display N/A on error
+                        }
+                    }
+                }
+            }
+
+            // Send an initial signal on page load
+            sendActivitySignal();
+            // Fetch initial visitor count on page load
+            fetchRealtimeVisitorCount();
+
+            // Send activity signal periodically (e.g., every 15 seconds)
+            // This interval should be less than the backend's ACTIVE_THRESHOLD_SECONDS (which is 30s)
+            setInterval(sendActivitySignal, 15000); // 15 seconds
+
+            // Fetch and update visitor count periodically (e.g., every 10 seconds)
+            setInterval(fetchRealtimeVisitorCount, 10000); // 10 seconds
 
 
             // Initial data fetching calls - these will run as soon as DOM is ready
