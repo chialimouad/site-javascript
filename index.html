@@ -7,6 +7,9 @@
     <!-- Meta description for SEO, will be dynamically updated by JS -->
     <meta name="description" id="meta-description" content="Découvrez les dernières tendances et les classiques intemporels chez Sheeka Store.">
     
+    <!-- Canonical URL to prevent duplicate content issues -->
+    <link rel="canonical" href="https://sheeka.onrender.com/index.html">
+
     <!-- Security Headers (Best Practices) -->
     <!-- X-Frame-Options: DENY to prevent clickjacking -->
     <meta http-equiv="X-Frame-Options" content="DENY">
@@ -14,8 +17,9 @@
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
     <!-- Content-Security-Policy: Basic policy to prevent XSS. Adjust as needed for your specific resources. -->
     <!-- NOTE: 'unsafe-inline' is used for style-src and script-src because the CSS and JavaScript are embedded directly in this HTML file.
-        For a more robust CSP in a production environment with external files, 'unsafe-inline' should be avoided. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://placehold.co https://sheeka.onrender.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co https://res.cloudinary.com; media-src 'self' https://www.w3schools.com;">
+         For a more robust CSP in a production environment with external files, 'unsafe-inline' should be avoided.
+         Ensure all external domains are explicitly listed. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://placehold.co https://sheeka.onrender.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co https://res.cloudinary.com; media-src 'self';">
     
     <!-- Preconnect for faster loading of critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,8 +29,7 @@
     <link rel="preconnect" href="https://placehold.co">
     <link rel="preconnect" href="https://sheeka.onrender.com">
 
-    <!-- Preload critical fonts for faster LCP -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Preload critical fonts for faster LCP (Largest Contentful Paint) -->
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Tailwind CSS CDN - using defer to not block rendering -->
@@ -76,7 +79,7 @@
         }
         /* Added for smooth background image transitions */
         #hero-background {
-            transition: background-image 1s ease-in-out; /* Removed opacity transition as it's now opaque */
+            transition: background-image 1s ease-in-out;
         }
 
         /* Dynamic colors applied using CSS variables */
@@ -94,7 +97,6 @@
         .footer-text { color: var(--footer-text-color); }
         .footer-link:hover { color: var(--footer-link-color); }
 
-        /* No direct gradient on #hero anymore, it's on the overlay div */
         /* Dynamic section backgrounds */
         #products, #about {
             background-color: var(--section-bg-primary);
@@ -172,7 +174,7 @@
     <!-- Header -->
     <header class="bg-white shadow-sm py-4 fixed w-full z-50">
         <nav class="container mx-auto px-6 flex justify-between items-center">
-            <a href="index.html" id="site-name-header" class="text-3xl font-extrabold text-primary rounded-lg p-2 hover:text-secondary transition duration-300"></a>
+            <a href="index.html" id="site-name-header" class="text-3xl font-extrabold text-primary rounded-lg p-2 hover:text-secondary transition duration-300" aria-label="Sheeka Store Home"></a>
             <div class="hidden md:flex space-x-8">
                 <!-- Navigation links pointing back to index.html with section IDs -->
                 <a href="index.html#hero" class="text-general hover:text-primary font-medium transition duration-300 rounded-md p-2">Home</a>
@@ -810,7 +812,6 @@
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const config = await response.json();
-                    // console.log("Fetched Site Config:", config); // Removed console.log
 
                     // Determine the design index, fallback to 0 if invalid
                     const designIndex = (config.currentDataIndex !== undefined && config.currentDataIndex >= 0 && config.currentDataIndex < designConfigurations.length)
@@ -859,7 +860,7 @@
 From conceptualization to creation, every piece is crafted with meticulous attention to detail and a passion for design. We're committed to sustainable practices and ethical production, ensuring that your style choices make a positive impact. Join the Sheeka family and redefine your wardrobe.`, 
                         aboutUsImageUrl: 'https://placehold.co/800x600/6A5ACD/FFFFFF?text=About+Us',
                         bannerHeadline: 'Welcome to our Collection', // Fallback for banner
-                        heroVideoUrl: 'https://www.w3schools.com/tags/movie.mp4', // Fallback for video
+                        heroVideoUrl: '', // No default video URL for fallback
                         socialMediaLinks: [ // Fallback social links
                             { url: '#', iconClass: 'fab fa-facebook', platform: 'Facebook' },
                             { url: '#', iconClass: 'fab fa-instagram', platform: 'Instagram' },
@@ -907,6 +908,7 @@ From conceptualization to creation, every piece is crafted with meticulous atten
                         productCard.className = 'bg-white rounded-2xl shadow-xl overflow-hidden transform transition duration-300 hover:scale-102 hover:shadow-2xl';
                         productCard.innerHTML = `
                             <a href="product-details.html?id=${product._id}" class="block">
+                                <!-- Added explicit width/height and more descriptive alt text -->
                                 <img src="${buildAbsoluteUrl(imageUrl, 'Image Error')}" alt="Image du produit ${product.name}" class="w-full h-72 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/EEEEEE/333333?text=Image+Error';" loading="lazy" width="600" height="400">
                                 <div class="p-6">
                                     <h3 class="text-2xl font-bold mb-2 text-general">${product.name}</h3>
@@ -988,13 +990,11 @@ From conceptualization to creation, every piece is crafted with meticulous atten
             // Function to fetch and set hero images for carousel
             async function fetchHeroImagesForCarousel() {
                 try {
-                    // console.log("Attempting to fetch promo images for carousel from:", `${BASE_URL}/products/promo`); // Removed console.log
                     const response = await fetch(`${BASE_URL}/products/promo`);
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const fetchedImages = await response.json();
-                    // console.log("Fetched promo images (raw data) for carousel:", fetchedImages); // Removed console.log
 
                     if (fetchedImages.length > 0) {
                         promoImagesArray = fetchedImages; // Store fetched images
